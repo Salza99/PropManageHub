@@ -1,0 +1,22 @@
+.login-background {
+  background-image: url("https://png.pngtree.com/thumb_back/fh260/back_our/20190628/ourmid/pngtree-real-estate-commercial-real-estate-background-banner-image_264561.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: -100px;
+}
+.visibility {
+  visibility: visible;
+  opacity: 1;
+}
+.transition {
+  transition: all 2s ease;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+.login-welcome {
+  overflow: hidden;
+  font-size: 80px;
+  margin: 0;
+}

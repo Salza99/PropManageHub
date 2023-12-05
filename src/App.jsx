@@ -1,12 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/style.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./components/LoginComponents/Login";
 
 function App() {
   return (
-    <div>
-      <div></div>
-      <div></div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
