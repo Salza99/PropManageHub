@@ -1,10 +1,30 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { RESET_ERROR_MESSAGE, loginFetch } from "../../redux/actions/LoginAction";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import ErrorAlert from "../Alerts/ErrorAlert";
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loginState = useSelector((state) => state.login.respLogin);
   const [loginInput, setLoginInput] = useState({
     username: "",
     password: "",
   });
+  const [loginInsuccess, setLoginInsuccess] = useState(false);
+  useEffect(() => {
+    if (loginState.authorizationToken) {
+      navigate("/homepage");
+    } else if (loginState.errorMessage) {
+      setLoginInsuccess(true);
+      setTimeout(() => {
+        setLoginInsuccess(false);
+        dispatch({ type: RESET_ERROR_MESSAGE, payload: "" });
+      }, 3000);
+    }
+  }, [loginState]);
+
   const [visibility, setVisibility] = useState(["hidden", "hidden", "hidden", "hidden"]);
   useEffect(() => {
     let index = 0;
@@ -24,11 +44,21 @@ const Login = () => {
   }, []);
   return (
     <div className="login-background">
+      {loginInsuccess && (
+        <div className="position-relative">
+          <ErrorAlert loginState={loginState} />
+        </div>
+      )}
       <Container style={{ height: "100vh" }}>
         <Row className="h-100 justify-content-start align-items-center">
           <Col className="me-5" xs={12} sm={8} xl={6}>
             <Card className="p-3">
-              <Form>
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  dispatch(loginFetch(loginInput));
+                }}
+              >
                 <div className="text-center">
                   <h3>Accedi</h3>
                   <Card.Subtitle className="mb-4 text-muted">Benvenuto in PropManageHub</Card.Subtitle>

@@ -23,4 +23,9 @@
   overflow: hidden;
   font-size: 80px;
   margin: 0;
+}
+
+.top-center-error-alert {
+  top: calc(50% + 38px);
+  width: 100%;
 }/*# sourceMappingURL=style.css.map */
