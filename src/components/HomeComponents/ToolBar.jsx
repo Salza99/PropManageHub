@@ -38,9 +38,7 @@ const ToolBar = () => {
           navigate("/homepage/collaboratori");
         }}
       >
-        <Nav.Link className="text-light" disabled>
-          Collaboratori
-        </Nav.Link>
+        <Nav.Link className="text-light">Collaboratori</Nav.Link>
       </Nav.Item>
     </Nav>
   );
