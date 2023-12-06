@@ -15,8 +15,16 @@ const Login = () => {
   const [loginInsuccess, setLoginInsuccess] = useState(false);
   useEffect(() => {
     if (loginState.authorizationToken) {
+      setLoginInput({
+        username: "",
+        password: "",
+      });
       navigate("/homepage");
     } else if (loginState.errorMessage) {
+      setLoginInput({
+        username: "",
+        password: "",
+      });
       setLoginInsuccess(true);
       setTimeout(() => {
         setLoginInsuccess(false);
