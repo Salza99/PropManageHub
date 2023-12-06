@@ -26,9 +26,11 @@ const Login = () => {
   }, [loginState]);
 
   const [visibility, setVisibility] = useState(["hidden", "hidden", "hidden", "hidden"]);
+  const [slide, setSlide] = useState("");
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
+      setSlide("slide-top");
       if (index < visibility.length) {
         const newVisibility = [...visibility];
         newVisibility[index] = "visible";
@@ -43,30 +45,34 @@ const Login = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="login-background">
-      {loginInsuccess && (
-        <div className="position-relative">
-          <ErrorAlert loginState={loginState} />
-        </div>
-      )}
+    <div className={`${slide} transition login-background`}>
+      <div
+        className={`position-relative ${loginInsuccess ? "fast-transition" : ""} ${
+          loginInsuccess ? "visibility" : "hidden"
+        }`}
+      >
+        <ErrorAlert loginState={loginState} />
+      </div>
+
       <Container style={{ height: "100vh" }}>
         <Row className="h-100 justify-content-start align-items-center">
           <Col className="me-5" xs={12} sm={8} xl={6}>
-            <Card className="p-3">
+            <Card className="p-3 border-shadow border-0 opacity-form text-center">
               <Form
                 onSubmit={(e) => {
                   e.preventDefault();
                   dispatch(loginFetch(loginInput));
                 }}
               >
-                <div className="text-center">
-                  <h3>Accedi</h3>
-                  <Card.Subtitle className="mb-4 text-muted">Benvenuto in PropManageHub</Card.Subtitle>
+                <div>
+                  <h3 className="text-color-text">Accedi</h3>
+                  <Card.Subtitle className="mb-4 text-color-text ">Benvenuto in PropManageHub</Card.Subtitle>
                 </div>
-                <div className="d-flex flex-column justify-content-start">
+                <div className="">
                   <Form.Group className="mb-3" controlId="formUsername">
-                    <Form.Label>Username</Form.Label>
+                    <Form.Label className="text-color-text">Username</Form.Label>
                     <Form.Control
+                      className="text-center w-75 me-auto ms-auto mb-0 mt-0 border-bottom-saffron"
                       type="text"
                       placeholder="inserisci l'username"
                       value={loginInput.username}
@@ -77,8 +83,9 @@ const Login = () => {
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label className="text-color-text">Password</Form.Label>
                     <Form.Control
+                      className="text-center w-75 me-auto ms-auto mb-0 mt-0 border-bottom-saffron"
                       type="password"
                       placeholder="Password"
                       value={loginInput.password}
@@ -88,7 +95,7 @@ const Login = () => {
                     />
                   </Form.Group>
                 </div>
-                <Button variant="primary" type="submit">
+                <Button className="text-color-text" variant="outline-dark" type="submit">
                   Accedi
                 </Button>
               </Form>
@@ -96,10 +103,10 @@ const Login = () => {
           </Col>
           <Col className="d-none d-xl-block" xs={12} sm={4} xl={5}>
             <div className="d-flex flex-column">
-              <p className={`login-welcome transition ${visibility[0]}`}>Everything</p>
-              <p className={`text-secondary login-welcome transition ${visibility[1]}`}>Property</p>
-              <p className={`text-secondary login-welcome transition ${visibility[2]}`}>Manager</p>
-              <p className={`text-secondary login-welcome transition ${visibility[3]}`}>Need</p>
+              <p className={`text-color-text login-welcome transition ${visibility[0]}`}>Everything</p>
+              <p className={`text-color-text login-welcome transition ${visibility[1]}`}>Property</p>
+              <p className={`text-color-text login-welcome transition ${visibility[2]}`}>Manager</p>
+              <p className={`text-color-text login-welcome transition ${visibility[3]}`}>Need</p>
             </div>
           </Col>
         </Row>

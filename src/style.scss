@@ -1,8 +1,10 @@
 .login-background {
-  background-image: url("https://png.pngtree.com/thumb_back/fh260/back_our/20190628/ourmid/pngtree-real-estate-commercial-real-estate-background-banner-image_264561.jpg");
-  background-repeat: no-repeat;
+  background-image: url("https://cdn.discordapp.com/attachments/1155537267285299372/1181683670772359249/background-5671886_1280.png?ex=6581f3ad&is=656f7ead&hm=82f6bb350c7395d37f89370a689d4bf7e1a316242a82ab9d4bcd63788a64a6b1&");
   background-size: cover;
-  background-position: -100px;
+  background-position: 0;
+}
+.slide-top {
+  background-position-y: -50px;
 }
 .visibility {
   visibility: visible;
@@ -10,6 +12,9 @@
 }
 .transition {
   transition: all 2s ease;
+}
+.fast-transition {
+  transition: all 0.4s ease-in;
 }
 .hidden {
   visibility: hidden;
@@ -23,4 +28,16 @@
 .top-center-error-alert {
   top: calc(50% + 38px);
   width: 100%;
+  opacity: 0.7;
+  color: orangered;
+  background-color: black;
+}
+.opacity-form {
+  background-color: rgba(33, 27, 46, 0);
+}
+.text-color-text {
+  color: rgba(235, 235, 235, 1);
+}
+.border-bottom-saffron {
+  border-bottom: 1.5px solid #f4e7ac;
 }
