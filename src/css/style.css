@@ -1,20 +1,38 @@
+:root {
+  --gradient: linear-gradient(140deg, rgb(255, 255, 255), rgb(245, 214, 73));
+  --gradient-background: linear-gradient(140deg, rgba(120, 192, 224, 1), rgba(68, 157, 209, 1), rgba(21, 5, 120, 1));
+}
+
 .app-background {
-  background-image: url("https://cdn.discordapp.com/attachments/1155537267285299372/1181683670772359249/background-5671886_1280.png?ex=6581f3ad&is=656f7ead&hm=82f6bb350c7395d37f89370a689d4bf7e1a316242a82ab9d4bcd63788a64a6b1&");
-  background-size: cover;
-  background-position: 0;
+  background-image: var(--gradient-background);
+  background-blend-mode: normal;
+  background-size: 300%;
+  background-position: left;
+  animation: bg-animation 40s infinite alternate-reverse ease;
 }
 
-.slide-top {
-  background-position-y: -50px;
+@keyframes bg-animation {
+  0% {
+    background-position: left;
+  }
+  50% {
+    background-position: right;
+  }
+  0% {
+    background-position: left;
+  }
 }
-
 .visibility {
   visibility: visible;
   opacity: 1;
 }
 
+.transition-slow {
+  transition: all 5s ease;
+}
+
 .transition {
-  transition: all 2s ease;
+  transition: opacity 2s ease;
 }
 
 .fast-transition {
@@ -36,8 +54,8 @@
   top: calc(50% + 38px);
   width: 100%;
   opacity: 0.7;
-  color: orangered;
-  background-color: black;
+  color: black;
+  background-color: red;
 }
 
 .opacity-form {
@@ -45,9 +63,24 @@
 }
 
 .text-color-text {
-  color: rgb(235, 235, 235);
+  color: transparent;
+  background-image: var(--gradient);
+  background-blend-mode: normal;
+  -webkit-background-clip: text;
+          background-clip: text;
+  background-size: 300%;
+  animation: bg-animation 40s infinite alternate-reverse;
 }
 
 .border-bottom-saffron {
-  border-bottom: 1.5px solid #f4e7ac;
+  border-bottom: 3px solid #f4e7ac;
+}
+
+.t-shadow {
+  text-shadow: 2px 2px 4px black;
+}
+
+.access-button {
+  color: black;
+  background-color: #f4e7ac;
 }/*# sourceMappingURL=style.css.map */
