@@ -53,7 +53,7 @@ const Login = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className={`${slide} transition login-background`}>
+    <div className={`${slide} transition app-background`}>
       <div
         className={`position-relative ${loginInsuccess ? "fast-transition" : ""} ${
           loginInsuccess ? "visibility" : "hidden"
