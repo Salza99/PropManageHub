@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMyProfile } from "../../redux/actions/HomepageAction";
 import { Card } from "react-bootstrap";
 import PageLoader from "../Loaders/PageLoader";
+import LogoBar from "../CommonComponents/LogoBar";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const HomePage = () => {
   }, []);
   return (
     <div className="app-background">
-      <div style={{ height: "100vh" }}>
+      <div>
         {homeState.myProfile.id ? (
           <Card style={{ width: "18rem" }}>
             <Card.Body>
@@ -36,6 +37,7 @@ const HomePage = () => {
           <PageLoader />
         )}
       </div>
+      <LogoBar />
     </div>
   );
 };

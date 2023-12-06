@@ -67,7 +67,7 @@ const Login = () => {
       <Container>
         <Row className="justify-content-start align-items-center">
           <Col className="me-xl-5" xs={12} sm={12} xl={6}>
-            <Card className="p-3 border-shadow border-0 opacity-form text-center">
+            <Card className="p-3 border-shadow border-0 opacity-form text-center mt-5">
               <Form
                 onSubmit={(e) => {
                   e.preventDefault();
