@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/homepage" element={<HomePage />} />
+        <Route path="/homepage/clienti" element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   );

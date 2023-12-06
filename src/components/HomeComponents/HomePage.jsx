@@ -4,6 +4,8 @@ import { fetchMyProfile } from "../../redux/actions/HomepageAction";
 import { Card } from "react-bootstrap";
 import PageLoader from "../Loaders/PageLoader";
 import LogoBar from "../CommonComponents/LogoBar";
+import CardInfoUser from "./HomepageSingleComponent/CardInfoUser";
+import ToolBar from "./ToolBar";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -15,30 +17,19 @@ const HomePage = () => {
     }
   }, []);
   return (
-    <div className="app-background">
-      <div>
-        {homeState.myProfile.id ? (
-          <Card style={{ width: "18rem" }}>
-            <Card.Body>
-              <Card.Title>
-                Benvenuto {homeState.myProfile.name} {homeState.myProfile.surname}!
-              </Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">{homeState.myProfile.username}</Card.Subtitle>
-              <Card.Text>
-                {homeState.myProfile.email}
-                <br />
-                {homeState.myProfile.phone}
-              </Card.Text>
-              <Card.Link href="#">Card Link</Card.Link>
-              <Card.Link href="#">Another Link</Card.Link>
-            </Card.Body>
-          </Card>
-        ) : (
-          <PageLoader />
-        )}
-      </div>
-      <LogoBar />
-    </div>
+    <>
+      {homeState ? (
+        <div className="app-background">
+          <LogoBar />
+          <ToolBar />
+          <div className="d-flex justify-content-center">
+            <div>{homeState.myProfile.id && <CardInfoUser homeState={homeState.myProfile} />}</div>
+          </div>
+        </div>
+      ) : (
+        <PageLoader />
+      )}
+    </>
   );
 };
 export default HomePage;

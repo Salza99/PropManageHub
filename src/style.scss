@@ -70,3 +70,12 @@
   color: black;
   background-color: #f4e7ac;
 }
+.info-user-show:hover {
+  transform: scale(1.5);
+  p:hover {
+    visibility: visible;
+  }
+  div:hover {
+    visibility: visible;
+  }
+}
