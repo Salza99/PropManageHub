@@ -55,13 +55,6 @@ const Login = () => {
   }, []);
   return (
     <div style={{ height: "100vh" }} className={`${slideGrdient} transition-slow app-background`}>
-      <div
-        className={`position-relative ${loginInsuccess ? "fast-transition" : ""} ${
-          loginInsuccess ? "visibility" : "hidden"
-        }`}
-      >
-        <ErrorAlert loginState={loginState} />
-      </div>
       <LogoBar />
 
       <Container>
@@ -74,6 +67,13 @@ const Login = () => {
                   dispatch(loginFetch(loginInput));
                 }}
               >
+                <div
+                  className={`position-relative ${loginInsuccess ? "fast-transition" : ""} ${
+                    loginInsuccess ? "visibility" : "hidden"
+                  }`}
+                >
+                  <ErrorAlert loginState={loginState} />
+                </div>
                 <div>
                   <Card.Subtitle className="mb-4 text-light t-shadow border-bottom-saffron w-75 me-auto ms-auto mb-0 mt-0 p-3">
                     Benvenuto in PropManageHub
