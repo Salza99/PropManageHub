@@ -11,6 +11,7 @@ import CustomerPage from "./CustomerComponent/CustomerPage";
 import Calendar from "./Calendar";
 import PropertyPage from "./PropertyComponents/PropertyPage";
 import RequestPage from "./RequestComponents/RequestPage";
+import AdminPage from "./AdminComponents/AdminPage";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,8 @@ const HomePage = () => {
     content = <PropertyPage />;
   } else if (location.pathname === "/homepage/richieste") {
     content = <RequestPage />;
+  } else if (location.pathname === "/homepage/collaboratori") {
+    content = <AdminPage />;
   } else {
     content = <div></div>;
   }

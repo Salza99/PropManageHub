@@ -4,6 +4,7 @@ import HomepageReducer from "../reducers/HomepageReducer";
 import CustomerReducer from "../reducers/CustomerReducer";
 import PropertyReducer from "../reducers/PropertyReducer";
 import RequestReducer from "../reducers/RequestReducer";
+import AdminReducer from "../reducers/AdminReducer";
 
 const rootReducer = combineReducers({
   login: LoginReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   customer: CustomerReducer,
   property: PropertyReducer,
   request: RequestReducer,
+  admin: AdminReducer,
 });
 
 const store = configureStore({
