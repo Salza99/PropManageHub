@@ -10,7 +10,7 @@ const PropertyDetail = () => {
   const propertyState = useSelector((state) => state.property);
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const params = useParams();
-  console.log(propertyState.selected);
+
   useEffect(() => {
     dispatch(singleProperty(token, params.pId));
   }, []);

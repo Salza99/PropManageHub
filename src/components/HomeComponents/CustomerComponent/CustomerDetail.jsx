@@ -11,7 +11,7 @@ const CustomerDetail = () => {
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const params = useParams();
   useEffect(() => {
-    dispatch(singleCustomer(token, params.id));
+    dispatch(singleCustomer(token, params.cId));
   }, []);
   return (
     <>

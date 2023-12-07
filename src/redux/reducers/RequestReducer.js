@@ -1,4 +1,4 @@
-import { ERROR_REQUEST, PAGE_REQUEST } from "../actions/RequestAction";
+import { ERROR_REQUEST, PAGE_REQUEST, SINGLE_REQUEST } from "../actions/RequestAction";
 
 const initialState = {
   content: [
@@ -21,6 +21,24 @@ const initialState = {
       toRent: false,
     },
   ],
+  selected: {
+    id: 0,
+    habitability: true,
+    condominiumFees: 0.0,
+    numberOfRooms: [],
+    condition: "",
+    otherCharacteristics: [],
+    regions: [],
+    cities: [],
+    hamlets: [],
+    surface: [],
+    numberOfBathrooms: [],
+    parkingSpace: [],
+    typeOfProperty: [],
+    maximal: 0,
+    note: "",
+    toRent: false,
+  },
   errorMessages: "",
 };
 
@@ -30,6 +48,11 @@ const RequestReducer = (state = initialState, action) => {
       return {
         ...state,
         content: action.payload.content,
+      };
+    case SINGLE_REQUEST:
+      return {
+        ...state,
+        selected: action.payload,
       };
     case ERROR_REQUEST:
       return {

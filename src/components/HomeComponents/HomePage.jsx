@@ -24,7 +24,7 @@ const HomePage = () => {
     content = <CustomerPage />;
   } else if (location.pathname === "/homepage/proprieta" || params.pId != null) {
     content = <PropertyPage />;
-  } else if (location.pathname === "/homepage/richieste") {
+  } else if (location.pathname === "/homepage/richieste" || params.rId != null) {
     content = <RequestPage />;
   } else if (location.pathname === "/homepage/collaboratori") {
     content = <AdminPage />;

@@ -12,7 +12,6 @@ const PropertyPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
   let content;
-  console.log(params.pId);
   if (params.pId === undefined) {
     content = propertyState.content.map((property) => {
       return <SingleProperty property={property} key={property.id} />;
