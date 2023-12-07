@@ -33,7 +33,7 @@ const HomePage = () => {
                 {homeState.myProfile.id && <CardInfoUser homeState={homeState.myProfile} />}
               </Col>
               {location.pathname === "/homepage/clienti" ? (
-                <Col xs={12} lg={8}>
+                <Col className="border border-secondary p-2" xs={12} lg={8}>
                   <CustomerPage />
                 </Col>
               ) : (

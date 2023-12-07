@@ -16,6 +16,7 @@ const CustomerPage = () => {
   }, [token]);
   return (
     <>
+      <h4 className="text-light t-shadow">Tutti i clienti:</h4>
       {customerState.content[0].id ? (
         customerState.content.map((customer) => {
           return <SingleCustomer customer={customer} key={customer.id} />;
