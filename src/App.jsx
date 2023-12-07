@@ -3,14 +3,19 @@ import "./css/style.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/LoginComponents/Login";
 import HomePage from "./components/HomeComponents/HomePage";
+import { useSelector } from "react-redux";
 
 function App() {
+  const userState = useSelector((state) => state.home.myProfile.authorities[0].authority);
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/homepage/clienti" element={<HomePage />} />
+        <Route path="/homepage/proprieta" element={<HomePage />} />
+        <Route path="/homepage/richieste" element={<HomePage />} />
+        {userState === "SUPER_ADMIN" ? <Route path="/homepage/collaboratori" element={<HomePage />} /> : ""}
       </Routes>
     </BrowserRouter>
   );

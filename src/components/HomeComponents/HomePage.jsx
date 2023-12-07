@@ -9,6 +9,7 @@ import ToolBar from "./ToolBar";
 import { useLocation } from "react-router-dom";
 import CustomerPage from "./CustomerComponent/CustomerPage";
 import Calendar from "./Calendar";
+import PropertyPage from "./PropertyComponents/PropertyPage";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,15 @@ const HomePage = () => {
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const homeState = useSelector((state) => state.home);
   console.log(location.pathname);
+  let content;
+
+  if (location.pathname === "/homepage/clienti") {
+    content = <CustomerPage />;
+  } else if (location.pathname === "/homepage/proprieta") {
+    content = <PropertyPage />;
+  } else {
+    content = <div></div>;
+  }
   useEffect(() => {
     if (token) {
       dispatch(fetchMyProfile(token));
@@ -32,13 +42,11 @@ const HomePage = () => {
               <Col className="text-center" xs={12}>
                 {homeState.myProfile.id && <CardInfoUser homeState={homeState.myProfile} />}
               </Col>
-              {location.pathname === "/homepage/clienti" ? (
-                <Col className="border border-secondary p-2" xs={12} lg={8}>
-                  <CustomerPage />
-                </Col>
-              ) : (
-                <div></div>
-              )}
+
+              <Col className="border border-secondary p-2" xs={12} lg={8}>
+                {content}
+              </Col>
+
               <Col xs={12} lg={4}>
                 <Calendar />
               </Col>

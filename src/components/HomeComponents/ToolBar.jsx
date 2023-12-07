@@ -34,25 +34,27 @@ const ToolBar = () => {
         <Nav.Link className="text-light t-shadow">Proprietà</Nav.Link>
       </Nav.Item>
       <Nav.Item
-        className={location.pathname === "/homepage/nonso" ? "active" : ""}
+        className={location.pathname === "/homepage/richieste" ? "active" : ""}
         onClick={() => {
-          navigate("/homepage/nonso");
+          navigate("/homepage/richieste");
         }}
       >
-        <Nav.Link className="text-light t-shadow">Disabled</Nav.Link>
+        <Nav.Link className="text-light t-shadow">Richieste</Nav.Link>
       </Nav.Item>
-      <Nav.Item
-        className={location.pathname === "/homepage/collaboratori" ? "active" : ""}
-        onClick={() => {
-          if (userState === "SUPER_ADMIN") {
-            navigate("/homepage/collaboratori");
-          }
-        }}
-      >
-        <Nav.Link className="text-light t-shadow" disabled={userState === "SUPER_ADMIN" ? false : true}>
-          Collaboratori
-        </Nav.Link>
-      </Nav.Item>
+      {userState === "SUPER_ADMIN" ? (
+        <Nav.Item
+          className={location.pathname === "/homepage/collaboratori" ? "active" : ""}
+          onClick={() => {
+            if (userState === "SUPER_ADMIN") {
+              navigate("/homepage/collaboratori");
+            }
+          }}
+        >
+          <Nav.Link className="text-light t-shadow">Collaboratori</Nav.Link>
+        </Nav.Item>
+      ) : (
+        ""
+      )}
     </Nav>
   );
 };
