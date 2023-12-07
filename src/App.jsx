@@ -15,8 +15,11 @@ function App() {
         <Route path="/homepage/clienti" element={<HomePage />} />
         <Route path="/homepage/proprieta" element={<HomePage />} />
         <Route path="/homepage/richieste" element={<HomePage />} />
-        <Route path="/homepage/clienti/:id" element={<HomePage />} />
+        <Route path="/homepage/richieste/:rId" element={<HomePage />} />
+        <Route path="/homepage/clienti/:cId" element={<HomePage />} />
+        <Route path="/homepage/proprieta/:pId" element={<HomePage />} />
         {userState === "SUPER_ADMIN" ? <Route path="/homepage/collaboratori" element={<HomePage />} /> : ""}
+        {userState === "SUPER_ADMIN" ? <Route path="/homepage/collaboratori/:id" element={<HomePage />} /> : ""}
       </Routes>
     </BrowserRouter>
   );

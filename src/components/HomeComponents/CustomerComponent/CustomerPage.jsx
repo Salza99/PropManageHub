@@ -14,7 +14,7 @@ const CustomerPage = () => {
   const params = useParams();
   let content;
 
-  if (params.id === undefined) {
+  if (params.cId === undefined) {
     content = customerState.content.map((customer) => {
       return <SingleCustomer customer={customer} key={customer.id} />;
     });

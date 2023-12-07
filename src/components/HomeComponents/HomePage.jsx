@@ -20,10 +20,9 @@ const HomePage = () => {
   const homeState = useSelector((state) => state.home);
   const params = useParams();
   let content;
-  console.log(params.id);
-  if (location.pathname === "/homepage/clienti" || params.id != null) {
+  if (location.pathname === "/homepage/clienti" || params.cId != null) {
     content = <CustomerPage />;
-  } else if (location.pathname === "/homepage/proprieta") {
+  } else if (location.pathname === "/homepage/proprieta" || params.pId != null) {
     content = <PropertyPage />;
   } else if (location.pathname === "/homepage/richieste") {
     content = <RequestPage />;
