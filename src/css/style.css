@@ -85,12 +85,6 @@
   background-color: #f4e7ac;
 }
 
-.info-user-show:hover {
-  transform: scale(1.5);
-}
-.info-user-show:hover p:hover {
-  visibility: visible;
-}
-.info-user-show:hover div:hover {
-  visibility: visible;
+.css-1hbyad5-MuiTypography-root {
+  display: none;
 }/*# sourceMappingURL=style.css.map */

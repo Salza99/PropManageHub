@@ -32,7 +32,12 @@ const Calendar = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoItem>
-        <StaticDatePicker onChange={handleDateChange} defaultValue={selectedDate} orientation={`${orientation}`} />
+        <StaticDatePicker
+          onChange={handleDateChange}
+          defaultValue={selectedDate}
+          orientation={`${orientation}`}
+          showDaysOutsideCurrentMonth={true}
+        />
       </DemoItem>
     </LocalizationProvider>
   );
