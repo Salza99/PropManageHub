@@ -4,7 +4,7 @@ import { Card } from "react-bootstrap";
 class SingleCustomer extends Component {
   render() {
     return (
-      <Card className="mb-3 shadow">
+      <Card className="mb-3 shadow-lg">
         <Card.Body>
           <Card.Title>
             {this.props.customer.name} {this.props.customer.surname}
