@@ -1,4 +1,4 @@
-import { ERROR_CUSTOMER, PAGE_CUSTOMER } from "../actions/CustomerAction";
+import { ERROR_CUSTOMER, PAGE_CUSTOMER, SINGLE_CUSTOMER } from "../actions/CustomerAction";
 
 const initialState = {
   content: [
@@ -14,6 +14,17 @@ const initialState = {
       followedByUser: {},
     },
   ],
+  selected: {
+    id: "",
+    name: "",
+    surname: "",
+    email: "",
+    phone: 0,
+    birthDay: "",
+    sellingProperties: [],
+    request: null,
+    followedByUser: {},
+  },
   errorMessages: "",
 };
 
@@ -23,6 +34,11 @@ const CustomerReducer = (state = initialState, action) => {
       return {
         ...state,
         content: action.payload.content,
+      };
+    case SINGLE_CUSTOMER:
+      return {
+        ...state,
+        selected: action.payload,
       };
     case ERROR_CUSTOMER:
       return {

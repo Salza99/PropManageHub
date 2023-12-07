@@ -6,7 +6,7 @@ import PageLoader from "../Loaders/PageLoader";
 import LogoBar from "../CommonComponents/LogoBar";
 import CardInfoUser from "./HomepageSingleComponent/CardInfoUser";
 import ToolBar from "./ToolBar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import CustomerPage from "./CustomerComponent/CustomerPage";
 import Calendar from "./Calendar";
 import PropertyPage from "./PropertyComponents/PropertyPage";
@@ -18,10 +18,10 @@ const HomePage = () => {
   const location = useLocation();
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const homeState = useSelector((state) => state.home);
-  console.log(location.pathname);
+  const params = useParams();
   let content;
-
-  if (location.pathname === "/homepage/clienti") {
+  console.log(params.id);
+  if (location.pathname === "/homepage/clienti" || params.id != null) {
     content = <CustomerPage />;
   } else if (location.pathname === "/homepage/proprieta") {
     content = <PropertyPage />;

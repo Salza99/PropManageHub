@@ -15,6 +15,7 @@ function App() {
         <Route path="/homepage/clienti" element={<HomePage />} />
         <Route path="/homepage/proprieta" element={<HomePage />} />
         <Route path="/homepage/richieste" element={<HomePage />} />
+        <Route path="/homepage/clienti/:id" element={<HomePage />} />
         {userState === "SUPER_ADMIN" ? <Route path="/homepage/collaboratori" element={<HomePage />} /> : ""}
       </Routes>
     </BrowserRouter>
