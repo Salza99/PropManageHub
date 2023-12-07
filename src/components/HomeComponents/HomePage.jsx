@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 import CustomerPage from "./CustomerComponent/CustomerPage";
 import Calendar from "./Calendar";
 import PropertyPage from "./PropertyComponents/PropertyPage";
+import RequestPage from "./RequestComponents/RequestPage";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,8 @@ const HomePage = () => {
     content = <CustomerPage />;
   } else if (location.pathname === "/homepage/proprieta") {
     content = <PropertyPage />;
+  } else if (location.pathname === "/homepage/richieste") {
+    content = <RequestPage />;
   } else {
     content = <div></div>;
   }

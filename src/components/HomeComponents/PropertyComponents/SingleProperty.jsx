@@ -7,8 +7,8 @@ class SingleProperty extends Component {
       <Card className="mb-3 shadow-lg">
         <Card.Body>
           <Card.Title>{this.props.property.typeOfProperty}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">{this.props.property.condition}</Card.Subtitle>
-          <Card.Subtitle className="mb-2 text-muted">{this.props.property.price} €</Card.Subtitle>
+          <Card.Subtitle className="mb-2 text-muted">Condizioni: {this.props.property.condition}</Card.Subtitle>
+          <Card.Subtitle className="mb-2 text-muted">Prezzo: {this.props.property.price} €</Card.Subtitle>
         </Card.Body>
       </Card>
     );

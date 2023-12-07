@@ -6,7 +6,6 @@ const ToolBar = () => {
   const userState = useSelector((state) => state.home.myProfile.authorities[0].authority);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
   return (
     <Nav justify variant="tabs">
       <Nav.Item

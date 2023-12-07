@@ -15,7 +15,7 @@ const PropertyPage = () => {
   }, [token]);
   return (
     <>
-      <h4 className="text-light t-shadow">Tutti i clienti:</h4>
+      <h4 className="text-light t-shadow">Tutte le proprietà:</h4>
       {propertyState.content[0].id ? (
         propertyState.content.map((property) => {
           return <SingleProperty property={property} key={property.id} />;
