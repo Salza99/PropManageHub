@@ -4,7 +4,7 @@ import { Card } from "react-bootstrap";
 class SingleCustomer extends Component {
   render() {
     return (
-      <Card style={{ width: "18rem" }}>
+      <Card className="mb-3 shadow">
         <Card.Body>
           <Card.Title>
             {this.props.customer.name} {this.props.customer.surname}

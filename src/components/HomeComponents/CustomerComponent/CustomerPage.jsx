@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllCustomer } from "../../../redux/actions/CustomerAction";
 import SingleCustomer from "./SingleCustomer";
+import CustomerCardLoader from "../../Loaders/CustomerCardLoader";
 
 const CustomerPage = () => {
   const dispatch = useDispatch();
@@ -14,12 +15,15 @@ const CustomerPage = () => {
     }
   }, [token]);
   return (
-    <div>
-      {customerState.content[0].id &&
+    <>
+      {customerState.content[0].id ? (
         customerState.content.map((customer) => {
           return <SingleCustomer customer={customer} key={customer.id} />;
-        })}
-    </div>
+        })
+      ) : (
+        <CustomerCardLoader />
+      )}
+    </>
   );
 };
 export default CustomerPage;

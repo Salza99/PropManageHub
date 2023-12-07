@@ -8,6 +8,7 @@ import CardInfoUser from "./HomepageSingleComponent/CardInfoUser";
 import ToolBar from "./ToolBar";
 import { useLocation } from "react-router-dom";
 import CustomerPage from "./CustomerComponent/CustomerPage";
+import { Calendar } from "react-bootstrap-icons";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -27,11 +28,20 @@ const HomePage = () => {
           <LogoBar />
           <ToolBar />
           <Container>
-            <Row className="">
+            <Row className="gy-3">
               <Col className="text-center" xs={12}>
                 {homeState.myProfile.id && <CardInfoUser homeState={homeState.myProfile} />}
               </Col>
-              {location.pathname === "/homepage/clienti" ? <CustomerPage /> : <div></div>}
+              {location.pathname === "/homepage/clienti" ? (
+                <Col xs={12} md={6}>
+                  <CustomerPage />
+                </Col>
+              ) : (
+                <div></div>
+              )}
+              <Col xs={12} md={6}>
+                <Calendar />
+              </Col>
             </Row>
           </Container>
         </>
