@@ -26,7 +26,7 @@ const RequestDetail = () => {
             </ListGroup.Item>
             <ListGroup.Item>Massimale: {requestState.selected.maximal} €</ListGroup.Item>
             <ListGroup.Item>Numero di locali: {requestState.selected.numberOfRooms.length}</ListGroup.Item>
-            <ListGroup.Item>Numero di bagni: {requestState.selected.numberOfBathrooms.length}</ListGroup.Item>
+            <ListGroup.Item>Numero di bagni: {requestState.selected.numberOfBathrooms}</ListGroup.Item>
 
             <Card.Text className="fw-bold">Informazioni sulla locazione:</Card.Text>
             {requestState.selected.regions.length > 0 && (
