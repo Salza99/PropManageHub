@@ -1,3 +1,4 @@
+import { DETAIL_RESET } from "../actions/HomepageAction";
 import { ERROR_REQUEST, PAGE_REQUEST, SINGLE_REQUEST } from "../actions/RequestAction";
 
 const initialState = {
@@ -53,6 +54,29 @@ const RequestReducer = (state = initialState, action) => {
       return {
         ...state,
         selected: action.payload,
+      };
+    case DETAIL_RESET:
+      return {
+        ...state,
+        selected: {
+          id: 0,
+          habitability: true,
+          condominiumFees: 0.0,
+          numberOfRooms: [],
+          condition: "",
+          otherCharacteristics: [],
+          regions: [],
+          cities: [],
+          hamlets: [],
+          surface: 0,
+          numberOfBathrooms: 0,
+          parkingSpace: 0,
+          typeOfProperty: [],
+          maximal: 0,
+          note: "",
+          toRent: false,
+        },
+        errorMessages: action.payload,
       };
     case ERROR_REQUEST:
       return {

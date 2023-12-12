@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Alert, Card, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllCustomer } from "../../../redux/actions/CustomerAction";
 import SingleCustomer from "./SingleCustomer";
 import CustomerCardLoader from "../../Loaders/CustomerCardLoader";
 import { useParams } from "react-router";
 import CustomerDetail from "./CustomerDetail";
+import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
 
 const CustomerPage = () => {
   const dispatch = useDispatch();
@@ -32,10 +33,10 @@ const CustomerPage = () => {
     <>
       <h4 className="text-light t-shadow">Tutti i clienti:</h4>
       {fetchDone ? (
-        customerState.content.lenght > 0 ? (
+        customerState.content.length > 0 ? (
           content
         ) : (
-          <div>non ci sono risultati</div>
+          <Alert variant="warning">Non ci sono risultati</Alert>
         )
       ) : (
         <CustomerCardLoader />

@@ -48,11 +48,11 @@ const HomePage = () => {
                 {homeState.myProfile.id && <CardInfoUser homeState={homeState.myProfile} />}
               </Col>
 
-              <Col className="border border-secondary p-2" xs={12} lg={8}>
+              <Col className="border-gold p-2" xs={12} lg={8}>
                 {content}
               </Col>
 
-              <Col xs={12} lg={4}>
+              <Col className=" p-2" xs={12} lg={4}>
                 <Calendar />
               </Col>
             </Row>

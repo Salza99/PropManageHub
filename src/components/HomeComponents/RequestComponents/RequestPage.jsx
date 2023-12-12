@@ -14,7 +14,7 @@ const RequestPage = () => {
   const params = useParams();
   let content;
   console.log(params.rId);
-  if (params.rId === undefined) {
+  if (params.rId === undefined && requestState.content.length > 0) {
     content = requestState.content.map((request) => {
       return <SingleRequest request={request} key={request.id} />;
     });
@@ -30,7 +30,7 @@ const RequestPage = () => {
   return (
     <>
       <h4 className="text-light t-shadow">Tutte le richieste:</h4>
-      {fetchDone ? requestState.content.lenght > 0 ? content : <div>non ci sono risultati</div> : <RequestCardLoader />}
+      {fetchDone ? requestState.content.length > 0 ? content : <div>non ci sono risultati</div> : <RequestCardLoader />}
     </>
   );
 };

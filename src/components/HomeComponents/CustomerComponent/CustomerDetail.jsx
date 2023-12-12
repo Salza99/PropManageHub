@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { singleCustomer } from "../../../redux/actions/CustomerAction";
 import { Card, ListGroup } from "react-bootstrap";
 import CustomerCardLoader from "../../Loaders/CustomerCardLoader";
+import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
 
 const CustomerDetail = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,9 @@ const CustomerDetail = () => {
   const params = useParams();
   useEffect(() => {
     dispatch(singleCustomer(token, params.cId));
+    return () => {
+      dispatch({ type: DETAIL_RESET, payload: "" });
+    };
   }, []);
   return (
     <>

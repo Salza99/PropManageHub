@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import PropertyCardLoader from "../../Loaders/PropertyCardLoader";
 import { singleProperty } from "../../../redux/actions/PropertyAction";
+import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
 
 const PropertyDetail = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,9 @@ const PropertyDetail = () => {
 
   useEffect(() => {
     dispatch(singleProperty(token, params.pId));
+    return () => {
+      dispatch({ type: DETAIL_RESET, payload: "" });
+    };
   }, []);
   return (
     <>

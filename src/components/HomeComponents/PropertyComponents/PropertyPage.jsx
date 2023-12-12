@@ -5,6 +5,7 @@ import SingleProperty from "./SingleProperty";
 import PropertyCardLoader from "../../Loaders/PropertyCardLoader";
 import { useParams } from "react-router";
 import PropertyDetail from "./PropertyDetail";
+import { Alert } from "react-bootstrap";
 
 const PropertyPage = () => {
   const propertyState = useSelector((state) => state.property);
@@ -13,7 +14,7 @@ const PropertyPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
   let content;
-  if (params.pId === undefined) {
+  if (params.pId === undefined && propertyState.content.length > 0) {
     content = propertyState.content.map((property) => {
       return <SingleProperty property={property} key={property.id} />;
     });
@@ -30,10 +31,10 @@ const PropertyPage = () => {
     <>
       <h4 className="text-light t-shadow">Tutte le proprietà:</h4>
       {fetchDone ? (
-        propertyState.content.lenght > 0 ? (
+        propertyState.content.length > 0 ? (
           content
         ) : (
-          <div>non ci sono risultati</div>
+          <Alert variant="warning">Non ci sono risultati</Alert>
         )
       ) : (
         <PropertyCardLoader />

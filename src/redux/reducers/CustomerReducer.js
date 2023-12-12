@@ -1,4 +1,5 @@
 import { ERROR_CUSTOMER, PAGE_CUSTOMER, SINGLE_CUSTOMER } from "../actions/CustomerAction";
+import { DETAIL_RESET } from "../actions/HomepageAction";
 
 const initialState = {
   content: [
@@ -43,6 +44,22 @@ const CustomerReducer = (state = initialState, action) => {
     case ERROR_CUSTOMER:
       return {
         ...state,
+        errorMessages: action.payload,
+      };
+    case DETAIL_RESET:
+      return {
+        ...state,
+        selected: {
+          id: "",
+          name: "",
+          surname: "",
+          email: "",
+          phone: 0,
+          birthDay: "",
+          sellingProperties: [],
+          request: null,
+          followedByUser: {},
+        },
         errorMessages: action.payload,
       };
     default:
