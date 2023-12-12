@@ -6,7 +6,6 @@ import SingleCustomer from "./SingleCustomer";
 import CustomerCardLoader from "../../Loaders/CustomerCardLoader";
 import { useParams } from "react-router";
 import CustomerDetail from "./CustomerDetail";
-import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
 
 const CustomerPage = () => {
   const dispatch = useDispatch();

@@ -26,7 +26,11 @@ const HomePage = () => {
     content = <PropertyPage />;
   } else if (location.pathname === "/homepage/richieste" || params.rId != null) {
     content = <RequestPage />;
-  } else if (location.pathname === "/homepage/collaboratori") {
+  } else if (
+    location.pathname === "/homepage/collaboratori" ||
+    params.id != null ||
+    location.pathname === "/homepage/collaboratori/createAdmin"
+  ) {
     content = <AdminPage />;
   } else {
     content = <div></div>;
@@ -48,7 +52,7 @@ const HomePage = () => {
                 {homeState.myProfile.id && <CardInfoUser homeState={homeState.myProfile} />}
               </Col>
 
-              <Col className="border-gold p-2" xs={12} lg={8}>
+              <Col className="border-gold background-op p-2" xs={12} lg={8}>
                 {content}
               </Col>
 

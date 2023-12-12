@@ -82,7 +82,28 @@
   border-top-left-radius: 10px;
 }
 .border-gold {
-  border: 3px solid #f4e7ac;
+  border: 1px solid #f4e7ac;
   border-radius: 15px;
   box-shadow: 0px 0px 3px 1px white;
+}
+.background-op {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+  border-radius: 0 !important;
+}
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border: 0 !important;
+  border-bottom: 1px solid rgb(255, 255, 255) !important;
+}
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+  padding-top: 1.25rem !important;
+  padding-bottom: 0.3rem !important;
+}
+.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root {
+  padding-top: 1.25rem !important;
+  padding-bottom: 0.3rem !important;
+}
+.css-1q2970e-MuiInputBase-root-MuiInput-root:before {
+  border-bottom: 1px solid white !important;
 }

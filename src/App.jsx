@@ -20,6 +20,7 @@ function App() {
         <Route path="/homepage/proprieta/:pId" element={<HomePage />} />
         {userState === "SUPER_ADMIN" ? <Route path="/homepage/collaboratori" element={<HomePage />} /> : ""}
         {userState === "SUPER_ADMIN" ? <Route path="/homepage/collaboratori/:id" element={<HomePage />} /> : ""}
+        {userState === "SUPER_ADMIN" ? <Route path="/homepage/collaboratori/createAdmin" element={<HomePage />} /> : ""}
       </Routes>
     </BrowserRouter>
   );
