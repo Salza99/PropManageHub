@@ -24,8 +24,10 @@ const CreateAdminForm = () => {
   });
   const [show, setShow] = useState(false);
   const [errorsPosition, setErrorsPosition] = useState(false);
+  const [screenWidth, setScreenWidth] = useState("");
+
   const handleResize = () => {
-    const screenWidth = window.innerWidth;
+    setScreenWidth(window.innerWidth);
     if (screenWidth >= 768) {
       setErrorsPosition(true);
     } else {
@@ -55,11 +57,17 @@ const CreateAdminForm = () => {
     },
   });
   useEffect(() => {
+    setScreenWidth(window.innerWidth);
+    if (screenWidth >= 768) {
+      setErrorsPosition(true);
+    } else {
+      setErrorsPosition(false);
+    }
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [screenWidth]);
   useEffect(() => {
     if (adminState.errorMessages !== "") {
       setShow(true);
@@ -67,6 +75,14 @@ const CreateAdminForm = () => {
   }, [adminState.errorMessages]);
   useEffect(() => {
     if (adminState.errorMessages === "" && adminState.createAdminOk === true) {
+      setBody({
+        name: "",
+        surname: "",
+        phone: "",
+        email: "",
+        username: "",
+        birthDay: dayjs(),
+      });
       navigate("/homepage/collaboratori");
     }
     return () => {
@@ -114,6 +130,7 @@ const CreateAdminForm = () => {
                 className="w-100 text"
                 label="Nome"
                 variant="standard"
+                value={body.name}
                 onChange={(e) => {
                   setBody({ ...body, name: e.target.value });
                 }}
@@ -133,6 +150,7 @@ const CreateAdminForm = () => {
                 className="w-100"
                 label="cognome"
                 variant="standard"
+                value={body.surname}
                 onChange={(e) => {
                   setBody({ ...body, surname: e.target.value });
                 }}
@@ -152,6 +170,7 @@ const CreateAdminForm = () => {
                 className="w-100"
                 label="telefono"
                 variant="standard"
+                value={body.phone}
                 onChange={(e) => {
                   setBody({ ...body, phone: e.target.value });
                 }}
@@ -171,6 +190,7 @@ const CreateAdminForm = () => {
                 className="w-100"
                 label="email"
                 variant="standard"
+                value={body.email}
                 onChange={(e) => {
                   setBody({ ...body, email: e.target.value });
                 }}
@@ -186,6 +206,7 @@ const CreateAdminForm = () => {
                     textShadow: "2px 2px 4px black",
                   },
                 }}
+                value={body.username}
                 color="ochre"
                 className="w-100"
                 label="username"
@@ -214,6 +235,7 @@ const CreateAdminForm = () => {
               />
             </LocalizationProvider>
           </Col>
+
           <Col className={`text-center align-self-center ${errorsPosition && "order-btn"}`} xs={6} md={3}>
             <button className="form-button" type="submit">
               Aggiungi
