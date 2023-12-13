@@ -9,6 +9,9 @@ import { useParams } from "react-router";
 import CustomerDetail from "./CustomerDetail";
 import { Plus } from "react-bootstrap-icons";
 import CreateCustomerForm from "./CreateCustomerForm";
+import CreateRequestForm from "../RequestComponents/CreateRequestForm";
+import CreateAddressForm from "../PropertyComponents/CreateAddressForm";
+import CreatePropertyForm from "../PropertyComponents/CreatePropertyForm";
 
 const CustomerPage = () => {
   const dispatch = useDispatch();
@@ -22,15 +25,23 @@ const CustomerPage = () => {
   if (
     params.cId === undefined &&
     customerState.content.length > 0 &&
-    location.pathname !== "/homepage/clienti/aggiungiCliente"
+    location.pathname !== "/homepage/clienti/aggiungiCliente" &&
+    location.pathname !== "/homepage/clienti/aggiungiCliente/richiesta" &&
+    location.pathname !== "/homepage/clienti/aggiungiCliente/proprieta"
   ) {
     content = customerState.content.map((customer) => {
       return <SingleCustomer customer={customer} key={customer.id} />;
     });
   } else if (params.cid !== undefined) {
     content = <CustomerDetail />;
-  } else {
+  } else if (location.pathname === "/homepage/clienti/aggiungiCliente") {
     content = <CreateCustomerForm />;
+  } else if (location.pathname === "/homepage/clienti/aggiungiCliente/richiesta") {
+    content = <CreateRequestForm />;
+  } else if (location.pathname === "/homepage/clienti/aggiungiCliente/indirizzo") {
+    content = <CreateAddressForm />;
+  } else if (location.pathname === "/homepage/clienti/aggiungiCliente/proprieta") {
+    content = <CreatePropertyForm />;
   }
   useEffect(() => {
     if (token) {

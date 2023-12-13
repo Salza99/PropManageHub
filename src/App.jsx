@@ -14,6 +14,9 @@ function App() {
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/homepage/clienti" element={<HomePage />} />
         <Route path="/homepage/clienti/aggiungiCliente" element={<HomePage />} />
+        <Route path="/homepage/clienti/aggiungiCliente/proprieta" element={<HomePage />} />
+        <Route path="/homepage/clienti/aggiungiCliente/richiesta" element={<HomePage />} />
+        <Route path="/homepage/clienti/aggiungiCliente/indirizzo" element={<HomePage />} />
         <Route path="/homepage/proprieta" element={<HomePage />} />
         <Route path="/homepage/richieste" element={<HomePage />} />
         <Route path="/homepage/richieste/:rId" element={<HomePage />} />
