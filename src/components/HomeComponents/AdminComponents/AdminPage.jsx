@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllAdmin } from "../../../redux/actions/AdminAction";
 import SingleAdmin from "./SingleAdmin";
 import AdminCardLoader from "../../Loaders/AdminCardLoader";
-import { Alert, Button } from "react-bootstrap";
+import { Alert, Button, Col, Row } from "react-bootstrap";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AdminDetail from "./AdminDetail";
 import CreateAdminForm from "./CreateAdminForm";
+import { Plus } from "react-bootstrap-icons";
 
 const AdminPage = () => {
   const dispatch = useDispatch();
@@ -35,19 +36,22 @@ const AdminPage = () => {
       dispatch(fetchAllAdmin(token));
       setFetchDone(true);
     }
-  }, [token]);
+  }, [token, adminState.createAdminOk]);
   return (
     <>
-      <h4 className="text-light t-shadow">Tutti i collaboratori:</h4>
-      <Button
-        className="mb-3"
-        variant="outline-light"
-        onClick={() => {
-          navigate("/homepage/collaboratori/createAdmin");
-        }}
-      >
-        +
-      </Button>
+      <Row>
+        <Col xs={10} sm={11}>
+          <h4 className="text-light t-shadow">Tutti i collaboratori:</h4>
+        </Col>
+        <Col xs={2} sm={1}>
+          <Plus
+            className="form-button-add"
+            onClick={() => {
+              navigate("/homepage/collaboratori/createAdmin");
+            }}
+          />
+        </Col>
+      </Row>
       {fetchDone ? (
         adminState.content[0].id ? (
           content

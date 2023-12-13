@@ -1,4 +1,4 @@
-import { ERROR_ADMIN, PAGE_ADMIN, SINGLE_ADMIN } from "../actions/AdminAction";
+import { ERROR_ADMIN, PAGE_ADMIN, POST_ADMIN_OK, RESET_ADMIN_OK, SINGLE_ADMIN } from "../actions/AdminAction";
 import { DETAIL_RESET } from "../actions/HomepageAction";
 
 const initialState = {
@@ -45,6 +45,7 @@ const initialState = {
     credentialsNonExpired: true,
   },
   errorMessages: "",
+  createAdminOk: false,
 };
 
 const AdminReducer = (state = initialState, action) => {
@@ -83,6 +84,16 @@ const AdminReducer = (state = initialState, action) => {
           credentialsNonExpired: true,
         },
         errorMessages: action.payload,
+      };
+    case POST_ADMIN_OK:
+      return {
+        ...state,
+        createAdminOk: action.payload,
+      };
+    case RESET_ADMIN_OK:
+      return {
+        ...state,
+        createAdminOk: action.payload,
       };
     case ERROR_ADMIN:
       return {

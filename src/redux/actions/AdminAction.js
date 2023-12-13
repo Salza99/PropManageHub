@@ -1,6 +1,8 @@
 export const PAGE_ADMIN = "PAGE_ADMIN";
 export const ERROR_ADMIN = "ERROR_ADMIN";
 export const SINGLE_ADMIN = "SINGLE_ADMIN";
+export const POST_ADMIN_OK = "POST_ADMIN_OK";
+export const RESET_ADMIN_OK = "RESET_ADMIN_OK";
 
 export const fetchAllAdmin = (token) => {
   return async (dispatch) => {
@@ -58,7 +60,7 @@ export const postAdmin = (token, body) => {
         },
       });
       if (resp.ok) {
-        const data = await resp.json();
+        dispatch({ type: POST_ADMIN_OK, payload: true });
       } else {
         const errorMessage = await resp.json();
         dispatch({ type: ERROR_ADMIN, payload: errorMessage.errorsList });

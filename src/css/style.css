@@ -99,35 +99,56 @@
   border-top-left-radius: 10px;
 }
 
-.border-gold {
-  border: 1px solid #f4e7ac;
-  border-radius: 15px;
-  box-shadow: 0px 0px 3px 1px white;
-}
-
 .background-op {
   background-color: rgba(255, 255, 255, 0.4);
 }
 
-.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
-  border-radius: 0 !important;
+.date fieldset {
+  border-color: white !important;
 }
 
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
-  border: 0 !important;
-  border-bottom: 1px solid rgb(255, 255, 255) !important;
+.form-button {
+  padding: 0.7rem 1rem;
+  color: white;
+  border: 1px solid white;
+  border-radius: 15px;
+  background-color: transparent;
+  text-shadow: 2px 2px 10px white;
+}
+.form-button:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  text-shadow: 2px 2px 4px black;
+}
+.form-button:active {
+  border: 2px solid #f4e7ac;
 }
 
-.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
-  padding-top: 1.25rem !important;
-  padding-bottom: 0.3rem !important;
+.form-button-add {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: white;
+  border: 1px solid white;
+  border-radius: 15px;
+  background-color: transparent;
+  text-shadow: 2px 2px 10px white;
+}
+.form-button-add:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  text-shadow: 2px 2px 4px black;
+}
+.form-button-add:active {
+  border: 2px solid #f4e7ac;
 }
 
-.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root {
-  padding-top: 1.25rem !important;
-  padding-bottom: 0.3rem !important;
+.border-main {
+  border-radius: 15px;
+  box-shadow: 12px 12px 20px 5px rgba(0, 0, 0, 0.3);
 }
 
-.css-1q2970e-MuiInputBase-root-MuiInput-root:before {
-  border-bottom: 1px solid white !important;
+.order-errors {
+  order: 0;
+}
+
+.order-btn {
+  order: 1;
 }/*# sourceMappingURL=style.css.map */

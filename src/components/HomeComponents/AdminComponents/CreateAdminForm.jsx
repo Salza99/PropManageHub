@@ -1,4 +1,4 @@
-import { DatePicker } from "@mui/x-date-pickers";
+import { DateField } from "@mui/x-date-pickers";
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import dayjs from "dayjs";
@@ -9,8 +9,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { GlobalStyles, TextField, ThemeProvider, createTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { postAdmin } from "../../../redux/actions/AdminAction";
-import ErrorAlert from "../../Alerts/ErrorAlert";
+import { RESET_ADMIN_OK, postAdmin } from "../../../redux/actions/AdminAction";
+import { ClassNames } from "@emotion/react";
+import ErrorsList from "../../Alerts/ErrorsList";
 
 const CreateAdminForm = () => {
   const [body, setBody] = useState({
@@ -21,7 +22,16 @@ const CreateAdminForm = () => {
     username: "",
     birthDay: dayjs(),
   });
-  const fetchSuccess = useState(false);
+  const [show, setShow] = useState(false);
+  const [errorsPosition, setErrorsPosition] = useState(false);
+  const handleResize = () => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth >= 768) {
+      setErrorsPosition(true);
+    } else {
+      setErrorsPosition(false);
+    }
+  };
   const adminState = useSelector((state) => state.admin);
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const dispatch = useDispatch();
@@ -44,11 +54,25 @@ const CreateAdminForm = () => {
       },
     },
   });
-  //   useEffect(() => {
-  //     if (adminState.errorMessages === "" && body.birthDay !== "") {
-  //       navigate("/homepage/collaboratori");
-  //     }
-  //   }, []);
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    if (adminState.errorMessages !== "") {
+      setShow(true);
+    }
+  }, [adminState.errorMessages]);
+  useEffect(() => {
+    if (adminState.errorMessages === "" && adminState.createAdminOk === true) {
+      navigate("/homepage/collaboratori");
+    }
+    return () => {
+      dispatch({ type: RESET_ADMIN_OK, payload: false });
+    };
+  }, [adminState.createAdminOk]);
   return (
     <>
       <Form
@@ -63,19 +87,23 @@ const CreateAdminForm = () => {
               border: "0 !important",
               borderBottom: "1px solid white !important",
             },
+            input: {
+              color: "white !important",
+              textShadow: "2px 2px 4px black !important",
+            },
+            svg: {
+              color: "white !important",
+            },
+            "& fieldset:hover": {
+              border: "1px solid #f4e7ac !important",
+            },
           }}
         />
-        <Row className="p-4">
-          <Col xs={12} md={6}>
+        <Row className="p-4 justify-content-end">
+          <Col className="mb-3 mb-md-5" xs={12} md={6}>
             <ThemeProvider theme={theme}>
               <TextField
                 InputLabelProps={{
-                  style: {
-                    color: "white",
-                    textShadow: "2px 2px 4px black",
-                  },
-                }}
-                FormHelperTextProps={{
                   style: {
                     color: "white",
                     textShadow: "2px 2px 4px black",
@@ -85,7 +113,6 @@ const CreateAdminForm = () => {
                 inputProps={{ style: { color: "white", textShadow: "2px 2px 4px black" } }}
                 className="w-100 text"
                 label="Nome"
-                helperText="inserisci il nome"
                 variant="standard"
                 onChange={(e) => {
                   setBody({ ...body, name: e.target.value });
@@ -93,7 +120,7 @@ const CreateAdminForm = () => {
               />
             </ThemeProvider>
           </Col>
-          <Col xs={12} md={6}>
+          <Col className="mb-3 mb-md-5" xs={12} md={6}>
             <ThemeProvider theme={theme}>
               <TextField
                 InputLabelProps={{
@@ -102,17 +129,9 @@ const CreateAdminForm = () => {
                     textShadow: "2px 2px 4px black",
                   },
                 }}
-                FormHelperTextProps={{
-                  style: {
-                    color: "white",
-                    textShadow: "2px 2px 4px black",
-                  },
-                }}
                 color="ochre"
-                inputProps={{ style: { color: "white", textShadow: "2px 2px 4px black" } }}
                 className="w-100"
                 label="cognome"
-                helperText="inserisci il cognome"
                 variant="standard"
                 onChange={(e) => {
                   setBody({ ...body, surname: e.target.value });
@@ -120,7 +139,7 @@ const CreateAdminForm = () => {
               />
             </ThemeProvider>
           </Col>
-          <Col xs={12} md={6}>
+          <Col className="mb-3 mb-md-5" xs={12} md={6}>
             <ThemeProvider theme={theme}>
               <TextField
                 InputLabelProps={{
@@ -129,17 +148,9 @@ const CreateAdminForm = () => {
                     textShadow: "2px 2px 4px black",
                   },
                 }}
-                FormHelperTextProps={{
-                  style: {
-                    color: "white",
-                    textShadow: "2px 2px 4px black",
-                  },
-                }}
                 color="ochre"
-                inputProps={{ style: { color: "white", textShadow: "2px 2px 4px black" } }}
                 className="w-100"
                 label="telefono"
-                helperText="inserisci il numero telefono"
                 variant="standard"
                 onChange={(e) => {
                   setBody({ ...body, phone: e.target.value });
@@ -147,7 +158,7 @@ const CreateAdminForm = () => {
               />
             </ThemeProvider>
           </Col>
-          <Col xs={12} md={6}>
+          <Col className="mb-3 mb-md-5" xs={12} md={6}>
             <ThemeProvider theme={theme}>
               <TextField
                 InputLabelProps={{
@@ -156,17 +167,9 @@ const CreateAdminForm = () => {
                     textShadow: "2px 2px 4px black",
                   },
                 }}
-                FormHelperTextProps={{
-                  style: {
-                    color: "white",
-                    textShadow: "2px 2px 4px black",
-                  },
-                }}
                 color="ochre"
-                inputProps={{ style: { color: "white", textShadow: "2px 2px 4px black" } }}
                 className="w-100"
                 label="email"
-                helperText="inserisci l'email"
                 variant="standard"
                 onChange={(e) => {
                   setBody({ ...body, email: e.target.value });
@@ -174,7 +177,7 @@ const CreateAdminForm = () => {
               />
             </ThemeProvider>
           </Col>
-          <Col xs={12} md={6}>
+          <Col className="mb-5 mb-md-5" xs={12} md={8}>
             <ThemeProvider theme={theme}>
               <TextField
                 InputLabelProps={{
@@ -183,17 +186,9 @@ const CreateAdminForm = () => {
                     textShadow: "2px 2px 4px black",
                   },
                 }}
-                FormHelperTextProps={{
-                  style: {
-                    color: "white",
-                    textShadow: "2px 2px 4px black",
-                  },
-                }}
                 color="ochre"
-                inputProps={{ style: { color: "white", textShadow: "2px 2px 4px black" } }}
                 className="w-100"
                 label="username"
-                helperText="inserisci l'username"
                 variant="standard"
                 onChange={(e) => {
                   setBody({ ...body, username: e.target.value });
@@ -201,15 +196,33 @@ const CreateAdminForm = () => {
               />
             </ThemeProvider>
           </Col>
-          <Col xs={12} md={6}>
+          <Col xs={6} md={4}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker format="YYYY-MM-DD" disableFuture onChange={handleDateChange} defaultValue={body.birthDay} />
+              <DateField
+                className="date"
+                format="DD/MM/YYYY"
+                label="data di nascità"
+                InputLabelProps={{
+                  style: {
+                    color: "white",
+                    textShadow: "2px 2px 4px black",
+                  },
+                }}
+                disableFuture
+                onChange={handleDateChange}
+                defaultValue={body.birthDay}
+              />
             </LocalizationProvider>
           </Col>
-          <Col xs={12} md={12}>
-            <Button variant="outline-light" type="submit">
-              Crea nuovo Collaboratore
-            </Button>
+          <Col className={`text-center align-self-center ${errorsPosition && "order-btn"}`} xs={6} md={3}>
+            <button className="form-button" type="submit">
+              Aggiungi
+            </button>
+          </Col>
+          <Col className={errorsPosition && "order-errors"} xs={12} md={9}>
+            {adminState.errorMessages && (
+              <ErrorsList adminState={adminState.errorMessages} show={show} setShow={setShow} />
+            )}
           </Col>
         </Row>
       </Form>
