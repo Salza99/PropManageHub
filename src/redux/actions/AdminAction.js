@@ -3,6 +3,7 @@ export const ERROR_ADMIN = "ERROR_ADMIN";
 export const SINGLE_ADMIN = "SINGLE_ADMIN";
 export const POST_ADMIN_OK = "POST_ADMIN_OK";
 export const RESET_ADMIN_OK = "RESET_ADMIN_OK";
+export const RESET_ADMIN_ERRORS = "RESET_ADMIN_ERRORS";
 
 export const fetchAllAdmin = (token) => {
   return async (dispatch) => {

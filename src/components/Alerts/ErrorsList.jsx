@@ -6,13 +6,14 @@ class ErrorsList extends Component {
     return (
       <Alert variant="danger" show={this.props.show} onClose={() => this.props.setShow(false)} dismissible>
         <Alert.Heading>Errore nell'inserimento dei dati!</Alert.Heading>
-        {this.props.adminState.map((error, index) => {
-          return (
-            <ul key={`error-${index + 1}`}>
-              <li>{error}</li>
-            </ul>
-          );
-        })}
+        {this.props.stateErrors &&
+          this.props.stateErrors.map((error, index) => {
+            return (
+              <ul key={`error-${index + 1}`}>
+                <li>{error}</li>
+              </ul>
+            );
+          })}
       </Alert>
     );
   }

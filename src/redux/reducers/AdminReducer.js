@@ -1,4 +1,11 @@
-import { ERROR_ADMIN, PAGE_ADMIN, POST_ADMIN_OK, RESET_ADMIN_OK, SINGLE_ADMIN } from "../actions/AdminAction";
+import {
+  ERROR_ADMIN,
+  PAGE_ADMIN,
+  POST_ADMIN_OK,
+  RESET_ADMIN_ERRORS,
+  RESET_ADMIN_OK,
+  SINGLE_ADMIN,
+} from "../actions/AdminAction";
 import { DETAIL_RESET } from "../actions/HomepageAction";
 
 const initialState = {
@@ -94,6 +101,11 @@ const AdminReducer = (state = initialState, action) => {
       return {
         ...state,
         createAdminOk: action.payload,
+      };
+    case RESET_ADMIN_ERRORS:
+      return {
+        ...state,
+        errorMessages: action.payload,
       };
     case ERROR_ADMIN:
       return {

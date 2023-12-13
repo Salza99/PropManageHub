@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { Alert, Card, Col, Row } from "react-bootstrap";
+import { Alert, Col, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllCustomer } from "../../../redux/actions/CustomerAction";
 import SingleCustomer from "./SingleCustomer";
 import CustomerCardLoader from "../../Loaders/CustomerCardLoader";
 import { useParams } from "react-router";
 import CustomerDetail from "./CustomerDetail";
+import { Plus } from "react-bootstrap-icons";
+import CreateCustomerForm from "./CreateCustomerForm";
 
 const CustomerPage = () => {
   const dispatch = useDispatch();
@@ -13,14 +16,21 @@ const CustomerPage = () => {
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const [fetchDone, setFetchDone] = useState(false);
   const params = useParams();
+  const navigate = useNavigate();
   let content;
 
-  if (params.cId === undefined && customerState.content.length > 0) {
+  if (
+    params.cId === undefined &&
+    customerState.content.length > 0 &&
+    location.pathname !== "/homepage/clienti/aggiungiCliente"
+  ) {
     content = customerState.content.map((customer) => {
       return <SingleCustomer customer={customer} key={customer.id} />;
     });
-  } else {
+  } else if (params.cid !== undefined) {
     content = <CustomerDetail />;
+  } else {
+    content = <CreateCustomerForm />;
   }
   useEffect(() => {
     if (token) {
@@ -30,7 +40,19 @@ const CustomerPage = () => {
   }, [token]);
   return (
     <>
-      <h4 className="text-light t-shadow">Tutti i clienti:</h4>
+      <Row>
+        <Col xs={10} sm={11}>
+          <h4 className="text-light t-shadow">Tutti i collaboratori:</h4>
+        </Col>
+        <Col xs={2} sm={1}>
+          <Plus
+            className="form-button-add"
+            onClick={() => {
+              navigate("/homepage/clienti/aggiungiCliente");
+            }}
+          />
+        </Col>
+      </Row>
       {fetchDone ? (
         customerState.content.length > 0 ? (
           content

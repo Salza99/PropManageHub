@@ -1,32 +1,31 @@
-import { DateField } from "@mui/x-date-pickers";
-import { useEffect, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import dayjs from "dayjs";
-
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-
 import { GlobalStyles, TextField, ThemeProvider, createTheme } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { RESET_ADMIN_ERRORS, RESET_ADMIN_OK, postAdmin } from "../../../redux/actions/AdminAction";
-import { ClassNames } from "@emotion/react";
+import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
+import { Col, Form, Row } from "react-bootstrap";
 import ErrorsList from "../../Alerts/ErrorsList";
-import { RESET_ERROR_MESSAGE } from "../../../redux/actions/LoginAction";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { RESET_CUSTOMER_ERRORS, RESET_CUSTOMER_OK, postCustomer } from "../../../redux/actions/CustomerAction";
 
-const CreateAdminForm = () => {
+const CreateCustomerForm = () => {
   const [body, setBody] = useState({
     name: "",
     surname: "",
     phone: "",
     email: "",
-    username: "",
     birthDay: dayjs(),
   });
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [errorsPosition, setErrorsPosition] = useState(false);
+  const [navigateRequest, setNavigateRequest] = useState(false);
+  const [navigateProperty, setNavigateProperty] = useState(false);
   const [screenWidth, setScreenWidth] = useState("");
-
+  const token = useSelector((state) => state.login.respLogin.authorizationToken);
+  const adminId = useSelector((state) => state.home.myProfile.id);
+  const customerState = useSelector((state) => state.customer);
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
     if (screenWidth >= 768) {
@@ -35,14 +34,13 @@ const CreateAdminForm = () => {
       setErrorsPosition(false);
     }
   };
-  const adminState = useSelector((state) => state.admin);
-  const token = useSelector((state) => state.login.respLogin.authorizationToken);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleDateChange = (date) => {
     setBody({
       ...body,
-      birthDay: `${date.year()}-${date.month() < 10 ? "0" + (date.month() + 1) : date.month()}-${date.$D}`,
+      birthDay: `${date.year()}-${date.month() < 10 ? "0" + (date.month() + 1) : date.month()}-${
+        date.$D < 10 ? "0" + date.$D : date.$D
+      }`,
     });
     console.log(date);
   };
@@ -70,37 +68,51 @@ const CreateAdminForm = () => {
     };
   }, [screenWidth]);
   useEffect(() => {
-    if (adminState.errorMessages !== "") {
+    if (customerState.errorMessages !== "") {
       setShow(true);
     }
-  }, [adminState.errorMessages]);
+  }, [customerState.errorMessages]);
   useEffect(() => {
     if (!show) {
-      dispatch({ type: RESET_ADMIN_ERRORS, payload: "" });
+      dispatch({ type: RESET_CUSTOMER_ERRORS, payload: "" });
     }
   }, [show]);
   useEffect(() => {
-    if (adminState.errorMessages === "" && adminState.createAdminOk === true) {
+    if (customerState.errorMessages === "" && customerState.createCustomerOk === true && navigateRequest === true) {
       setBody({
         name: "",
         surname: "",
         phone: "",
         email: "",
-        username: "",
         birthDay: dayjs(),
       });
-      navigate("/homepage/collaboratori");
+      navigate("/homepage/clienti/aggiungiCliente/richiesta");
+    } else if (
+      customerState.errorMessages === "" &&
+      customerState.createCustomerOk === true &&
+      navigateProperty === true
+    ) {
+      setBody({
+        name: "",
+        surname: "",
+        phone: "",
+        email: "",
+        birthDay: dayjs(),
+      });
+      navigate("/homepage/clienti/aggiungiCliente/proprieta");
     }
+  }, [customerState.createCustomerOk]);
+  useEffect(() => {
     return () => {
-      dispatch({ type: RESET_ADMIN_OK, payload: false });
+      dispatch({ type: RESET_CUSTOMER_OK, payload: false });
     };
-  }, [adminState.createAdminOk]);
+  }, []);
   return (
     <>
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(postAdmin(token, body));
+          dispatch(postCustomer(token, body, adminId));
         }}
       >
         <GlobalStyles
@@ -203,26 +215,6 @@ const CreateAdminForm = () => {
               />
             </ThemeProvider>
           </Col>
-          <Col className="mb-5 mb-md-5" xs={12} md={8}>
-            <ThemeProvider theme={theme}>
-              <TextField
-                InputLabelProps={{
-                  style: {
-                    color: "white",
-                    textShadow: "2px 2px 4px black",
-                  },
-                }}
-                value={body.username}
-                color="ochre"
-                className="w-100"
-                label="username"
-                variant="standard"
-                onChange={(e) => {
-                  setBody({ ...body, username: e.target.value });
-                }}
-              />
-            </ThemeProvider>
-          </Col>
           <Col className="mb-5" xs={6} md={4}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateField
@@ -247,13 +239,28 @@ const CreateAdminForm = () => {
             xs={6}
             md={3}
           >
-            <button className="form-button" type="submit">
-              Aggiungi
+            <button
+              onClick={() => {
+                setNavigateRequest(true);
+              }}
+              className="form-button mb-3"
+              type="submit"
+            >
+              Aggiungi richiesta
+            </button>
+            <button
+              onClick={() => {
+                setNavigateProperty(true);
+              }}
+              className="form-button"
+              type="submit"
+            >
+              Aggiungi proprietà
             </button>
           </Col>
           <Col className={errorsPosition && "order-errors"} xs={12} md={9}>
-            {adminState.errorMessages && (
-              <ErrorsList stateErrors={adminState.errorMessages} show={show} setShow={setShow} />
+            {customerState.errorMessages && (
+              <ErrorsList stateErrors={customerState.errorMessages} show={show} setShow={setShow} />
             )}
           </Col>
         </Row>
@@ -261,4 +268,4 @@ const CreateAdminForm = () => {
     </>
   );
 };
-export default CreateAdminForm;
+export default CreateCustomerForm;

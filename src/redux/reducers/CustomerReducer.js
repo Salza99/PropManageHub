@@ -1,4 +1,12 @@
-import { ERROR_CUSTOMER, PAGE_CUSTOMER, SINGLE_CUSTOMER } from "../actions/CustomerAction";
+import {
+  ERROR_CUSTOMER,
+  PAGE_CUSTOMER,
+  POST_CUSTOMER_DATA,
+  POST_CUSTOMER_OK,
+  RESET_CUSTOMER_ERRORS,
+  RESET_CUSTOMER_OK,
+  SINGLE_CUSTOMER,
+} from "../actions/CustomerAction";
 import { DETAIL_RESET } from "../actions/HomepageAction";
 
 const initialState = {
@@ -26,6 +34,7 @@ const initialState = {
     request: null,
     followedByUser: {},
   },
+  createCustomerOk: false,
   errorMessages: "",
 };
 
@@ -42,6 +51,26 @@ const CustomerReducer = (state = initialState, action) => {
         selected: action.payload,
       };
     case ERROR_CUSTOMER:
+      return {
+        ...state,
+        errorMessages: action.payload,
+      };
+    case POST_CUSTOMER_OK:
+      return {
+        ...state,
+        createCustomerOk: action.payload,
+      };
+    case POST_CUSTOMER_DATA:
+      return {
+        ...state,
+        selected: action.payload,
+      };
+    case RESET_CUSTOMER_OK:
+      return {
+        ...state,
+        createCustomerOk: action.payload,
+      };
+    case RESET_CUSTOMER_ERRORS:
       return {
         ...state,
         errorMessages: action.payload,
