@@ -133,3 +133,81 @@
 .order-btn {
   order: 1;
 }
+.loader-page {
+  position: absolute;
+  height: 18em;
+  width: 18em;
+  top: -76px;
+  left: 170px;
+  z-index: 0;
+  border-radius: 50%;
+  border: 5px solid;
+  border-color: #f4e7ac;
+  border-top-color: transparent;
+  animation: loader 1s linear infinite;
+  @media screen and (max-width: 768px) {
+    height: 12em;
+    width: 12em;
+    top: -60px;
+    left: 90px;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 8em;
+    width: 8em;
+    top: -40px;
+    left: 60px;
+  }
+}
+@keyframes loader {
+  20% {
+    border-color: #f4e7ac5e;
+    border-top-color: transparent;
+  }
+  60% {
+    border-color: #ff9100;
+    border-top-color: transparent;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.text-loader {
+  font-size: 5em;
+  @media screen and (max-width: 768px) {
+    font-size: 3em; /* Riduci la dimensione del testo per schermi più piccoli */
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 2em; /* Ulteriore riduzione per dispositivi molto piccoli */
+  }
+}
+// background: conic-gradient(
+//     from 360deg,
+//     rgba(242, 210, 0, 1) 0deg,
+//     rgba(0, 0, 0, 0) 15deg,
+//     rgba(242, 210, 0, 1) 30deg,
+//     rgba(0, 0, 0, 0) 45deg,
+//     rgba(242, 210, 0, 1) 60deg,
+//     rgba(0, 0, 0, 0) 75deg,
+//     rgba(242, 210, 0, 1) 90deg,
+//     rgba(0, 0, 0, 0) 105deg,
+//     rgba(242, 210, 0, 1) 120deg,
+//     rgba(0, 0, 0, 0) 135deg,
+//     rgba(242, 210, 0, 1) 150deg,
+//     rgba(0, 0, 0, 0) 165deg,
+//     rgba(242, 210, 0, 1) 180deg,
+//     rgba(0, 0, 0, 0) 195deg,
+//     rgba(242, 210, 0, 1) 210deg,
+//     rgba(0, 0, 0, 0) 225deg,
+//     rgba(242, 210, 0, 1) 240deg,
+//     rgba(0, 0, 0, 0) 255deg,
+//     rgba(242, 210, 0, 1) 270deg,
+//     rgba(0, 0, 0, 0) 285deg,
+//     rgba(242, 210, 0, 1) 300deg,
+//     rgba(0, 0, 0, 0) 315deg,
+//     rgba(242, 210, 0, 1) 330deg,
+//     rgba(0, 0, 0, 0) 347deg,
+//     rgba(242, 210, 0, 1) 365deg
+//   );
+// background-blend-mode: normal;

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --gradient: linear-gradient(140deg, rgb(255, 255, 255), rgb(245, 214, 73));
   --gradient-background: linear-gradient(140deg, rgba(120, 192, 224, 1), rgba(68, 157, 209, 1), rgba(21, 5, 120, 1));
@@ -151,4 +152,61 @@
 
 .order-btn {
   order: 1;
+}
+
+.loader-page {
+  position: absolute;
+  height: 18em;
+  width: 18em;
+  top: -76px;
+  left: 170px;
+  z-index: 0;
+  border-radius: 50%;
+  border: 5px solid;
+  border-color: #f4e7ac;
+  border-top-color: transparent;
+  animation: loader 1s linear infinite;
+}
+@media screen and (max-width: 768px) {
+  .loader-page {
+    height: 12em;
+    width: 12em;
+    top: -60px;
+    left: 90px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .loader-page {
+    height: 8em;
+    width: 8em;
+    top: -40px;
+    left: 60px;
+  }
+}
+
+@keyframes loader {
+  20% {
+    border-color: rgba(244, 231, 172, 0.368627451);
+    border-top-color: transparent;
+  }
+  60% {
+    border-color: #ff9100;
+    border-top-color: transparent;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.text-loader {
+  font-size: 5em;
+}
+@media screen and (max-width: 768px) {
+  .text-loader {
+    font-size: 3em; /* Riduci la dimensione del testo per schermi più piccoli */
+  }
+}
+@media screen and (max-width: 480px) {
+  .text-loader {
+    font-size: 2em; /* Ulteriore riduzione per dispositivi molto piccoli */
+  }
 }/*# sourceMappingURL=style.css.map */
