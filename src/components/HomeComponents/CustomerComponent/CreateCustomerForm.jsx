@@ -38,7 +38,7 @@ const CreateCustomerForm = () => {
   const handleDateChange = (date) => {
     setBody({
       ...body,
-      birthDay: `${date.year()}-${date.month() < 10 ? "0" + (date.month() + 1) : date.month()}-${
+      birthDay: `${date.year()}-${(date.month() + 1).toString().padStart(2, "0")}-${
         date.$D < 10 ? "0" + date.$D : date.$D
       }`,
     });

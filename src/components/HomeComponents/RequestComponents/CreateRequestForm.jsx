@@ -4,7 +4,8 @@ import ChipRooms from "./MuiSupportComponents/ChipRooms";
 import ChipOtherCharacteristics from "./MuiSupportComponents/ChipOtherCharacteristics";
 import ChipTypeOfProperty from "./MuiSupportComponents/ChipTypeOfProperty";
 import { Form } from "react-bootstrap";
-import { Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import ChipsRegionRequest from "./MuiSupportComponents/ChipRegionRequest";
 
 const CreateRequestForm = () => {
   const [body, setBody] = useState({
@@ -33,6 +34,7 @@ const CreateRequestForm = () => {
         <ChipRooms setBody={setBody} body={body} />
         <ChipOtherCharacteristics setBody={setBody} body={body} />
         <ChipTypeOfProperty setBody={setBody} body={body} />
+        <ChipsRegionRequest setBody={setBody} body={body} />
         <TextField
           id="standard-search"
           label="spese cond."
@@ -132,17 +134,6 @@ const CreateRequestForm = () => {
               isToRent: e.target.value,
             });
           }}
-        />
-
-        <Checkbox
-          checked={body.isToRent}
-          onChange={(e) => {
-            setBody({
-              ...body,
-              isToRent: e.target.value,
-            });
-          }}
-          inputProps={{ "aria-label": "controlled" }}
         />
         <TextField
           id="standard-multiline-static"
