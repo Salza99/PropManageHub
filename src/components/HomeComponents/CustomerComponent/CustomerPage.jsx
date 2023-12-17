@@ -32,7 +32,7 @@ const CustomerPage = () => {
     content = customerState.content.map((customer) => {
       return <SingleCustomer customer={customer} key={customer.id} />;
     });
-  } else if (params.cid !== undefined) {
+  } else if (params.cId !== undefined) {
     content = <CustomerDetail />;
   } else if (location.pathname === "/homepage/clienti/aggiungiCliente") {
     content = <CreateCustomerForm />;
@@ -43,6 +43,7 @@ const CustomerPage = () => {
   } else if (location.pathname === "/homepage/clienti/aggiungiCliente/proprieta") {
     content = <CreatePropertyForm />;
   }
+  useEffect(() => {}, [content]);
   useEffect(() => {
     if (token) {
       dispatch(fetchAllCustomer(token));
@@ -65,7 +66,7 @@ const CustomerPage = () => {
         </Col>
       </Row>
       {fetchDone ? (
-        customerState.content.length > 0 ? (
+        customerState.content.length > 0 || location.pathname !== "/homepage/clienti" ? (
           content
         ) : (
           <Alert variant="warning">Non ci sono risultati</Alert>

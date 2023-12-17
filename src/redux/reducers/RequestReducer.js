@@ -1,5 +1,5 @@
 import { DETAIL_RESET } from "../actions/HomepageAction";
-import { ERROR_REQUEST, PAGE_REQUEST, SINGLE_REQUEST } from "../actions/RequestAction";
+import { ERROR_REQUEST, PAGE_REQUEST, POST_FETCH_OK, SINGLE_REQUEST } from "../actions/RequestAction";
 
 const initialState = {
   content: [
@@ -41,6 +41,7 @@ const initialState = {
     isToRent: false,
   },
   errorMessages: "",
+  fetchOk: false,
 };
 
 const RequestReducer = (state = initialState, action) => {
@@ -77,6 +78,11 @@ const RequestReducer = (state = initialState, action) => {
           toRent: false,
         },
         errorMessages: action.payload,
+      };
+    case POST_FETCH_OK:
+      return {
+        ...state,
+        fetchOk: action.payload,
       };
     case ERROR_REQUEST:
       return {

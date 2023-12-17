@@ -49,14 +49,6 @@ const RequestDetail = () => {
                 })}
               </ListGroup.Item>
             )}
-            {requestState.selected.hamlets.length > 0 && (
-              <ListGroup.Item>
-                Comune/i:{" "}
-                {requestState.selected.hamlets.map((hamlet) => {
-                  return hamlet + ", ";
-                })}
-              </ListGroup.Item>
-            )}
             <Card.Text className="fw-bold">Note:</Card.Text>
             <ListGroup.Item>{requestState.selected.note}</ListGroup.Item>
           </ListGroup>
