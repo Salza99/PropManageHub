@@ -7,7 +7,8 @@ import { Form } from "react-bootstrap";
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 
 import ChipProvinceRequest from "./MuiSupportComponents/ChipProvinceRequest";
-import { postRequest } from "../../../redux/actions/RequestAction";
+import { POST_FETCH_OK, postRequest } from "../../../redux/actions/RequestAction";
+import { useNavigate } from "react-router-dom";
 
 const CreateRequestForm = () => {
   const [body, setBody] = useState({
@@ -29,13 +30,40 @@ const CreateRequestForm = () => {
   });
   const dispatch = useDispatch();
   const customerIdState = useSelector((state) => state.customer.selected.id);
+  const fetchOk = useSelector((state) => state.request.fetchOk);
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
+  const navigate = useNavigate();
   useEffect(() => {
     setBody({
       ...body,
       customerId: customerIdState,
     });
   }, [customerIdState]);
+  useEffect(() => {
+    if (fetchOk) {
+      setBody({
+        habitability: false,
+        condominiumFees: 0.0,
+        numberOfRooms: [],
+        condition: "",
+        otherCharacteristics: [],
+        regions: [],
+        cities: [],
+        surface: 0,
+        numberOfBathrooms: 0,
+        parkingSpace: 0,
+        typeOfProperty: [],
+        maximal: 0,
+        note: "",
+        customerId: "",
+        isToRent: false,
+      });
+      navigate("/homepage/richieste");
+    }
+    return () => {
+      dispatch({ type: POST_FETCH_OK, payload: false });
+    };
+  }, [fetchOk]);
   return (
     <div>
       <Form
