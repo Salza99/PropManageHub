@@ -1,7 +1,10 @@
 export const PROVINCES_GET = "PROVINCES_GET";
 export const FETCH_PROVINCE_DONE = "FETCH_PROVINCE_DONE";
 export const GET_HAMLET_BY_RANGE = "GET_HAMLET_BY_RANGE";
-
+export const POST_ADDRESS_OK = "POST_ADDRESS_OK";
+export const ERROR_ADDRESS = "ERROR_ADDRESS";
+export const ERROR_RESET = "ERROR_RESET";
+export const RESET_PROVINCE = "RESET_PROVINCE";
 export const fetchOnsearch = (token, search) => {
   return async (dispatch) => {
     try {
@@ -35,6 +38,28 @@ export const fetchOnhamletByRange = (token, lat, lng) => {
       if (resp.ok) {
         const data = await resp.json();
         dispatch({ type: GET_HAMLET_BY_RANGE, payload: data.geonames });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+export const postAddress = (token, body) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetch("http://localhost:3002/addresses", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-type": "application/json",
+        },
+      });
+      if (resp.ok) {
+        dispatch({ type: POST_ADDRESS_OK, payload: true });
+      } else {
+        const errorMessage = await resp.json();
+        dispatch({ type: ERROR_ADDRESS, payload: errorMessage.errorsList });
       }
     } catch (err) {
       console.log(err);

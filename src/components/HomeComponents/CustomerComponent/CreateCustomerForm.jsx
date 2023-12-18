@@ -99,7 +99,7 @@ const CreateCustomerForm = () => {
         email: "",
         birthDay: dayjs(),
       });
-      navigate("/homepage/clienti/aggiungiCliente/proprieta");
+      navigate("/homepage/clienti/aggiungiCliente/indirizzo");
     }
   }, [customerState.createCustomerOk]);
   useEffect(() => {

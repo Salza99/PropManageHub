@@ -9,6 +9,7 @@ import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/mater
 import ChipProvinceRequest from "./MuiSupportComponents/ChipProvinceRequest";
 import { POST_FETCH_OK, postRequest } from "../../../redux/actions/RequestAction";
 import { useNavigate } from "react-router-dom";
+import { RESET_PROVINCE } from "../../../redux/actions/AddressAction";
 
 const CreateRequestForm = () => {
   const [body, setBody] = useState({
@@ -62,6 +63,7 @@ const CreateRequestForm = () => {
     }
     return () => {
       dispatch({ type: POST_FETCH_OK, payload: false });
+      dispatch({ type: RESET_PROVINCE, payload: [] });
     };
   }, [fetchOk]);
   return (

@@ -57,16 +57,8 @@ const ChipTypeOfProperty = (props) => {
     } = event;
     let splitValue = typeof value === "string" ? value.split(",") : value;
     let transformedValue = splitValue.map((item) => item.toUpperCase().replace(/\s+/g, "_"));
-
-    // Verifica se il valore è già presente in typeOfProperty
-    if (typeOfProperty.includes(transformedValue)) {
-      // Rimuovi il valore se è già presente (effetto toggle)
-      const updatedValues = typeOfProperty.filter((item) => item !== transformedValue);
-      setTypeOfProperty(updatedValues);
-    } else {
-      // Aggiungi il valore se non è presente
-      setTypeOfProperty([...typeOfProperty, ...transformedValue]);
-    }
+    const uniqueValues = new Set([...typeOfProperty, ...transformedValue]);
+    setTypeOfProperty(Array.from(uniqueValues));
   };
   useEffect(() => {
     props.setBody({ ...props.body, typeOfProperty: typeOfProperty });

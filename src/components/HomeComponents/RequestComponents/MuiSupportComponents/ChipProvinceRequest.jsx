@@ -59,7 +59,7 @@ const ChipProvinceRequest = (props) => {
             {...params}
             variant="standard"
             label="nome della provincia"
-            placeholder="Favorites"
+            placeholder="provincia"
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);

@@ -27,7 +27,8 @@ const CustomerPage = () => {
     customerState.content.length > 0 &&
     location.pathname !== "/homepage/clienti/aggiungiCliente" &&
     location.pathname !== "/homepage/clienti/aggiungiCliente/richiesta" &&
-    location.pathname !== "/homepage/clienti/aggiungiCliente/proprieta"
+    location.pathname !== "/homepage/clienti/aggiungiCliente/proprieta" &&
+    location.pathname !== "/homepage/clienti/aggiungiCliente/indirizzo"
   ) {
     content = customerState.content.map((customer) => {
       return <SingleCustomer customer={customer} key={customer.id} />;
