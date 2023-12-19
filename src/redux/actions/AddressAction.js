@@ -2,9 +2,12 @@ export const PROVINCES_GET = "PROVINCES_GET";
 export const FETCH_PROVINCE_DONE = "FETCH_PROVINCE_DONE";
 export const GET_HAMLET_BY_RANGE = "GET_HAMLET_BY_RANGE";
 export const POST_ADDRESS_OK = "POST_ADDRESS_OK";
+export const POST_ADDRESS_RESET = "POST_ADDRESS_RESET";
 export const ERROR_ADDRESS = "ERROR_ADDRESS";
 export const ERROR_RESET = "ERROR_RESET";
 export const RESET_PROVINCE = "RESET_PROVINCE";
+export const ADDRESS_INSERT = "ADDRESS_INSERT";
+export const ADDRESS_RESET = "ADDRESS_RESET";
 export const fetchOnsearch = (token, search) => {
   return async (dispatch) => {
     try {
@@ -56,6 +59,8 @@ export const postAddress = (token, body) => {
         },
       });
       if (resp.ok) {
+        const data = await resp.json();
+        dispatch({ type: ADDRESS_INSERT, payload: data });
         dispatch({ type: POST_ADDRESS_OK, payload: true });
       } else {
         const errorMessage = await resp.json();

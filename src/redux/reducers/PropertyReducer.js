@@ -1,5 +1,12 @@
 import { DETAIL_RESET } from "../actions/HomepageAction";
-import { ERROR_PROPERTY, PAGE_PROPERTY, SINGLE_PROPERTY } from "../actions/PropertyAction";
+import {
+  ERROR_PROPERTY,
+  ERROR_PROPERTY_RESET,
+  PAGE_PROPERTY,
+  POST_PROPERTY_OK,
+  POST_PROPERTY_RESET,
+  SINGLE_PROPERTY,
+} from "../actions/PropertyAction";
 
 const initialState = {
   content: [
@@ -64,7 +71,8 @@ const initialState = {
     heating: "",
     toRent: false,
   },
-  errorMessage: "",
+  postProperty: false,
+  errorMessages: "",
 };
 
 const PropertyReducer = (state = initialState, action) => {
@@ -114,8 +122,23 @@ const PropertyReducer = (state = initialState, action) => {
         },
         errorMessage: action.payload,
       };
+    case POST_PROPERTY_OK:
+      return {
+        ...state,
+        postProperty: action.payload,
+      };
     case ERROR_PROPERTY:
       return { ...state, errorMessage: action.payload };
+    case ERROR_PROPERTY_RESET:
+      return {
+        ...state,
+        errorMessage: action.payload,
+      };
+    case POST_PROPERTY_RESET:
+      return {
+        ...state,
+        postProperty: action.payload,
+      };
     default:
       return state;
   }

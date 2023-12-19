@@ -2,7 +2,13 @@ import { Autocomplete, TextField, ThemeProvider, createTheme } from "@mui/materi
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { ERROR_RESET, RESET_PROVINCE, fetchOnsearch, postAddress } from "../../../redux/actions/AddressAction";
+import {
+  ERROR_RESET,
+  POST_ADDRESS_RESET,
+  RESET_PROVINCE,
+  fetchOnsearch,
+  postAddress,
+} from "../../../redux/actions/AddressAction";
 import { useNavigate } from "react-router-dom";
 import ErrorsList from "../../Alerts/ErrorsList";
 
@@ -22,7 +28,7 @@ const CreateAddressForm = () => {
     city: "",
     street: "",
     postalCode: 0,
-    houseNumber: 0,
+    houseNumber: "",
   });
   const [show, setShow] = useState(false);
   const [citySelect, setCitySelect] = useState("");
@@ -51,6 +57,7 @@ const CreateAddressForm = () => {
     }
     return () => {
       dispatch({ type: RESET_PROVINCE, payload: [] });
+      dispatch({ type: POST_ADDRESS_RESET, payload: false });
     };
   }, [addressState.fetchOk]);
   useEffect(() => {
