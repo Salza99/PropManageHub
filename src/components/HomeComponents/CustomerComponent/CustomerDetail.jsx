@@ -31,7 +31,7 @@ const CustomerDetail = () => {
   return (
     <>
       {customerState.selected.id ? (
-        <Card>
+        <Card className="p-2">
           <ThemeProvider theme={theme}>
             <Card.Body>
               <Row>
@@ -76,19 +76,34 @@ const CustomerDetail = () => {
                 <ListGroup.Item>Data di nascità: {customerState.selected.birthDay}</ListGroup.Item>
               </ListGroup>
               {customerState.selected.sellingProperties.length > 0 ? (
-                <div>
-                  <h3>Lista proprietà in vendità:</h3>
+                <div className="shadow border mb-4 rounded p-2">
+                  <h3>Modulo proprietà in vendità</h3>
                   <div>
                     {customerState.selected.sellingProperties.map((property) => {
                       return (
-                        <Card key={property.id}>
+                        <Card className="mb-3" key={property.id}>
+                          <Card.Header>
+                            <Card.Title className="m-0">Proprietà:</Card.Title>
+                          </Card.Header>
                           <Card.Body>
-                            <Card.Title>{property.typeOfProperty.toLowerCase()}</Card.Title>
+                            <ListGroup>
+                              <div className="border rounded p-3">
+                                <Card.Subtitle className="mb-2">Tipologia:</Card.Subtitle>
+                                <ListGroup.Item className="fw-bold fs-6 text-capitalize">
+                                  {property.typeOfProperty.toLowerCase().split("_").join(" ")}
+                                </ListGroup.Item>
+                              </div>
+                            </ListGroup>
                             <ListGroup variant="flush">
                               <ListGroup.Item>
                                 Superficie: {property.surface} m<sup>2</sup>
                               </ListGroup.Item>
-                              <ListGroup.Item>Condizioni: {property.condition.toLowerCase()}</ListGroup.Item>
+                              <ListGroup.Item className="text-capitalize">
+                                Condizioni:{" "}
+                                <span className="text-capitalize">
+                                  {property.condition.toLowerCase().split("_").join(" ")}
+                                </span>
+                              </ListGroup.Item>
                               <ListGroup.Item>Prezzo: {property.price}€</ListGroup.Item>
                             </ListGroup>
                             <Row className="justify-content-end">
@@ -114,28 +129,52 @@ const CustomerDetail = () => {
                   Il cliente non ha proprietà in vendità
                 </Alert>
               )}
-              <div>
+              <div className="shadow border rounded p-2">
+                <h3>Modulo Richiesta</h3>
                 {customerState.selected.request !== null ? (
                   <>
-                    <h3>Richiesta:</h3>
                     <Card>
+                      <Card.Header>
+                        <Card.Title className="m-0">Richiesta:</Card.Title>
+                      </Card.Header>
                       <Card.Body>
-                        <ListGroup variant="flush">
-                          {customerState.selected.request.typeOfProperty.map((type) => {
-                            return (
-                              <ListGroup.Item className="fw-bold" key={"type" + count++}>
-                                {type}
-                              </ListGroup.Item>
-                            );
-                          })}
-                        </ListGroup>
+                        {customerState.selected.request.typeOfProperty.length < 2 ? (
+                          <div className="border p-3 rounded">
+                            <Card.Subtitle className="mb-2">Tipologia:</Card.Subtitle>
+                            <ListGroup>
+                              {customerState.selected.request.typeOfProperty.map((type) => {
+                                return (
+                                  <ListGroup.Item className="fw-bold fs-6 text-capitalize" key={"type" + count++}>
+                                    {type.toLowerCase().split("_").join(" ")}
+                                  </ListGroup.Item>
+                                );
+                              })}
+                            </ListGroup>
+                          </div>
+                        ) : (
+                          <div className="border p-3 mb-1 rounded">
+                            <Card.Subtitle className="mb-2">Tipologie:</Card.Subtitle>
+                            <ListGroup>
+                              {customerState.selected.request.typeOfProperty.map((type) => {
+                                return (
+                                  <ListGroup.Item className="fw-bold fs-6 text-capitalize" key={"type" + count++}>
+                                    {type.toLowerCase().split("_").join(" ")}
+                                  </ListGroup.Item>
+                                );
+                              })}
+                            </ListGroup>
+                          </div>
+                        )}
 
                         <ListGroup variant="flush">
                           <ListGroup.Item>
                             Superficie: {customerState.selected.request.surface} m<sup>2</sup>
                           </ListGroup.Item>
                           <ListGroup.Item>
-                            Condizioni: {customerState.selected.request.condition.toLowerCase()}
+                            Condizioni:{" "}
+                            <span className="text-capitalize">
+                              {customerState.selected.request.condition.toLowerCase().split("_").join(" ")}
+                            </span>
                           </ListGroup.Item>
                           <ListGroup.Item>Massimale: {customerState.selected.request.maximal}€</ListGroup.Item>
                         </ListGroup>
