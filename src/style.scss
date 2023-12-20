@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=GFS+Didot&family=Open+Sans:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap");
 :root {
   --gradient: linear-gradient(140deg, rgb(255, 255, 255), rgb(245, 214, 73));
   --gradient-background: linear-gradient(140deg, rgba(120, 192, 224, 1), rgba(68, 157, 209, 1), rgba(21, 5, 120, 1));
@@ -182,32 +183,27 @@
     font-size: 2em; /* Ulteriore riduzione per dispositivi molto piccoli */
   }
 }
-// background: conic-gradient(
-//     from 360deg,
-//     rgba(242, 210, 0, 1) 0deg,
-//     rgba(0, 0, 0, 0) 15deg,
-//     rgba(242, 210, 0, 1) 30deg,
-//     rgba(0, 0, 0, 0) 45deg,
-//     rgba(242, 210, 0, 1) 60deg,
-//     rgba(0, 0, 0, 0) 75deg,
-//     rgba(242, 210, 0, 1) 90deg,
-//     rgba(0, 0, 0, 0) 105deg,
-//     rgba(242, 210, 0, 1) 120deg,
-//     rgba(0, 0, 0, 0) 135deg,
-//     rgba(242, 210, 0, 1) 150deg,
-//     rgba(0, 0, 0, 0) 165deg,
-//     rgba(242, 210, 0, 1) 180deg,
-//     rgba(0, 0, 0, 0) 195deg,
-//     rgba(242, 210, 0, 1) 210deg,
-//     rgba(0, 0, 0, 0) 225deg,
-//     rgba(242, 210, 0, 1) 240deg,
-//     rgba(0, 0, 0, 0) 255deg,
-//     rgba(242, 210, 0, 1) 270deg,
-//     rgba(0, 0, 0, 0) 285deg,
-//     rgba(242, 210, 0, 1) 300deg,
-//     rgba(0, 0, 0, 0) 315deg,
-//     rgba(242, 210, 0, 1) 330deg,
-//     rgba(0, 0, 0, 0) 347deg,
-//     rgba(242, 210, 0, 1) 365deg
-//   );
-// background-blend-mode: normal;
+.button-info {
+  background-color: #e3d026;
+  border: 0;
+  border-radius: 15px;
+}
+.button-info:hover {
+  background-color: #a29415;
+}
+.btn-transition {
+  transition: all 0.3s;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "GFS Didot", serif;
+}
+p,
+a,
+li {
+  font-family: "Open Sans", sans-serif;
+}
