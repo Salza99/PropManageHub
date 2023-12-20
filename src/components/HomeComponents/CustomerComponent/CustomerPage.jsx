@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllCustomer } from "../../../redux/actions/CustomerAction";
 import SingleCustomer from "./SingleCustomer";
 import CustomerCardLoader from "../../Loaders/CustomerCardLoader";
-import { useParams } from "react-router";
+import { useParams, useLocation } from "react-router";
 import CustomerDetail from "./CustomerDetail";
 import { Plus } from "react-bootstrap-icons";
 import CreateCustomerForm from "./CreateCustomerForm";
 import CreateRequestForm from "../RequestComponents/CreateRequestForm";
 import CreateAddressForm from "../PropertyComponents/CreateAddressForm";
 import CreatePropertyForm from "../PropertyComponents/CreatePropertyForm";
+import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
 
 const CustomerPage = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const CustomerPage = () => {
   const params = useParams();
   const navigate = useNavigate();
   let content;
+  const location = useLocation();
 
   if (
     params.cId === undefined &&
@@ -45,6 +47,16 @@ const CustomerPage = () => {
     content = <CreatePropertyForm />;
   }
   useEffect(() => {}, [content]);
+  useEffect(() => {
+    if (
+      params.cId !== undefined &&
+      location.pathname !== "/homepage/clienti/aggiungiCliente/richiesta" &&
+      location.pathname !== "/homepage/clienti/aggiungiCliente/proprieta" &&
+      location.pathname !== "/homepage/clienti/aggiungiCliente/indirizzo"
+    ) {
+      dispatch({ type: DETAIL_RESET, payload: "" });
+    }
+  }, [location]);
   useEffect(() => {
     if (token) {
       dispatch(fetchAllCustomer(token));
