@@ -94,7 +94,41 @@ const CreatePropertyForm = () => {
           dispatch(postProperty(token, body));
         }}
       >
-        <ChipTypeOfPropert body={body} setBody={setBody} />
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-filled-label">tipo</InputLabel>
+          <Select
+            value={body.typeOfProperty}
+            onChange={(e) => {
+              const updatedValue = e.target.value.toUpperCase().replace(/\s+/g, "_");
+              setBody({
+                ...body,
+                typeOfProperty: updatedValue,
+              });
+            }}
+          >
+            <MenuItem value={"APPARTAMENTO"}>Appartamento</MenuItem>
+            <MenuItem value={"CASA_INDIPENDENTE"}>Casa indipendente</MenuItem>
+            <MenuItem value={"VILLA"}>Villa</MenuItem>
+            <MenuItem value={"BIFAMILIARE"}>Bifamiliare</MenuItem>
+            <MenuItem value={"TRIFAMILIARE"}>Trifamiliare</MenuItem>
+            <MenuItem value={"MONOLOCALE"}>Monolocale</MenuItem>
+            <MenuItem value={"BILOCALE"}>Bilocale</MenuItem>
+            <MenuItem value={"TRILOCALE"}>Trilocale</MenuItem>
+            <MenuItem value={"QUADRILOCALE"}>Quadrilocale</MenuItem>
+            <MenuItem value={"ATTICO"}>Attico</MenuItem>
+            <MenuItem value={"LOFT"}>Loft</MenuItem>
+            <MenuItem value={"MANSARDA"}>Mansarda</MenuItem>
+            <MenuItem value={"RUSTICO"}>Rustico</MenuItem>
+            <MenuItem value={"CASALE"}>Casale</MenuItem>
+            <MenuItem value={"PALAZZO"}>Palazzo</MenuItem>
+            <MenuItem value={"CHALET"}>Chalet</MenuItem>
+            <MenuItem value={"CAPANNONE"}>Capannone</MenuItem>
+            <MenuItem value={"NEGOZIO"}>Negozio</MenuItem>
+            <MenuItem value={"UFFICIO"}>Ufficio</MenuItem>
+            <MenuItem value={"TERRENO_EDIFICABILE"}>Terreno edificabile</MenuItem>
+            <MenuItem value={"TERRENO_AGRICOLO"}>Terreno agricolo</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           label="anno di costruzione"
           variant="standard"
@@ -176,11 +210,33 @@ const CreatePropertyForm = () => {
             });
           }}
         />
+
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-filled-label">classe energetica</InputLabel>
+          <Select
+            value={body.energyClass}
+            onChange={(e) => {
+              setBody({
+                ...body,
+                energyClass: e.target.value,
+              });
+            }}
+          >
+            <MenuItem value={"A4"}>A4</MenuItem>
+            <MenuItem value={"A3"}>A3</MenuItem>
+            <MenuItem value={"A2"}>A2</MenuItem>
+            <MenuItem value={"A1"}>A1</MenuItem>
+            <MenuItem value={"B"}>B</MenuItem>
+            <MenuItem value={"C"}>C</MenuItem>
+            <MenuItem value={"D"}>D</MenuItem>
+            <MenuItem value={"E"}>E</MenuItem>
+            <MenuItem value={"F"}>F</MenuItem>
+            <MenuItem value={"G"}>G</MenuItem>
+          </Select>
+        </FormControl>
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="demo-simple-select-filled-label">condizioni</InputLabel>
           <Select
-            labelId="demo-simple-select-filled-label"
-            id="demo-simple-select-filled"
             value={body.condition}
             onChange={(e) => {
               const updatedValue = e.target.value.toUpperCase().replace(/\s+/g, "_");
