@@ -75,9 +75,9 @@ const CustomerDetail = () => {
                 <ListGroup.Item>Telefono: {customerState.selected.phone}</ListGroup.Item>
                 <ListGroup.Item>Data di nascità: {customerState.selected.birthDay}</ListGroup.Item>
               </ListGroup>
-              {customerState.selected.sellingProperties.length > 0 ? (
-                <div className="shadow border mb-4 rounded p-2">
-                  <h3>Modulo proprietà in vendità</h3>
+              <div className="shadow border mb-4 rounded p-2">
+                <h3>Modulo Proprietà</h3>
+                {customerState.selected.sellingProperties.length > 0 ? (
                   <div>
                     {customerState.selected.sellingProperties.map((property) => {
                       return (
@@ -112,7 +112,7 @@ const CustomerDetail = () => {
                                   onClick={() => {
                                     navigate("/homepage/proprieta/" + property.id);
                                   }}
-                                  className="button-info btn-transition"
+                                  className="button-info btn-transition shadow"
                                 >
                                   Dettagli
                                 </button>
@@ -123,12 +123,12 @@ const CustomerDetail = () => {
                       );
                     })}
                   </div>
-                </div>
-              ) : (
-                <Alert variant="outlined" className="mb-2" severity="info">
-                  Il cliente non ha proprietà in vendità
-                </Alert>
-              )}
+                ) : (
+                  <Alert variant="outlined" className="mb-2" severity="info">
+                    Il cliente non ha proprietà in vendità
+                  </Alert>
+                )}
+              </div>
               <div className="shadow border rounded p-2">
                 <h3>Modulo Richiesta</h3>
                 {customerState.selected.request !== null ? (
@@ -184,7 +184,7 @@ const CustomerDetail = () => {
                               onClick={() => {
                                 navigate("/homepage/richieste/" + customerState.selected.request.id);
                               }}
-                              className="button-info btn-transition"
+                              className="button-info btn-transition shadow"
                             >
                               Dettagli
                             </button>
