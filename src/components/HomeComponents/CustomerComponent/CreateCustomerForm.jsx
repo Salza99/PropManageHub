@@ -1,6 +1,6 @@
-import { GlobalStyles, TextField, ThemeProvider, createTheme } from "@mui/material";
+import { Button, TextField, ThemeProvider, Tooltip, createTheme } from "@mui/material";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
-import { Col, Form, Row } from "react-bootstrap";
+import { Card, Col, Form, Row } from "react-bootstrap";
 import ErrorsList from "../../Alerts/ErrorsList";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { RESET_CUSTOMER_ERRORS, RESET_CUSTOMER_OK, postCustomer } from "../../../redux/actions/CustomerAction";
-
+import SendIcon from "@mui/icons-material/DoubleArrowRounded";
 const CreateCustomerForm = () => {
   const [body, setBody] = useState({
     name: "",
@@ -19,21 +19,11 @@ const CreateCustomerForm = () => {
   });
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const [errorsPosition, setErrorsPosition] = useState(false);
   const [navigateRequest, setNavigateRequest] = useState(false);
   const [navigateProperty, setNavigateProperty] = useState(false);
-  const [screenWidth, setScreenWidth] = useState("");
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const adminId = useSelector((state) => state.home.myProfile.id);
   const customerState = useSelector((state) => state.customer);
-  const handleResize = () => {
-    setScreenWidth(window.innerWidth);
-    if (screenWidth >= 768) {
-      setErrorsPosition(true);
-    } else {
-      setErrorsPosition(false);
-    }
-  };
   const navigate = useNavigate();
   const handleDateChange = (date) => {
     setBody({
@@ -55,18 +45,6 @@ const CreateCustomerForm = () => {
       },
     },
   });
-  useEffect(() => {
-    setScreenWidth(window.innerWidth);
-    if (screenWidth >= 768) {
-      setErrorsPosition(true);
-    } else {
-      setErrorsPosition(false);
-    }
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [screenWidth]);
   useEffect(() => {
     if (customerState.errorMessages !== "") {
       setShow(true);
@@ -108,43 +86,20 @@ const CreateCustomerForm = () => {
     };
   }, []);
   return (
-    <>
+    <Card className="shadow mb-3">
       <Form
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(postCustomer(token, body, adminId));
         }}
       >
-        <GlobalStyles
-          styles={{
-            "&::before": {
-              border: "0 !important",
-              borderBottom: "1px solid white !important",
-            },
-            input: {
-              color: "white !important",
-              textShadow: "2px 2px 4px black !important",
-            },
-            svg: {
-              color: "white !important",
-            },
-            "& fieldset:hover": {
-              border: "1px solid #f4e7ac !important",
-            },
-          }}
-        />
-        <Row className="p-4 justify-content-end">
-          <Col className="mb-3 mb-md-5" xs={12} md={6}>
-            <ThemeProvider theme={theme}>
+        <Row className="p-4 justify-content-center">
+          <Card.Header className="align-self-start">
+            <Card.Title>Form Cliente</Card.Title>
+          </Card.Header>
+          <Row className="border shadow-sm mb-3">
+            <Col className="mb-3 mb-md-5" xs={12} md={6}>
               <TextField
-                InputLabelProps={{
-                  style: {
-                    color: "white",
-                    textShadow: "2px 2px 4px black",
-                  },
-                }}
-                color="ochre"
-                inputProps={{ style: { color: "white", textShadow: "2px 2px 4px black" } }}
                 className="w-100 text"
                 label="Nome"
                 variant="standard"
@@ -153,18 +108,9 @@ const CreateCustomerForm = () => {
                   setBody({ ...body, name: e.target.value });
                 }}
               />
-            </ThemeProvider>
-          </Col>
-          <Col className="mb-3 mb-md-5" xs={12} md={6}>
-            <ThemeProvider theme={theme}>
+            </Col>
+            <Col className="mb-3 mb-md-5" xs={12} md={6}>
               <TextField
-                InputLabelProps={{
-                  style: {
-                    color: "white",
-                    textShadow: "2px 2px 4px black",
-                  },
-                }}
-                color="ochre"
                 className="w-100"
                 label="cognome"
                 variant="standard"
@@ -173,18 +119,9 @@ const CreateCustomerForm = () => {
                   setBody({ ...body, surname: e.target.value });
                 }}
               />
-            </ThemeProvider>
-          </Col>
-          <Col className="mb-3 mb-md-5" xs={12} md={6}>
-            <ThemeProvider theme={theme}>
+            </Col>
+            <Col className="mb-3 mb-md-5" xs={12} md={6}>
               <TextField
-                InputLabelProps={{
-                  style: {
-                    color: "white",
-                    textShadow: "2px 2px 4px black",
-                  },
-                }}
-                color="ochre"
                 className="w-100"
                 label="telefono"
                 variant="standard"
@@ -193,18 +130,9 @@ const CreateCustomerForm = () => {
                   setBody({ ...body, phone: e.target.value });
                 }}
               />
-            </ThemeProvider>
-          </Col>
-          <Col className="mb-5 mb-md-5" xs={12} md={6}>
-            <ThemeProvider theme={theme}>
+            </Col>
+            <Col className="mb-5 mb-md-5" xs={12} md={6}>
               <TextField
-                InputLabelProps={{
-                  style: {
-                    color: "white",
-                    textShadow: "2px 2px 4px black",
-                  },
-                }}
-                color="ochre"
                 className="w-100"
                 label="email"
                 variant="standard"
@@ -213,20 +141,15 @@ const CreateCustomerForm = () => {
                   setBody({ ...body, email: e.target.value });
                 }}
               />
-            </ThemeProvider>
-          </Col>
+            </Col>
+          </Row>
           <Col className="mb-5" xs={12}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateField
                 className="date"
                 format="DD/MM/YYYY"
                 label="data di nascità"
-                InputLabelProps={{
-                  style: {
-                    color: "white",
-                    textShadow: "2px 2px 4px black",
-                  },
-                }}
+                variant="outlined"
                 disableFuture
                 onChange={handleDateChange}
                 defaultValue={body.birthDay}
@@ -234,27 +157,41 @@ const CreateCustomerForm = () => {
             </LocalizationProvider>
           </Col>
 
-          <Col className="text-center" xs={6} md={6}>
-            <button
-              onClick={() => {
-                setNavigateRequest(true);
-              }}
-              className="form-button mb-3"
-              type="submit"
-            >
-              Aggiungi richiesta
-            </button>
+          <Col className="text-center mb-3" xs={6} md={6}>
+            <ThemeProvider theme={theme}>
+              <Tooltip title="Aggiungi Richiesta">
+                <Button
+                  onClick={() => {
+                    setNavigateRequest(true);
+                  }}
+                  size="small"
+                  color="ochre"
+                  variant="contained"
+                  type="submit"
+                  endIcon={<SendIcon />}
+                >
+                  Aggiungi Richiesta
+                </Button>
+              </Tooltip>
+            </ThemeProvider>
           </Col>
-          <Col className="text-center" xs={6} md={6}>
-            <button
-              onClick={() => {
-                setNavigateProperty(true);
-              }}
-              className="form-button"
-              type="submit"
-            >
-              Aggiungi proprietà
-            </button>
+          <Col className="text-center mb-3" xs={6} md={6}>
+            <ThemeProvider theme={theme}>
+              <Tooltip title="Aggiungi Richiesta">
+                <Button
+                  onClick={() => {
+                    setNavigateProperty(true);
+                  }}
+                  size="small"
+                  color="ochre"
+                  variant="contained"
+                  type="submit"
+                  endIcon={<SendIcon />}
+                >
+                  Aggiungi Proprietà
+                </Button>
+              </Tooltip>
+            </ThemeProvider>
           </Col>
 
           <Col xs={12}>
@@ -264,7 +201,7 @@ const CreateCustomerForm = () => {
           </Col>
         </Row>
       </Form>
-    </>
+    </Card>
   );
 };
 export default CreateCustomerForm;

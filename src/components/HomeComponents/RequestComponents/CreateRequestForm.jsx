@@ -89,7 +89,7 @@ const CreateRequestForm = () => {
     };
   }, [fetchOk]);
   return (
-    <Card className=" shadow  mb-3">
+    <Card className="shadow mb-3">
       <Form
         onSubmit={(e) => {
           e.preventDefault();
