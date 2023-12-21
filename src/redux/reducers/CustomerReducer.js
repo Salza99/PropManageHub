@@ -24,6 +24,8 @@ const initialState = {
       followedByUser: {},
     },
   ],
+  pageable: { pageNumber: 0, pageSize: 0 },
+  totalPages: 0,
   selected: {
     id: "",
     name: "",
@@ -46,6 +48,8 @@ const CustomerReducer = (state = initialState, action) => {
       return {
         ...state,
         content: action.payload.content,
+        pageable: action.payload.pageable,
+        totalPages: action.payload.totalPages,
       };
     case SINGLE_CUSTOMER:
       return {

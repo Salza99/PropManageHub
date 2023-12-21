@@ -144,6 +144,11 @@ const PropertyDetail = () => {
               </Card>
             </div>
           </ThemeProvider>
+          <Card.Footer className="d-flex justify-content-end">
+            <Card.Subtitle className="text-muted p">
+              Proprietà inserita il: {propertyState.selected.insertDate}
+            </Card.Subtitle>
+          </Card.Footer>
         </Card>
       ) : (
         <PropertyCardLoader />

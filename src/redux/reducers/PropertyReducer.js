@@ -42,6 +42,8 @@ const initialState = {
       toRent: false,
     },
   ],
+  pageable: { pageNumber: 0, pageSize: 0 },
+  totalPages: 0,
   selected: {
     id: 0,
     habitability: true,
@@ -82,6 +84,8 @@ const PropertyReducer = (state = initialState, action) => {
       return {
         ...state,
         content: action.payload.content,
+        pageable: action.payload.pageable,
+        totalPages: action.payload.totalPages,
       };
     case SINGLE_PROPERTY:
       return {

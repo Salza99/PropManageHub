@@ -29,7 +29,7 @@ const CreatePropertyForm = () => {
     energyClass: "",
     condition: "",
     typeOfProperty: "",
-    otherCharacteristics: "",
+    otherCharacteristics: [],
     yearOfConstruction: 1800,
     condominiumFees: 0,
     price: 0,
@@ -232,6 +232,7 @@ const CreatePropertyForm = () => {
             <MenuItem value={"E"}>E</MenuItem>
             <MenuItem value={"F"}>F</MenuItem>
             <MenuItem value={"G"}>G</MenuItem>
+            <MenuItem value={"NON_CLASSIFICABILE"}>NON_CLASSIFICABILE</MenuItem>
           </Select>
         </FormControl>
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>

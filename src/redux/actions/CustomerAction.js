@@ -6,10 +6,10 @@ export const RESET_CUSTOMER_OK = "RESET_CUSTOMER_OK";
 export const RESET_CUSTOMER_ERRORS = "RESET_CUSTOMER_ERRORS";
 export const POST_CUSTOMER_DATA = "POST_CUSTOMER_DATA";
 
-export const fetchAllCustomer = (token) => {
+export const fetchAllCustomer = (token, page) => {
   return async (dispatch) => {
     try {
-      const resp = await fetch("http://localhost:3002/customers", {
+      const resp = await fetch("http://localhost:3002/customers?size=8&page=" + page, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,

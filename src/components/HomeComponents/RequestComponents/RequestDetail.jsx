@@ -196,6 +196,11 @@ const RequestDetail = () => {
                     </Card>
                   )}
                 </Card>
+                <Card.Footer className="d-flex justify-content-end">
+                  <Card.Subtitle className="text-muted p">
+                    Richiesta inserita il: {requestState.selected.insertDate}
+                  </Card.Subtitle>
+                </Card.Footer>
               </Card>
             </div>
           </ThemeProvider>

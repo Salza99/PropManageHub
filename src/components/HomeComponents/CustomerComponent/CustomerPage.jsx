@@ -13,7 +13,7 @@ import CreateRequestForm from "../RequestComponents/CreateRequestForm";
 import CreateAddressForm from "../PropertyComponents/CreateAddressForm";
 import CreatePropertyForm from "../PropertyComponents/CreatePropertyForm";
 import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
-import { AlertTitle, Alert, Fab, ThemeProvider, Tooltip, createTheme } from "@mui/material";
+import { AlertTitle, Alert, Fab, ThemeProvider, Tooltip, createTheme, Pagination } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
 const CustomerPage = () => {
@@ -46,7 +46,7 @@ const CustomerPage = () => {
   ) {
     add = true;
     content = customerState.content.map((customer) => {
-      return <SingleCustomer customer={customer} key={customer.id} />;
+      return <SingleCustomer key={customer.id} customer={customer} />;
     });
   } else if (params.cId !== undefined) {
     add = false;
@@ -77,7 +77,7 @@ const CustomerPage = () => {
   }, [location]);
   useEffect(() => {
     if (token) {
-      dispatch(fetchAllCustomer(token));
+      dispatch(fetchAllCustomer(token, 0));
       setFetchDone(true);
     }
   }, [token]);
@@ -117,8 +117,9 @@ const CustomerPage = () => {
       {fetchDone ? (
         customerState.content.length > 0 || location.pathname !== "/homepage/clienti" ? (
           <>
-            {content}
-            {location.pathname !== "/homepage/clienti" && (
+            <Row>{content}</Row>
+
+            {location.pathname !== "/homepage/clienti" ? (
               <Row>
                 <Col xs={12}>
                   <Tooltip title="indietro">
@@ -128,6 +129,15 @@ const CustomerPage = () => {
                   </Tooltip>
                 </Col>
               </Row>
+            ) : customerState.totalPages > 0 ? (
+              <Pagination
+                count={customerState.totalPages}
+                onChange={(e, page) => {
+                  dispatch(fetchAllCustomer(token, page - 1));
+                }}
+              />
+            ) : (
+              ""
             )}
           </>
         ) : (

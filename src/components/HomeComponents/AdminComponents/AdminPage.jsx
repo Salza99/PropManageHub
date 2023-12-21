@@ -88,7 +88,7 @@ const AdminPage = () => {
       {fetchDone ? (
         adminState.content[0].id ? (
           <>
-            {content}
+            <Row>{content}</Row>
             {location.pathname !== "/homepage/collaboratori" && (
               <Col xs={12}>
                 <Tooltip title="indietro">

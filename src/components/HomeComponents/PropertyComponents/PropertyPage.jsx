@@ -62,7 +62,7 @@ const PropertyPage = () => {
       {fetchDone ? (
         propertyState.content.length > 0 ? (
           <>
-            {content}
+            <Row>{content}</Row>
             {location.pathname !== "/homepage/proprieta" && (
               <ThemeProvider theme={theme}>
                 <Col xs={12}>

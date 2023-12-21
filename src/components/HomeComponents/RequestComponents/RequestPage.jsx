@@ -61,7 +61,7 @@ const RequestPage = () => {
       {fetchDone ? (
         requestState.content.length > 0 ? (
           <>
-            {content}
+            <Row>{content}</Row>
             {location.pathname !== "/homepage/richieste" && (
               <ThemeProvider theme={theme}>
                 <Col xs={12}>

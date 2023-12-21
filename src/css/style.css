@@ -259,4 +259,8 @@ li {
 }
 .elevation:hover {
   transform: scale(1.05);
+}
+
+.single-card-height {
+  height: 45vh;
 }/*# sourceMappingURL=style.css.map */
