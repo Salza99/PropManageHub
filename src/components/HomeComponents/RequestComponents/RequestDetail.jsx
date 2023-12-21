@@ -46,7 +46,7 @@ const RequestDetail = () => {
   return (
     <>
       {requestState.selected.id ? (
-        <Card className="p-2">
+        <Card className="p-2 mb-2">
           <ThemeProvider theme={theme}>
             <Card.Body>
               <Row className="align-items-center">

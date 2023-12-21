@@ -31,7 +31,7 @@ const CustomerDetail = () => {
   return (
     <>
       {customerState.selected.id ? (
-        <Card className="p-2">
+        <Card className="p-2 mb-2">
           <ThemeProvider theme={theme}>
             <Card.Body>
               <Row>
@@ -200,6 +200,11 @@ const CustomerDetail = () => {
                 )}
               </div>
             </Card.Body>
+            <Card.Footer className="d-flex justify-content-end">
+              <Card.Subtitle className="text-muted p">
+                Cliente inserito il: {customerState.selected.insertDate}
+              </Card.Subtitle>
+            </Card.Footer>
           </ThemeProvider>
         </Card>
       ) : (

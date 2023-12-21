@@ -23,6 +23,7 @@ const initialState = {
       numberOfBathrooms: 0,
       parkingSpace: 0,
       yearOfConstruction: 0,
+      insertDate: "",
       energyClass: "",
       typeOfProperty: "",
       price: 0,

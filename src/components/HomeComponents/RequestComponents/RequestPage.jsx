@@ -6,7 +6,7 @@ import RequestCardLoader from "../../Loaders/RequestCardLoader";
 import { useParams, useLocation } from "react-router";
 import RequestDetail from "./RequestDetail";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { IconButton, ThemeProvider, Tooltip, createTheme } from "@mui/material";
+import { Alert, AlertTitle, ThemeProvider, Tooltip, createTheme } from "@mui/material";
 import { Col, Container, Row } from "react-bootstrap";
 const RequestPage = () => {
   const requestState = useSelector((state) => state.request);
@@ -58,7 +58,31 @@ const RequestPage = () => {
           </Col>
         )}
       </Row>
-      {fetchDone ? requestState.content.length > 0 ? content : <div>Non ci sono risultati</div> : <RequestCardLoader />}
+      {fetchDone ? (
+        requestState.content.length > 0 ? (
+          <>
+            {content}
+            {location.pathname !== "/homepage/richieste" && (
+              <ThemeProvider theme={theme}>
+                <Col xs={12}>
+                  <Tooltip title="indietro">
+                    <button className="button-info btn-transition shadow w-100" onClick={() => window.history.back()}>
+                      <KeyboardBackspaceIcon className="icon" />
+                    </button>
+                  </Tooltip>
+                </Col>
+              </ThemeProvider>
+            )}
+          </>
+        ) : (
+          <Alert severity="warning" variant="filled" elevation={6}>
+            <AlertTitle>Attenzione</AlertTitle>
+            Nessun Risultato trovato!
+          </Alert>
+        )
+      ) : (
+        <RequestCardLoader />
+      )}
     </Container>
   );
 };

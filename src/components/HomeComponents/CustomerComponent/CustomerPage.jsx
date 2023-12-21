@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllCustomer } from "../../../redux/actions/CustomerAction";
@@ -13,7 +13,7 @@ import CreateRequestForm from "../RequestComponents/CreateRequestForm";
 import CreateAddressForm from "../PropertyComponents/CreateAddressForm";
 import CreatePropertyForm from "../PropertyComponents/CreatePropertyForm";
 import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
-import { Fab, ThemeProvider, Tooltip, createTheme } from "@mui/material";
+import { AlertTitle, Alert, Fab, ThemeProvider, Tooltip, createTheme } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
 const CustomerPage = () => {
@@ -116,9 +116,25 @@ const CustomerPage = () => {
       </Row>
       {fetchDone ? (
         customerState.content.length > 0 || location.pathname !== "/homepage/clienti" ? (
-          content
+          <>
+            {content}
+            {location.pathname !== "/homepage/clienti" && (
+              <Row>
+                <Col xs={12}>
+                  <Tooltip title="indietro">
+                    <button className="button-info btn-transition shadow w-100" onClick={() => window.history.back()}>
+                      <KeyboardBackspaceIcon className="icon" />
+                    </button>
+                  </Tooltip>
+                </Col>
+              </Row>
+            )}
+          </>
         ) : (
-          <Alert variant="warning">Non ci sono risultati</Alert>
+          <Alert severity="warning" variant="filled" elevation={6}>
+            <AlertTitle>Attenzione</AlertTitle>
+            Nessun Risultato trovato!
+          </Alert>
         )
       ) : (
         <CustomerCardLoader />

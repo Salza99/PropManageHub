@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllAdmin } from "../../../redux/actions/AdminAction";
 import SingleAdmin from "./SingleAdmin";
 import AdminCardLoader from "../../Loaders/AdminCardLoader";
-import { Alert, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AdminDetail from "./AdminDetail";
 import CreateAdminForm from "./CreateAdminForm";
 import { Plus } from "react-bootstrap-icons";
-import { Fab, ThemeProvider, Tooltip, createTheme } from "@mui/material";
+import { AlertTitle, Alert, Fab, ThemeProvider, Tooltip, createTheme } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 const AdminPage = () => {
   const dispatch = useDispatch();
@@ -87,9 +87,23 @@ const AdminPage = () => {
       </Row>
       {fetchDone ? (
         adminState.content[0].id ? (
-          content
+          <>
+            {content}
+            {location.pathname !== "/homepage/collaboratori" && (
+              <Col xs={12}>
+                <Tooltip title="indietro">
+                  <button className="button-info btn-transition shadow w-100" onClick={() => window.history.back()}>
+                    <KeyboardBackspaceIcon className="icon" />
+                  </button>
+                </Tooltip>
+              </Col>
+            )}
+          </>
         ) : (
-          <Alert variant="warning">Non ci sono risultati</Alert>
+          <Alert severity="warning" variant="filled" elevation={6}>
+            <AlertTitle>Attenzione</AlertTitle>
+            Nessun Risultato trovato!
+          </Alert>
         )
       ) : (
         <AdminCardLoader />

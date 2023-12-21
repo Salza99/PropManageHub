@@ -5,9 +5,9 @@ import SingleProperty from "./SingleProperty";
 import PropertyCardLoader from "../../Loaders/PropertyCardLoader";
 import { useParams, useLocation } from "react-router";
 import PropertyDetail from "./PropertyDetail";
-import { Alert, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { IconButton, ThemeProvider, Tooltip, createTheme } from "@mui/material";
+import { AlertTitle, Alert, ThemeProvider, Tooltip, createTheme } from "@mui/material";
 
 const PropertyPage = () => {
   const propertyState = useSelector((state) => state.property);
@@ -61,9 +61,25 @@ const PropertyPage = () => {
       </Row>
       {fetchDone ? (
         propertyState.content.length > 0 ? (
-          content
+          <>
+            {content}
+            {location.pathname !== "/homepage/proprieta" && (
+              <ThemeProvider theme={theme}>
+                <Col xs={12}>
+                  <Tooltip title="indietro">
+                    <button className="button-info btn-transition shadow w-100" onClick={() => window.history.back()}>
+                      <KeyboardBackspaceIcon className="icon" />
+                    </button>
+                  </Tooltip>
+                </Col>
+              </ThemeProvider>
+            )}
+          </>
         ) : (
-          <Alert variant="warning">Non ci sono risultati</Alert>
+          <Alert severity="warning" variant="filled" elevation={6}>
+            <AlertTitle>Attenzione</AlertTitle>
+            Nessun Risultato trovato!
+          </Alert>
         )
       ) : (
         <PropertyCardLoader />
