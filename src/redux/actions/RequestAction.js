@@ -2,7 +2,7 @@ export const PAGE_REQUEST = "PAGE_REQUEST";
 export const ERROR_REQUEST = "ERROR_REQUEST";
 export const SINGLE_REQUEST = "SINGLE_REQUEST";
 export const POST_FETCH_OK = "POST_FETCH_OK";
-
+export const ERROR_REQUEST_RESET = "ERROR_REQUEST_RESET";
 export const fetchAllRequest = (token, page) => {
   return async (dispatch) => {
     try {
@@ -63,7 +63,7 @@ export const postRequest = (token, body) => {
         dispatch({ type: POST_FETCH_OK, payload: true });
       } else {
         const errorMessage = await resp.json();
-        dispatch({ type: ERROR_REQUEST, payload: errorMessage.message });
+        dispatch({ type: ERROR_REQUEST, payload: errorMessage.errorsList });
       }
     } catch (err) {
       console.log(err);

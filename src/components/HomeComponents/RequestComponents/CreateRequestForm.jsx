@@ -19,9 +19,10 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/DoubleArrowRounded";
 import ChipProvinceRequest from "./MuiSupportComponents/ChipProvinceRequest";
-import { POST_FETCH_OK, postRequest } from "../../../redux/actions/RequestAction";
+import { ERROR_REQUEST_RESET, POST_FETCH_OK, postRequest } from "../../../redux/actions/RequestAction";
 import { useNavigate } from "react-router-dom";
 import { RESET_PROVINCE } from "../../../redux/actions/AddressAction";
+import ErrorsList from "../../Alerts/ErrorsList";
 
 const CreateRequestForm = () => {
   const [body, setBody] = useState({
@@ -51,9 +52,11 @@ const CreateRequestForm = () => {
       },
     },
   });
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const customerIdState = useSelector((state) => state.customer.selected.id);
   const fetchOk = useSelector((state) => state.request.fetchOk);
+  const stateErrors = useSelector((state) => state.request.errorMessages);
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const navigate = useNavigate();
   useEffect(() => {
@@ -62,6 +65,16 @@ const CreateRequestForm = () => {
       customerId: customerIdState,
     });
   }, [customerIdState]);
+  useEffect(() => {
+    if (stateErrors !== "") {
+      setShow(true);
+    }
+  }, [stateErrors]);
+  useEffect(() => {
+    if (!show) {
+      dispatch({ type: ERROR_REQUEST_RESET, payload: "" });
+    }
+  }, [show]);
   useEffect(() => {
     if (fetchOk) {
       setBody({
@@ -274,12 +287,22 @@ const CreateRequestForm = () => {
             <ThemeProvider theme={theme}>
               <Col className="mb-1" xs={6} sm={4} md={3} lg={4}>
                 <Tooltip title="Aggiungi Richiesta">
-                  <Button size="small" color="ochre" variant="contained" type="submit" endIcon={<SendIcon />}>
+                  <Button
+                    className="btn-send"
+                    size="small"
+                    color="ochre"
+                    variant="contained"
+                    type="submit"
+                    endIcon={<SendIcon className="icon" />}
+                  >
                     Aggiungi Richiesta
                   </Button>
                 </Tooltip>
               </Col>
             </ThemeProvider>
+            <Col className="mt-1" xs={12}>
+              {stateErrors && <ErrorsList stateErrors={stateErrors} show={show} setShow={setShow} />}
+            </Col>
           </Row>
         </Card>
       </Form>

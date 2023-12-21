@@ -161,6 +161,7 @@ const CreateCustomerForm = () => {
             <ThemeProvider theme={theme}>
               <Tooltip title="Aggiungi Richiesta">
                 <Button
+                  className="btn-send"
                   onClick={() => {
                     setNavigateRequest(true);
                   }}
@@ -168,7 +169,7 @@ const CreateCustomerForm = () => {
                   color="ochre"
                   variant="contained"
                   type="submit"
-                  endIcon={<SendIcon />}
+                  endIcon={<SendIcon className="icon" />}
                 >
                   Aggiungi Richiesta
                 </Button>
@@ -177,8 +178,9 @@ const CreateCustomerForm = () => {
           </Col>
           <Col className="text-center mb-3" xs={6} md={6}>
             <ThemeProvider theme={theme}>
-              <Tooltip title="Aggiungi Richiesta">
+              <Tooltip title="Aggiungi Proprietà">
                 <Button
+                  className="btn-send"
                   onClick={() => {
                     setNavigateProperty(true);
                   }}
@@ -186,7 +188,7 @@ const CreateCustomerForm = () => {
                   color="ochre"
                   variant="contained"
                   type="submit"
-                  endIcon={<SendIcon />}
+                  endIcon={<SendIcon className="icon" />}
                 >
                   Aggiungi Proprietà
                 </Button>

@@ -1,5 +1,11 @@
 import { DETAIL_RESET } from "../actions/HomepageAction";
-import { ERROR_REQUEST, PAGE_REQUEST, POST_FETCH_OK, SINGLE_REQUEST } from "../actions/RequestAction";
+import {
+  ERROR_REQUEST,
+  ERROR_REQUEST_RESET,
+  PAGE_REQUEST,
+  POST_FETCH_OK,
+  SINGLE_REQUEST,
+} from "../actions/RequestAction";
 
 const initialState = {
   content: [
@@ -91,6 +97,11 @@ const RequestReducer = (state = initialState, action) => {
         fetchOk: action.payload,
       };
     case ERROR_REQUEST:
+      return {
+        ...state,
+        errorMessages: action.payload,
+      };
+    case ERROR_REQUEST_RESET:
       return {
         ...state,
         errorMessages: action.payload,
