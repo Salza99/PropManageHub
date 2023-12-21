@@ -133,11 +133,11 @@ const PropertyReducer = (state = initialState, action) => {
         postProperty: action.payload,
       };
     case ERROR_PROPERTY:
-      return { ...state, errorMessage: action.payload };
+      return { ...state, errorMessages: action.payload };
     case ERROR_PROPERTY_RESET:
       return {
         ...state,
-        errorMessage: action.payload,
+        errorMessages: action.payload,
       };
     case POST_PROPERTY_RESET:
       return {

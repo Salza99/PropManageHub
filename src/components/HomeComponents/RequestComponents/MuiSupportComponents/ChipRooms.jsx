@@ -55,8 +55,8 @@ const ChipRooms = (props) => {
   }, [rooms]);
 
   return (
-    <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+    <div className="d-flex">
+      <FormControl className="w-100" sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-chip-label">Stanze</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
