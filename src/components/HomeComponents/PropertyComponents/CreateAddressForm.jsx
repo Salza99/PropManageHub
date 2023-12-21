@@ -1,6 +1,6 @@
-import { Autocomplete, TextField, ThemeProvider, createTheme } from "@mui/material";
+import { Autocomplete, Button, TextField, ThemeProvider, Tooltip, createTheme } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Card, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ERROR_RESET,
@@ -11,6 +11,7 @@ import {
 } from "../../../redux/actions/AddressAction";
 import { useNavigate } from "react-router-dom";
 import ErrorsList from "../../Alerts/ErrorsList";
+import SendIcon from "@mui/icons-material/DoubleArrowRounded";
 
 const CreateAddressForm = () => {
   const theme = createTheme({
@@ -71,80 +72,93 @@ const CreateAddressForm = () => {
     }
   }, [stateErrors]);
   return (
-    <div>
+    <Card className=" shadow mb-3">
       <Form
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(postAddress(token, body));
         }}
       >
-        <Autocomplete
-          options={cityOption.map((option) => `${option.placeName}, ${option.adminName1}, ${option.postalCode}`)}
-          onChange={(e, newValue) => {
-            if (newValue) {
-              const [city, region, postalCode] = newValue.split(",").map((item) => item.trim());
-              setBody({
-                ...body,
-                city: city,
-                region: region,
-                postalCode: parseInt(postalCode),
-              });
-            }
-          }}
-          renderInput={(params) => (
-            <TextField
-              value={citySelect}
-              onChange={(e) => {
-                setCitySelect(e.target.value);
-              }}
-              {...params}
-              label="location"
-              variant="standard"
-            />
-          )}
-        />
-        <ThemeProvider theme={theme}>
-          <TextField
-            InputLabelProps={{
-              style: {
-                color: "white",
-                textShadow: "2px 2px 4px black",
-              },
-            }}
-            color="ochre"
-            className="w-100"
-            label="via"
-            variant="standard"
-            value={body.street}
-            onChange={(e) => {
-              setBody({ ...body, street: e.target.value });
-            }}
-          />
-        </ThemeProvider>
-        <ThemeProvider theme={theme}>
-          <TextField
-            InputLabelProps={{
-              style: {
-                color: "white",
-                textShadow: "2px 2px 4px black",
-              },
-            }}
-            color="ochre"
-            className="w-100"
-            label="numero civico"
-            variant="standard"
-            value={body.houseNumber}
-            onChange={(e) => {
-              setBody({ ...body, houseNumber: e.target.value });
-            }}
-          />
-        </ThemeProvider>
-        <button className="form-button" type="submit">
-          Inserisci indirizzo
-        </button>
+        <Row className="p-4 justify-content-center">
+          <Card.Header className="align-self-start">
+            <Card.Title>Form Indirizzo</Card.Title>
+          </Card.Header>
+          <Row className="border shadow-sm mb-2 p-2 pb-5 mb-4">
+            <Col xs={12}>
+              <Autocomplete
+                options={cityOption.map((option) => `${option.placeName}, ${option.adminName1}, ${option.postalCode}`)}
+                onChange={(e, newValue) => {
+                  if (newValue) {
+                    const [city, region, postalCode] = newValue.split(",").map((item) => item.trim());
+                    setBody({
+                      ...body,
+                      city: city,
+                      region: region,
+                      postalCode: parseInt(postalCode),
+                    });
+                  }
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    value={citySelect}
+                    onChange={(e) => {
+                      setCitySelect(e.target.value);
+                    }}
+                    {...params}
+                    label="location"
+                    variant="standard"
+                  />
+                )}
+              />
+            </Col>
+
+            <Col xs={6}>
+              <TextField
+                className="w-100"
+                label="via"
+                variant="standard"
+                value={body.street}
+                onChange={(e) => {
+                  setBody({ ...body, street: e.target.value });
+                }}
+              />
+            </Col>
+
+            <Col xs={6}>
+              <TextField
+                className="w-100"
+                label="numero civico"
+                variant="standard"
+                value={body.houseNumber}
+                onChange={(e) => {
+                  setBody({ ...body, houseNumber: e.target.value });
+                }}
+              />
+            </Col>
+          </Row>
+
+          <Row className="text-end">
+            <Col className="mb-2 align-self-end">
+              <ThemeProvider theme={theme}>
+                <Tooltip title="Vai a Form Proprietà">
+                  <Button
+                    className="btn-send"
+                    size="small"
+                    color="ochre"
+                    variant="contained"
+                    type="submit"
+                    endIcon={<SendIcon className="icon" />}
+                  >
+                    Aggiungi Indirizzo
+                  </Button>
+                </Tooltip>
+              </ThemeProvider>
+            </Col>
+          </Row>
+        </Row>
       </Form>
       {stateErrors && <ErrorsList show={show} setShow={setShow} stateErrors={stateErrors} />}
-    </div>
+    </Card>
   );
 };
 export default CreateAddressForm;
