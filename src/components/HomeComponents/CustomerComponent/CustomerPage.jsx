@@ -132,6 +132,7 @@ const CustomerPage = () => {
             ) : customerState.totalPages > 0 ? (
               <Pagination
                 count={customerState.totalPages}
+                defaultPage={customerState.pageable.pageNumber + 1}
                 onChange={(e, page) => {
                   dispatch(fetchAllCustomer(token, page - 1));
                 }}

@@ -8,7 +8,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AdminDetail from "./AdminDetail";
 import CreateAdminForm from "./CreateAdminForm";
 import { Plus } from "react-bootstrap-icons";
-import { AlertTitle, Alert, Fab, ThemeProvider, Tooltip, createTheme } from "@mui/material";
+import { AlertTitle, Alert, Fab, ThemeProvider, Tooltip, createTheme, Pagination } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 const AdminPage = () => {
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const AdminPage = () => {
   }
   useEffect(() => {
     if (token) {
-      dispatch(fetchAllAdmin(token));
+      dispatch(fetchAllAdmin(token, 0));
       setFetchDone(true);
     }
   }, [token, adminState.createAdminOk]);
@@ -89,7 +89,7 @@ const AdminPage = () => {
         adminState.content[0].id ? (
           <>
             <Row>{content}</Row>
-            {location.pathname !== "/homepage/collaboratori" && (
+            {location.pathname !== "/homepage/collaboratori" ? (
               <Col xs={12}>
                 <Tooltip title="indietro">
                   <button className="button-info btn-transition shadow w-100" onClick={() => window.history.back()}>
@@ -97,6 +97,16 @@ const AdminPage = () => {
                   </button>
                 </Tooltip>
               </Col>
+            ) : adminState.totalPages > 0 ? (
+              <Pagination
+                count={adminState.totalPages}
+                defaultPage={adminState.pageable.pageNumber + 1}
+                onChange={(e, page) => {
+                  dispatch(fetchAllAdmin(token, page - 1));
+                }}
+              />
+            ) : (
+              ""
             )}
           </>
         ) : (

@@ -5,10 +5,10 @@ export const POST_ADMIN_OK = "POST_ADMIN_OK";
 export const RESET_ADMIN_OK = "RESET_ADMIN_OK";
 export const RESET_ADMIN_ERRORS = "RESET_ADMIN_ERRORS";
 
-export const fetchAllAdmin = (token) => {
+export const fetchAllAdmin = (token, page) => {
   return async (dispatch) => {
     try {
-      const resp = await fetch("http://localhost:3002/users", {
+      const resp = await fetch("http://localhost:3002/users?size=8&page=" + page, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,

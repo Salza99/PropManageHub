@@ -5,10 +5,10 @@ export const POST_PROPERTY_OK = "POST_PROPERTY_OK";
 export const POST_PROPERTY_RESET = "POST_PROPERTY_RESET";
 export const ERROR_PROPERTY_RESET = "ERROR_PROPERTY_RESET";
 
-export const fetchAllProperty = (token) => {
+export const fetchAllProperty = (token, page) => {
   return async (dispatch) => {
     try {
-      const resp = await fetch("http://localhost:3002/estates", {
+      const resp = await fetch("http://localhost:3002/estates?size=8&page=" + page, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,

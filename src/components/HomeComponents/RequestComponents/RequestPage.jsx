@@ -6,7 +6,7 @@ import RequestCardLoader from "../../Loaders/RequestCardLoader";
 import { useParams, useLocation } from "react-router";
 import RequestDetail from "./RequestDetail";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { Alert, AlertTitle, ThemeProvider, Tooltip, createTheme } from "@mui/material";
+import { Alert, AlertTitle, Pagination, ThemeProvider, Tooltip, createTheme } from "@mui/material";
 import { Col, Container, Row } from "react-bootstrap";
 const RequestPage = () => {
   const requestState = useSelector((state) => state.request);
@@ -35,7 +35,7 @@ const RequestPage = () => {
   }
   useEffect(() => {
     if (token) {
-      dispatch(fetchAllRequest(token));
+      dispatch(fetchAllRequest(token, 0));
       setFetchDone(true);
     }
   }, [token]);
@@ -62,7 +62,7 @@ const RequestPage = () => {
         requestState.content.length > 0 ? (
           <>
             <Row>{content}</Row>
-            {location.pathname !== "/homepage/richieste" && (
+            {location.pathname !== "/homepage/richieste" ? (
               <ThemeProvider theme={theme}>
                 <Col xs={12}>
                   <Tooltip title="indietro">
@@ -72,6 +72,16 @@ const RequestPage = () => {
                   </Tooltip>
                 </Col>
               </ThemeProvider>
+            ) : requestState.totalPages > 0 ? (
+              <Pagination
+                count={requestState.totalPages}
+                defaultPage={requestState.pageable.pageNumber + 1}
+                onChange={(e, page) => {
+                  dispatch(fetchAllRequest(token, page - 1));
+                }}
+              />
+            ) : (
+              ""
             )}
           </>
         ) : (

@@ -3,10 +3,10 @@ export const ERROR_REQUEST = "ERROR_REQUEST";
 export const SINGLE_REQUEST = "SINGLE_REQUEST";
 export const POST_FETCH_OK = "POST_FETCH_OK";
 
-export const fetchAllRequest = (token) => {
+export const fetchAllRequest = (token, page) => {
   return async (dispatch) => {
     try {
-      const resp = await fetch("http://localhost:3002/requests", {
+      const resp = await fetch("http://localhost:3002/requests?size=8&page=" + page, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,

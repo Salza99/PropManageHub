@@ -7,7 +7,7 @@ import { useParams, useLocation } from "react-router";
 import PropertyDetail from "./PropertyDetail";
 import { Col, Container, Row } from "react-bootstrap";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { AlertTitle, Alert, ThemeProvider, Tooltip, createTheme } from "@mui/material";
+import { AlertTitle, Alert, ThemeProvider, Tooltip, createTheme, Pagination } from "@mui/material";
 
 const PropertyPage = () => {
   const propertyState = useSelector((state) => state.property);
@@ -36,7 +36,7 @@ const PropertyPage = () => {
   }
   useEffect(() => {
     if (token) {
-      dispatch(fetchAllProperty(token));
+      dispatch(fetchAllProperty(token, 0));
       setFetchDone(true);
     }
   }, [token]);
@@ -63,7 +63,7 @@ const PropertyPage = () => {
         propertyState.content.length > 0 ? (
           <>
             <Row>{content}</Row>
-            {location.pathname !== "/homepage/proprieta" && (
+            {location.pathname !== "/homepage/proprieta" ? (
               <ThemeProvider theme={theme}>
                 <Col xs={12}>
                   <Tooltip title="indietro">
@@ -73,6 +73,16 @@ const PropertyPage = () => {
                   </Tooltip>
                 </Col>
               </ThemeProvider>
+            ) : propertyState.totalPages > 0 ? (
+              <Pagination
+                count={propertyState.totalPages}
+                defaultPage={propertyState.pageable.pageNumber + 1}
+                onChange={(e, page) => {
+                  dispatch(fetchAllProperty(token, page - 1));
+                }}
+              />
+            ) : (
+              ""
             )}
           </>
         ) : (
