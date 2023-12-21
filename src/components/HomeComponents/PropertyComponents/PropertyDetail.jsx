@@ -49,11 +49,11 @@ const PropertyDetail = () => {
         <Card className="p-2">
           <ThemeProvider theme={theme}>
             <Card.Body>
-              <Row>
+              <Row className="align-items-center">
                 <Col xs={10}>
                   <Card.Title>Info Proprietà</Card.Title>
                 </Col>
-                <Col xs={2}>
+                <Col className="text-center" xs={2}>
                   <Tooltip title="Modifica info proprietà">
                     <Fab className="me-1" size="small" color="ochre" aria-label="edit">
                       <Pencil />

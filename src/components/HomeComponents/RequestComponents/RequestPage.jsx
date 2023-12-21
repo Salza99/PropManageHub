@@ -30,7 +30,7 @@ const RequestPage = () => {
   return (
     <>
       <h4 className="text-light t-shadow">Tutte le richieste:</h4>
-      {fetchDone ? requestState.content.length > 0 ? content : <div>non ci sono risultati</div> : <RequestCardLoader />}
+      {fetchDone ? requestState.content.length > 0 ? content : <div>Non ci sono risultati</div> : <RequestCardLoader />}
     </>
   );
 };
