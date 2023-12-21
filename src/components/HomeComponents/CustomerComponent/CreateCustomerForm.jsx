@@ -195,7 +195,7 @@ const CreateCustomerForm = () => {
               />
             </ThemeProvider>
           </Col>
-          <Col className="mb-3 mb-md-5" xs={12} md={6}>
+          <Col className="mb-5 mb-md-5" xs={12} md={6}>
             <ThemeProvider theme={theme}>
               <TextField
                 InputLabelProps={{
@@ -215,7 +215,7 @@ const CreateCustomerForm = () => {
               />
             </ThemeProvider>
           </Col>
-          <Col className="mb-5" xs={6} md={4}>
+          <Col className="mb-5" xs={12}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateField
                 className="date"
@@ -234,11 +234,7 @@ const CreateCustomerForm = () => {
             </LocalizationProvider>
           </Col>
 
-          <Col
-            className={`text-center {${!errorsPosition && "align-self-center"} ${errorsPosition && "order-btn"}`}
-            xs={6}
-            md={3}
-          >
+          <Col className="text-center" xs={6} md={6}>
             <button
               onClick={() => {
                 setNavigateRequest(true);
@@ -248,6 +244,8 @@ const CreateCustomerForm = () => {
             >
               Aggiungi richiesta
             </button>
+          </Col>
+          <Col className="text-center" xs={6} md={6}>
             <button
               onClick={() => {
                 setNavigateProperty(true);
@@ -258,7 +256,8 @@ const CreateCustomerForm = () => {
               Aggiungi proprietà
             </button>
           </Col>
-          <Col className={errorsPosition && "order-errors"} xs={12} md={9}>
+
+          <Col xs={12}>
             {customerState.errorMessages && (
               <ErrorsList stateErrors={customerState.errorMessages} show={show} setShow={setShow} />
             )}

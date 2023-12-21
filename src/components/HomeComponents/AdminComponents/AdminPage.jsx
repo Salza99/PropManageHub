@@ -73,12 +73,15 @@ const AdminPage = () => {
           {add && (
             <Col xs={2} md={1}>
               <Tooltip title="Aggiungi collaboratori">
-                <Fab size="small" color="ochre" aria-label="add">
-                  <Plus
-                    onClick={() => {
-                      navigate("/homepage/collaboratori/createAdmin");
-                    }}
-                  />
+                <Fab
+                  size="small"
+                  color="ochre"
+                  aria-label="add"
+                  onClick={() => {
+                    navigate("/homepage/collaboratori/createAdmin");
+                  }}
+                >
+                  <Plus />
                 </Fab>
               </Tooltip>
             </Col>

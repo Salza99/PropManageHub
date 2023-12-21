@@ -263,4 +263,12 @@ li {
 
 .single-card-height {
   height: 45vh;
+}
+
+.button-submit {
+  background-color: #e3d026;
+}
+
+.button-submit:hover {
+  background-color: #a29415;
 }/*# sourceMappingURL=style.css.map */

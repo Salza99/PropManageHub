@@ -102,12 +102,15 @@ const CustomerPage = () => {
           {add && (
             <Col xs={2} md={1}>
               <Tooltip title="Aggiungi cliente">
-                <Fab size="small" color="ochre" aria-label="add">
-                  <Plus
-                    onClick={() => {
-                      navigate("/homepage/clienti/aggiungiCliente");
-                    }}
-                  />
+                <Fab
+                  size="small"
+                  color="ochre"
+                  aria-label="add"
+                  onClick={() => {
+                    navigate("/homepage/clienti/aggiungiCliente");
+                  }}
+                >
+                  <Plus />
                 </Fab>
               </Tooltip>
             </Col>
