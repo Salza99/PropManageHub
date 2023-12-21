@@ -9,6 +9,7 @@ import AdminDetail from "./AdminDetail";
 import CreateAdminForm from "./CreateAdminForm";
 import { Plus } from "react-bootstrap-icons";
 import { Fab, ThemeProvider, Tooltip, createTheme } from "@mui/material";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 const AdminPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,17 +56,27 @@ const AdminPage = () => {
     <Container>
       <Row className="mb-4 p-3">
         <ThemeProvider theme={theme}>
-          <Col xs={10} md={11}>
-            <h4 className="text-light t-shadow">Tutti i collaboratori:</h4>
-          </Col>
+          {location.pathname !== "/homepage/collaboratori" ? (
+            <Col xs={12}>
+              <Tooltip title="indietro">
+                <button className="button-info btn-transition shadow w-100" onClick={() => window.history.back()}>
+                  <KeyboardBackspaceIcon className="icon" />
+                </button>
+              </Tooltip>
+            </Col>
+          ) : (
+            <Col xs={10} md={11}>
+              <h4 className="text-light t-shadow m-0">Tutti i collaboratori:</h4>
+            </Col>
+          )}
 
           {add && (
             <Col xs={2} md={1}>
-              <Tooltip title="Aggiungi cliente">
+              <Tooltip title="Aggiungi collaboratori">
                 <Fab size="small" color="ochre" aria-label="add">
                   <Plus
                     onClick={() => {
-                      navigate("/homepage/clienti/aggiungiCliente");
+                      navigate("/homepage/collaboratori/createAdmin");
                     }}
                   />
                 </Fab>

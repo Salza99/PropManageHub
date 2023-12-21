@@ -14,6 +14,7 @@ import CreateAddressForm from "../PropertyComponents/CreateAddressForm";
 import CreatePropertyForm from "../PropertyComponents/CreatePropertyForm";
 import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
 import { Fab, ThemeProvider, Tooltip, createTheme } from "@mui/material";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
 const CustomerPage = () => {
   const dispatch = useDispatch();
@@ -82,11 +83,21 @@ const CustomerPage = () => {
   }, [token]);
   return (
     <Container>
-      <Row className="mb-4 p-3">
+      <Row className="mb-1 p-3">
         <ThemeProvider theme={theme}>
-          <Col xs={10} md={11}>
-            <h4 className="text-light t-shadow">Tutti i collaboratori:</h4>
-          </Col>
+          {location.pathname !== "/homepage/clienti" ? (
+            <Col xs={12}>
+              <Tooltip title="indietro">
+                <button className="button-info btn-transition shadow w-100" onClick={() => window.history.back()}>
+                  <KeyboardBackspaceIcon className="icon" />
+                </button>
+              </Tooltip>
+            </Col>
+          ) : (
+            <Col xs={10} md={11}>
+              <h4 className="text-light t-shadow m-0">Tutti i clienti:</h4>
+            </Col>
+          )}
 
           {add && (
             <Col xs={2} md={1}>

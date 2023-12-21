@@ -239,4 +239,24 @@ p,
 a,
 li {
   font-family: "Open Sans", sans-serif;
+}
+
+.icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.button-info:hover .icon {
+  animation: moveLeftRight 0.5s ease-in-out infinite;
+}
+
+@keyframes moveLeftRight {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+}
+.elevation:hover {
+  transform: scale(1.05);
 }/*# sourceMappingURL=style.css.map */

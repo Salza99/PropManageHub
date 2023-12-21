@@ -8,7 +8,7 @@ class SingleRequest extends Component {
       <Link className="nav-link" to={"/homepage/richieste/" + this.props.request.id}>
         <Card className="mb-3 shadow-lg">
           <Card.Body>
-            <Card.Title>{this.props.request.typeOfProperty}</Card.Title>
+            <Card.Title className="text-capitalize">{this.props.request.typeOfProperty}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">Condizioni: {this.props.request.condition}</Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted">Massimale: {this.props.request.maximal} €</Card.Subtitle>
           </Card.Body>

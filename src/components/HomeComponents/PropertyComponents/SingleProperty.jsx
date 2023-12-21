@@ -1,16 +1,33 @@
 import { Component } from "react";
-import { Card } from "react-bootstrap";
+import { Card, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 class SingleProperty extends Component {
   render() {
     return (
       <Link className="nav-link" to={"/homepage/proprieta/" + this.props.property.id}>
-        <Card className="mb-3 shadow-lg">
+        <Card className="mb-3 shadow-lg elevation btn-transition">
+          <Card.Header>
+            <Card.Title className="m-0">Proprietà</Card.Title>
+          </Card.Header>
+          <ListGroup className="p-3">
+            <div className="border rounded p-3">
+              <Card.Subtitle className="mb-2">Tipologia:</Card.Subtitle>
+              <ListGroup.Item className="fw-bold text-capitalize">
+                {this.props.property.typeOfProperty.toLowerCase().split("_").join(" ")}
+              </ListGroup.Item>
+            </div>
+          </ListGroup>
           <Card.Body>
-            <Card.Title>{this.props.property.typeOfProperty}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">Condizioni: {this.props.property.condition}</Card.Subtitle>
-            <Card.Subtitle className="mb-2 text-muted">Prezzo: {this.props.property.price} €</Card.Subtitle>
+            <ListGroup>
+              <ListGroup.Item>
+                <span className="card-subtitle h6">Condizioni:</span>{" "}
+                {this.props.property.condition.toLowerCase().split("_").join(" ")}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <span className="card-subtitle h6">Prezzo:</span> {this.props.property.price} €
+              </ListGroup.Item>
+            </ListGroup>
           </Card.Body>
         </Card>
       </Link>
