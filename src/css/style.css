@@ -206,6 +206,15 @@
   border-radius: 15px;
 }
 
+.button-access {
+  background-color: #e3d026;
+  border: 0;
+}
+
+.button-access:hover {
+  background-color: #a29415;
+}
+
 .button-info:hover {
   background-color: #a29415;
 }

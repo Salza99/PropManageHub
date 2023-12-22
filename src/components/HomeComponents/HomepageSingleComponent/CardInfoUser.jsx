@@ -1,9 +1,22 @@
 import { Logout, PersonAdd } from "@mui/icons-material";
-import { Avatar, Box, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  ThemeProvider,
+  Tooltip,
+  createTheme,
+} from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LOGOUT } from "../../../redux/actions/HomepageAction";
+import { Card } from "react-bootstrap";
 const CardInfoUser = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -15,20 +28,39 @@ const CardInfoUser = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const theme = createTheme({
+    palette: {
+      ochre: {
+        main: "#E3D026",
+        light: "#E9DB5D",
+        dark: "#A29415",
+        contrastText: "#242105",
+      },
+    },
+  });
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center", justifyContent: "center" }}>
         <Tooltip title="Impostazioni">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
-            <Avatar sx={{ width: 32, height: 32 }}>{props.homeState.name.charAt(0).toUpperCase()}</Avatar>
-          </IconButton>
+          <ThemeProvider theme={theme}>
+            <Button
+              color="ochre"
+              className="mt-2 mb-2"
+              variant="contained"
+              onClick={handleClick}
+              size="large"
+              sx={{ ml: 2 }}
+              aria-controls={open ? "account-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+            >
+              <div className="w-100 text-dark">
+                <Card.Title>
+                  {props.homeState.name.charAt(0).toUpperCase()} {props.homeState.surname.charAt(0).toUpperCase()}
+                </Card.Title>
+              </div>
+            </Button>
+          </ThemeProvider>
         </Tooltip>
       </Box>
       <Menu

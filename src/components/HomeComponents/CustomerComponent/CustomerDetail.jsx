@@ -46,22 +46,29 @@ const CustomerDetail = () => {
                   </Tooltip>
 
                   <Tooltip title="Aggiungi proprietà">
-                    <Fab className="me-1" size="small" color="ochre" aria-label="add">
-                      <HouseAdd
-                        onClick={() => {
-                          navigate("/homepage/clienti/aggiungiCliente/indirizzo");
-                        }}
-                      />
+                    <Fab
+                      className="me-1"
+                      size="small"
+                      color="ochre"
+                      aria-label="add"
+                      onClick={() => {
+                        navigate("/homepage/clienti/aggiungiCliente/indirizzo");
+                      }}
+                    >
+                      <HouseAdd />
                     </Fab>
                   </Tooltip>
                   {customerState.selected.request === null && (
                     <Tooltip title="Aggiungi richiesta">
-                      <Fab size="small" color="ochre" aria-label="edit">
-                        <EnvelopePlus
-                          onClick={() => {
-                            navigate("/homepage/clienti/aggiungiCliente/richiesta");
-                          }}
-                        />
+                      <Fab
+                        size="small"
+                        color="ochre"
+                        aria-label="edit"
+                        onClick={() => {
+                          navigate("/homepage/clienti/aggiungiCliente/richiesta");
+                        }}
+                      >
+                        <EnvelopePlus />
                       </Fab>
                     </Tooltip>
                   )}

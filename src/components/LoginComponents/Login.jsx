@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { RESET_ERROR_MESSAGE, loginFetch } from "../../redux/actions/LoginAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -106,9 +106,9 @@ const Login = () => {
                     />
                   </Form.Group>
                 </div>
-                <Button className="access-button" type="submit">
+                <button className="button-access pt-1 pb-1 ps-2 pe-2 rounded btn-transition" type="submit">
                   Accedi
-                </Button>
+                </button>
               </Form>
             </Card>
           </Col>
