@@ -6,7 +6,7 @@ import {
   RESET_ADMIN_OK,
   SINGLE_ADMIN,
 } from "../actions/AdminAction";
-import { DETAIL_RESET } from "../actions/HomepageAction";
+import { DETAIL_RESET, LOGOUT } from "../actions/HomepageAction";
 
 const initialState = {
   content: [
@@ -115,6 +115,55 @@ const AdminReducer = (state = initialState, action) => {
       return {
         ...state,
         errorMessages: action.payload,
+      };
+    case LOGOUT:
+      return {
+        content: [
+          {
+            id: "",
+            username: "",
+            name: "",
+            surname: "",
+            email: "",
+            phone: 0,
+            birthDay: "",
+            insertDate: "",
+            role: "",
+            enable: false,
+            authorities: [
+              {
+                authority: "",
+              },
+            ],
+            accountNonLocked: true,
+            accountNonExpired: true,
+            credentialsNonExpired: true,
+          },
+        ],
+        pageable: { pageNumber: 0, pageSize: 0 },
+        totalPages: 0,
+        selected: {
+          id: "",
+          username: "",
+          name: "",
+          surname: "",
+          email: "",
+          phone: 0,
+          birthDay: "",
+          insertDate: "",
+          role: "",
+          enable: false,
+          authorities: [
+            {
+              authority: "",
+            },
+          ],
+          accountNonLocked: true,
+          accountNonExpired: true,
+          credentialsNonExpired: true,
+        },
+        errorMessages: "",
+        createAdminOk: false,
       };
     default:
       return state;

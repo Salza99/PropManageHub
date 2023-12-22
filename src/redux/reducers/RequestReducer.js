@@ -1,4 +1,4 @@
-import { DETAIL_RESET } from "../actions/HomepageAction";
+import { DETAIL_RESET, LOGOUT } from "../actions/HomepageAction";
 import {
   ERROR_REQUEST,
   ERROR_REQUEST_RESET,
@@ -105,6 +105,53 @@ const RequestReducer = (state = initialState, action) => {
       return {
         ...state,
         errorMessages: action.payload,
+      };
+    case LOGOUT:
+      return {
+        content: [
+          {
+            id: 0,
+            habitability: false,
+            condominiumFees: 0.0,
+            numberOfRooms: [],
+            condition: "",
+            otherCharacteristics: [],
+            regions: [],
+            cities: [],
+            hamlets: [],
+            surface: 0,
+            numberOfBathrooms: 0,
+            parkingSpace: 0,
+            insertDate: "",
+            typeOfProperty: [],
+            maximal: 0,
+            note: "",
+            idToRent: false,
+          },
+        ],
+        pageable: { pageNumber: 0, pageSize: 0 },
+        totalPages: 0,
+        selected: {
+          id: 0,
+          habitability: false,
+          condominiumFees: 0.0,
+          numberOfRooms: [],
+          condition: "",
+          otherCharacteristics: [],
+          regions: [],
+          cities: [],
+          hamlets: [],
+          surface: 0,
+          numberOfBathrooms: 0,
+          parkingSpace: 0,
+          insertDate: "",
+          typeOfProperty: [],
+          maximal: 0,
+          note: "",
+          isToRent: false,
+        },
+        errorMessages: "",
+        fetchOk: false,
       };
     default:
       return state;

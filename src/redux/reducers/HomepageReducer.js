@@ -1,4 +1,4 @@
-import { ERROR_PROFILE, MY_PROFILE_INFO } from "../actions/HomepageAction";
+import { ERROR_PROFILE, LOGOUT, MY_PROFILE_INFO } from "../actions/HomepageAction";
 
 const initialState = {
   myProfile: {
@@ -36,6 +36,31 @@ const HomepageReducer = (state = initialState, action) => {
       return {
         ...state,
         errorMessage: action.payload,
+      };
+    case LOGOUT:
+      return {
+        myProfile: {
+          id: "",
+          username: "",
+          password: "",
+          name: "",
+          surname: "",
+          email: "",
+          phone: 0,
+          birthDay: "",
+          insertDate: "",
+          role: "",
+          enabled: false,
+          authorities: [
+            {
+              authority: "SUPER_ADMIN",
+            },
+          ],
+          accountNonExpired: false,
+          credentialsNonExpired: false,
+          accountNonLocked: false,
+        },
+        errorMessage: "",
       };
     default:
       return state;

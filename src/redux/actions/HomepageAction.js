@@ -1,7 +1,7 @@
 export const MY_PROFILE_INFO = "MY_PROFILE_INFO";
 export const ERROR_PROFILE = "ERROR_PROFILE";
 export const DETAIL_RESET = "DETAIL_RESET";
-
+export const LOGOUT = "LOGOUT";
 export const fetchMyProfile = (token) => {
   return async (dispatch) => {
     try {

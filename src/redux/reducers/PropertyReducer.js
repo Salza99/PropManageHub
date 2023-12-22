@@ -1,4 +1,4 @@
-import { DETAIL_RESET } from "../actions/HomepageAction";
+import { DETAIL_RESET, LOGOUT } from "../actions/HomepageAction";
 import {
   ERROR_PROPERTY,
   ERROR_PROPERTY_RESET,
@@ -143,6 +143,76 @@ const PropertyReducer = (state = initialState, action) => {
       return {
         ...state,
         postProperty: action.payload,
+      };
+    case LOGOUT:
+      return {
+        content: [
+          {
+            id: 0,
+            habitability: true,
+            condominiumFees: 0.0,
+            numberOfRooms: [],
+            condition: "",
+            otherCharacteristics: null,
+            floor: 0,
+            surface: 0,
+            numberOfFloors: 0,
+            numberOfBathrooms: 0,
+            parkingSpace: 0,
+            yearOfConstruction: 0,
+            insertDate: "",
+            energyClass: "",
+            typeOfProperty: "",
+            price: 0,
+            description: null,
+            availability: true,
+            address: {
+              id: 0,
+              region: "",
+              city: "",
+              hamlet: "",
+              postalCode: 0,
+              street: "",
+              houseNumber: 0,
+            },
+            heating: "",
+            toRent: false,
+          },
+        ],
+        pageable: { pageNumber: 0, pageSize: 0 },
+        totalPages: 0,
+        selected: {
+          id: 0,
+          habitability: true,
+          condominiumFees: 0.0,
+          numberOfRooms: [],
+          condition: "",
+          otherCharacteristics: null,
+          floor: 0,
+          surface: 0,
+          numberOfFloors: 0,
+          numberOfBathrooms: 0,
+          parkingSpace: 0,
+          yearOfConstruction: 0,
+          energyClass: "",
+          typeOfProperty: "",
+          price: 0,
+          description: null,
+          availability: true,
+          address: {
+            id: 0,
+            region: "",
+            city: "",
+            hamlet: "",
+            postalCode: 0,
+            street: "",
+            houseNumber: 0,
+          },
+          heating: "",
+          toRent: false,
+        },
+        postProperty: false,
+        errorMessages: "",
       };
     default:
       return state;

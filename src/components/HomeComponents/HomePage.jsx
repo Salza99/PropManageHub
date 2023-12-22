@@ -6,7 +6,7 @@ import PageLoader from "../Loaders/PageLoader";
 import LogoBar from "../CommonComponents/LogoBar";
 import CardInfoUser from "./HomepageSingleComponent/CardInfoUser";
 import ToolBar from "./ToolBar";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CustomerPage from "./CustomerComponent/CustomerPage";
 import Calendar from "./Calendar";
 import PropertyPage from "./PropertyComponents/PropertyPage";
@@ -19,6 +19,7 @@ const HomePage = () => {
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const homeState = useSelector((state) => state.home);
   const params = useParams();
+  const navigate = useNavigate();
   let content;
   if (
     location.pathname === "/homepage/clienti" ||
@@ -45,8 +46,10 @@ const HomePage = () => {
   useEffect(() => {
     if (token) {
       dispatch(fetchMyProfile(token));
+    } else {
+      navigate("/");
     }
-  }, []);
+  }, [token]);
   return (
     <div className="app-background">
       {homeState.myProfile.id ? (

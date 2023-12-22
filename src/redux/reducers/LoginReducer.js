@@ -1,3 +1,4 @@
+import { LOGOUT } from "../actions/HomepageAction";
 import { AUTHORIZATION_TOKEN, ERROR_LOGIN, RESET_ERROR_MESSAGE } from "../actions/LoginAction";
 
 const initialState = {
@@ -31,6 +32,13 @@ const LoginReducer = (state = initialState, action) => {
         respLogin: {
           ...state.respLogin,
           errorMessage: action.payload,
+        },
+      };
+    case LOGOUT:
+      return {
+        respLogin: {
+          authorizationToken: "",
+          errorMessage: "",
         },
       };
     default:

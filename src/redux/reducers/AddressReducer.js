@@ -10,6 +10,7 @@ import {
   PROVINCES_GET,
   RESET_PROVINCE,
 } from "../actions/AddressAction";
+import { LOGOUT } from "../actions/HomepageAction";
 
 const initialState = {
   provinces: [],
@@ -71,6 +72,15 @@ const AddressReducer = (state = initialState, action) => {
       return {
         ...state,
         addressId: action.payload,
+      };
+    case LOGOUT:
+      return {
+        provinces: [],
+        hamletByRange: [],
+        addressId: 0,
+        provinceOk: false,
+        fetchOk: false,
+        errorMessages: "",
       };
     default:
       return state;

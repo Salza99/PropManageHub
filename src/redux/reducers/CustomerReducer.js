@@ -7,7 +7,7 @@ import {
   RESET_CUSTOMER_OK,
   SINGLE_CUSTOMER,
 } from "../actions/CustomerAction";
-import { DETAIL_RESET } from "../actions/HomepageAction";
+import { DETAIL_RESET, LOGOUT } from "../actions/HomepageAction";
 
 const initialState = {
   content: [
@@ -96,6 +96,39 @@ const CustomerReducer = (state = initialState, action) => {
           followedByUser: {},
         },
         errorMessages: action.payload,
+      };
+    case LOGOUT:
+      return {
+        content: [
+          {
+            id: "",
+            name: "",
+            surname: "",
+            email: "",
+            phone: 0,
+            birthDay: "",
+            insertDate: "",
+            sellingProperties: [],
+            request: null,
+            followedByUser: {},
+          },
+        ],
+        pageable: { pageNumber: 0, pageSize: 0 },
+        totalPages: 0,
+        selected: {
+          id: "",
+          name: "",
+          surname: "",
+          email: "",
+          phone: 0,
+          birthDay: "",
+          insertDate: "",
+          sellingProperties: [],
+          request: null,
+          followedByUser: {},
+        },
+        createCustomerOk: false,
+        errorMessages: "",
       };
     default:
       return state;
