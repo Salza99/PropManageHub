@@ -127,13 +127,6 @@ const PropertyDetail = () => {
                       <Col xs={9} md={10}>
                         <Card.Subtitle className="fw-bold mb-2">Locazione:</Card.Subtitle>
                       </Col>
-                      <Col xs={3} md={2}>
-                        <Tooltip title="Modifica info locazione">
-                          <Fab className="me-1" size="small" color="ochre" aria-label="edit">
-                            <Pencil />
-                          </Fab>
-                        </Tooltip>
-                      </Col>
                     </Row>
                     <ListGroup.Item>
                       <span className="card-subtitle h6">Regione:</span> {propertyState.selected.address.region}
