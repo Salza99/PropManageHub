@@ -1,25 +1,20 @@
 import { Autocomplete, Chip, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOnhamletByRange, fetchOnsearch } from "../../../../redux/actions/AddressAction";
+import { fetchOnsearch } from "../../../../redux/actions/AddressAction";
 
 const ChipProvinceRequest = (props) => {
   const chipValue = useSelector((state) => state.address.provinces);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
+
   const [search, setSearch] = useState("");
   useEffect(() => {
     if (search !== "") {
       dispatch(fetchOnsearch(token, search));
     }
   }, [search]);
-  const [searchedProvince, setSearchedProvince] = useState({});
-  useEffect(() => {
-    if (props.body.cities.length > 0) {
-      setSearchedProvince(chipValue.find((searchedCity) => props.body.cities[0].includes(searchedCity.placeName)));
-      dispatch(fetchOnhamletByRange(token, searchedProvince.lat, searchedProvince.lng));
-    }
-  }, [props.body.cities]);
+
   return (
     <div>
       <Autocomplete

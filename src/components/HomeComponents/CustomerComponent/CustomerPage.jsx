@@ -44,7 +44,8 @@ const CustomerPage = () => {
     location.pathname !== "/homepage/clienti/aggiungiCliente/proprieta" &&
     location.pathname !== "/homepage/clienti/aggiungiCliente/indirizzo" &&
     location.pathname !== "/homepage/clienti/modifica" &&
-    location.pathname !== "/homepage/proprieta/modifica"
+    location.pathname !== "/homepage/proprieta/modifica" &&
+    location.pathname !== "/homepage/richieste/modifica"
   ) {
     add = true;
     content = customerState.content.map((customer) => {

@@ -4,6 +4,9 @@ import {
   ERROR_REQUEST_RESET,
   PAGE_REQUEST,
   POST_FETCH_OK,
+  POST_REQUEST_DATA,
+  PUT_FETCH_OK,
+  PUT_FETCH_RESET,
   SINGLE_REQUEST,
 } from "../actions/RequestAction";
 
@@ -52,6 +55,7 @@ const initialState = {
   },
   errorMessages: "",
   fetchOk: false,
+  putOk: false,
 };
 
 const RequestReducer = (state = initialState, action) => {
@@ -67,6 +71,21 @@ const RequestReducer = (state = initialState, action) => {
       return {
         ...state,
         selected: action.payload,
+      };
+    case POST_REQUEST_DATA:
+      return {
+        ...state,
+        selected: action.payload,
+      };
+    case PUT_FETCH_OK:
+      return {
+        ...state,
+        putOk: action.payload,
+      };
+    case PUT_FETCH_RESET:
+      return {
+        ...state,
+        putOk: action.payload,
       };
     case DETAIL_RESET:
       return {

@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+import { Refresh } from "@mui/icons-material";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -50,20 +51,29 @@ function getStyles(name, rooms, theme) {
 const ChipTypeOfProperty = (props) => {
   const theme = useTheme();
   const [typeOfProperty, setTypeOfProperty] = useState([]);
-
+  const [displayedType, setDisplayedType] = useState([]);
+  let initialPut = [];
   const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    let splitValue = typeof value === "string" ? value.split(",") : value;
-    let transformedValue = splitValue.map((item) => item.toUpperCase().replace(/\s+/g, "_"));
-    const uniqueValues = new Set([...typeOfProperty, ...transformedValue]);
-    setTypeOfProperty(Array.from(uniqueValues));
+    setDisplayedType(event.target.value);
   };
+  useEffect(() => {
+    setTypeOfProperty(displayedType.map((type) => type.toUpperCase().split(" ").join("_")));
+  }, [displayedType]);
   useEffect(() => {
     props.setBody({ ...props.body, typeOfProperty: typeOfProperty });
   }, [typeOfProperty]);
-
+  useEffect(() => {
+    if (props.refresh) {
+      initialPut = props.body.typeOfProperty;
+      initialPut = initialPut.map((type) =>
+        type
+          .toLowerCase()
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, (char) => char.toUpperCase())
+      );
+      setDisplayedType(initialPut);
+    }
+  }, [props.refresh]);
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
@@ -72,7 +82,7 @@ const ChipTypeOfProperty = (props) => {
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={typeOfProperty}
+          value={displayedType}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (

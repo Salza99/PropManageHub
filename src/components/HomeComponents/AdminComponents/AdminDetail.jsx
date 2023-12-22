@@ -39,13 +39,6 @@ const AdminDetail = () => {
                 <Col xs={6} sm={8}>
                   <Card.Title>Anagrafica</Card.Title>
                 </Col>
-                <Col className="text-center" xs={6} sm={4}>
-                  <Tooltip title="Modifica info collaboratore">
-                    <Fab className="me-1" size="small" color="ochre" aria-label="edit">
-                      <Pencil />
-                    </Fab>
-                  </Tooltip>
-                </Col>
               </Row>
               <Card.Title>
                 {adminState.selected.name} {adminState.selected.surname}

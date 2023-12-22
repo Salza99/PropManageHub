@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { Card, Col, ListGroup, Row } from "react-bootstrap";
 import CustomerCardLoader from "../../Loaders/CustomerCardLoader";
 import { singleRequest } from "../../../redux/actions/RequestAction";
@@ -22,6 +22,7 @@ const RequestDetail = () => {
   const requestState = useSelector((state) => state.request);
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const params = useParams();
+  const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
   let count = 0;
   const handleChange = (panel) => (event, isExpanded) => {
@@ -39,9 +40,6 @@ const RequestDetail = () => {
   });
   useEffect(() => {
     dispatch(singleRequest(token, params.rId));
-    return () => {
-      dispatch({ type: DETAIL_RESET, payload: "" });
-    };
   }, []);
   return (
     <>
@@ -55,7 +53,15 @@ const RequestDetail = () => {
                 </Col>
                 <Col className="text-center" xs={2}>
                   <Tooltip title="Modifica info richiesta">
-                    <Fab className="me-1" size="small" color="ochre" aria-label="edit">
+                    <Fab
+                      className="me-1"
+                      size="small"
+                      color="ochre"
+                      aria-label="edit"
+                      onClick={() => {
+                        navigate("/homepage/richieste/modifica");
+                      }}
+                    >
                       <Pencil />
                     </Fab>
                   </Tooltip>

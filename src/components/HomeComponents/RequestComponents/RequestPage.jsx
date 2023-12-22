@@ -8,6 +8,7 @@ import RequestDetail from "./RequestDetail";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Alert, AlertTitle, Pagination, ThemeProvider, Tooltip, createTheme } from "@mui/material";
 import { Col, Container, Row } from "react-bootstrap";
+import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
 const RequestPage = () => {
   const requestState = useSelector((state) => state.request);
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
@@ -34,6 +35,7 @@ const RequestPage = () => {
     content = <RequestDetail />;
   }
   useEffect(() => {
+    dispatch({ type: DETAIL_RESET, payload: "" });
     if (token) {
       dispatch(fetchAllRequest(token, 0));
       setFetchDone(true);

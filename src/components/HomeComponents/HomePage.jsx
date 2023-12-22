@@ -29,16 +29,13 @@ const HomePage = () => {
     location.pathname === "/homepage/clienti/aggiungiCliente/richiesta" ||
     location.pathname === "/homepage/clienti/aggiungiCliente/indirizzo" ||
     location.pathname === "/homepage/clienti/modifica" ||
-    location.pathname === "/homepage/proprieta/modifica"
+    location.pathname === "/homepage/proprieta/modifica" ||
+    location.pathname === "/homepage/richieste/modifica"
   ) {
     content = <CustomerPage />;
   } else if (location.pathname === "/homepage/proprieta" || params.pId != null) {
     content = <PropertyPage />;
-  } else if (
-    location.pathname === "/homepage/richieste" ||
-    params.rId != null ||
-    location.pathname === "/homepage/richieste/modifica"
-  ) {
+  } else if (location.pathname === "/homepage/richieste" || params.rId != null) {
     content = <RequestPage />;
   } else if (
     location.pathname === "/homepage/collaboratori" ||
