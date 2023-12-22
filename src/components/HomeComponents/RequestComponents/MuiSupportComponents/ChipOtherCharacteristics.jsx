@@ -46,6 +46,7 @@ function getStyles(name, rooms, theme) {
 }
 const ChipOtherCharacteristics = (props) => {
   const theme = useTheme();
+
   const [otherCharacteristics, setOtherCharacteristics] = useState([]);
 
   const handleChange = (event) => {
@@ -57,6 +58,11 @@ const ChipOtherCharacteristics = (props) => {
   useEffect(() => {
     props.setBody({ ...props.body, otherCharacteristics: otherCharacteristics });
   }, [otherCharacteristics]);
+  useEffect(() => {
+    if (props.refresh) {
+      setOtherCharacteristics(props.body.otherCharacteristics);
+    }
+  }, [props.refresh]);
 
   return (
     <div className="d-flex">

@@ -28,17 +28,23 @@ const HomePage = () => {
     location.pathname === "/homepage/clienti/aggiungiCliente/proprieta" ||
     location.pathname === "/homepage/clienti/aggiungiCliente/richiesta" ||
     location.pathname === "/homepage/clienti/aggiungiCliente/indirizzo" ||
-    location.pathname === "/homepage/clienti/modifica"
+    location.pathname === "/homepage/clienti/modifica" ||
+    location.pathname === "/homepage/proprieta/modifica"
   ) {
     content = <CustomerPage />;
   } else if (location.pathname === "/homepage/proprieta" || params.pId != null) {
     content = <PropertyPage />;
-  } else if (location.pathname === "/homepage/richieste" || params.rId != null) {
+  } else if (
+    location.pathname === "/homepage/richieste" ||
+    params.rId != null ||
+    location.pathname === "/homepage/richieste/modifica"
+  ) {
     content = <RequestPage />;
   } else if (
     location.pathname === "/homepage/collaboratori" ||
     params.id != null ||
-    location.pathname === "/homepage/collaboratori/createAdmin"
+    location.pathname === "/homepage/collaboratori/createAdmin" ||
+    location.pathname === "/homepage/collaboratori/modifica"
   ) {
     content = <AdminPage />;
   } else {

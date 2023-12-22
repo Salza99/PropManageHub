@@ -5,6 +5,9 @@ import {
   PAGE_PROPERTY,
   POST_PROPERTY_OK,
   POST_PROPERTY_RESET,
+  POST_PROPERTY_SELECT_DATA,
+  PUT_PROPERTY_OK,
+  PUT_PROPERTY_RESET,
   SINGLE_PROPERTY,
 } from "../actions/PropertyAction";
 
@@ -76,6 +79,7 @@ const initialState = {
   },
   postProperty: false,
   errorMessages: "",
+  putProperty: false,
 };
 
 const PropertyReducer = (state = initialState, action) => {
@@ -88,6 +92,11 @@ const PropertyReducer = (state = initialState, action) => {
         totalPages: action.payload.totalPages,
       };
     case SINGLE_PROPERTY:
+      return {
+        ...state,
+        selected: action.payload,
+      };
+    case POST_PROPERTY_SELECT_DATA:
       return {
         ...state,
         selected: action.payload,
@@ -143,6 +152,16 @@ const PropertyReducer = (state = initialState, action) => {
       return {
         ...state,
         postProperty: action.payload,
+      };
+    case PUT_PROPERTY_OK:
+      return {
+        ...state,
+        putProperty: action.payload,
+      };
+    case PUT_PROPERTY_RESET:
+      return {
+        ...state,
+        putProperty: action.payload,
       };
     case LOGOUT:
       return {
@@ -213,6 +232,7 @@ const PropertyReducer = (state = initialState, action) => {
         },
         postProperty: false,
         errorMessages: "",
+        putProperty: false,
       };
     default:
       return state;

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Card, Col, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router-dom";
 import PropertyCardLoader from "../../Loaders/PropertyCardLoader";
 import { singleProperty } from "../../../redux/actions/PropertyAction";
-import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
 import {
   Accordion,
   AccordionDetails,
@@ -23,6 +22,7 @@ const PropertyDetail = () => {
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const params = useParams();
   const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate();
   let count = 0;
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -39,9 +39,6 @@ const PropertyDetail = () => {
   });
   useEffect(() => {
     dispatch(singleProperty(token, params.pId));
-    return () => {
-      dispatch({ type: DETAIL_RESET, payload: "" });
-    };
   }, []);
   return (
     <>
@@ -55,7 +52,15 @@ const PropertyDetail = () => {
                 </Col>
                 <Col className="text-center" xs={2}>
                   <Tooltip title="Modifica info proprietà">
-                    <Fab className="me-1" size="small" color="ochre" aria-label="edit">
+                    <Fab
+                      className="me-1"
+                      size="small"
+                      color="ochre"
+                      aria-label="edit"
+                      onClick={() => {
+                        navigate("/homepage/proprieta/modifica");
+                      }}
+                    >
                       <Pencil />
                     </Fab>
                   </Tooltip>
@@ -118,7 +123,18 @@ const PropertyDetail = () => {
                     <span className="card-subtitle h6">Prezzo:</span> {propertyState.selected.price} €
                   </ListGroup.Item>
                   <Card className="p-2 mb-3">
-                    <Card.Subtitle className="fw-bold mb-2">Locazione:</Card.Subtitle>
+                    <Row className="align-items-center mb-2">
+                      <Col xs={9} md={10}>
+                        <Card.Subtitle className="fw-bold mb-2">Locazione:</Card.Subtitle>
+                      </Col>
+                      <Col xs={3} md={2}>
+                        <Tooltip title="Modifica info locazione">
+                          <Fab className="me-1" size="small" color="ochre" aria-label="edit">
+                            <Pencil />
+                          </Fab>
+                        </Tooltip>
+                      </Col>
+                    </Row>
                     <ListGroup.Item>
                       <span className="card-subtitle h6">Regione:</span> {propertyState.selected.address.region}
                     </ListGroup.Item>

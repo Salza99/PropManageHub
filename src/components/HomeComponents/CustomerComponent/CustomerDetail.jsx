@@ -7,6 +7,7 @@ import CustomerCardLoader from "../../Loaders/CustomerCardLoader";
 import { EnvelopePlus, HouseAdd, Pencil } from "react-bootstrap-icons";
 import { Alert, Fab, ThemeProvider, Tooltip, createTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
 
 const CustomerDetail = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,11 @@ const CustomerDetail = () => {
   useEffect(() => {
     dispatch(singleCustomer(token, params.cId));
   }, []);
+  useEffect(() => {
+    if (params.cId !== undefined) {
+      dispatch({ type: DETAIL_RESET, payload: "" });
+    }
+  }, [params]);
   return (
     <>
       {customerState.selected.id ? (

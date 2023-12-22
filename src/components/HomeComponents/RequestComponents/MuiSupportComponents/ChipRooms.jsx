@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -40,10 +41,10 @@ function getStyles(name, rooms, theme) {
     fontWeight: rooms.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium,
   };
 }
+
 const ChipRooms = (props) => {
   const theme = useTheme();
   const [rooms, setRooms] = useState([]);
-
   const handleChange = (event) => {
     const {
       target: { value },
@@ -53,7 +54,11 @@ const ChipRooms = (props) => {
   useEffect(() => {
     props.setBody({ ...props.body, numberOfRooms: rooms });
   }, [rooms]);
-
+  useEffect(() => {
+    if (props.refresh) {
+      setRooms(props.body.numberOfRooms);
+    }
+  }, [props.refresh]);
   return (
     <div className="d-flex">
       <FormControl className="w-100" sx={{ m: 1, width: 300 }}>

@@ -132,7 +132,7 @@ const CreateCustomerForm = () => {
               <TextField
                 className="w-100 text"
                 label="Nome"
-                disabled={`${location.pathname !== "/homepage/clienti/modifica" ? false : true}`}
+                disabled={`${location.pathname !== "/homepage/clienti/modifica" ? "" : "disabled"}`}
                 variant="standard"
                 value={body.name}
                 onChange={(e) => {
@@ -144,7 +144,7 @@ const CreateCustomerForm = () => {
               <TextField
                 className="w-100"
                 label="cognome"
-                disabled={`${location.pathname !== "/homepage/clienti/modifica" ? false : true}`}
+                disabled={`${location.pathname !== "/homepage/clienti/modifica" ? "" : "disabled"}`}
                 variant="standard"
                 value={body.surname}
                 onChange={(e) => {
@@ -182,7 +182,7 @@ const CreateCustomerForm = () => {
                 format="DD/MM/YYYY"
                 label="data di nascità"
                 variant="outlined"
-                value={body.birthDay}
+                value={`${location.pathname === "/homepage/clienti/modifica" ? body.birthDay : ""}`}
                 onChange={handleDateChange}
               />
             </LocalizationProvider>
@@ -191,7 +191,7 @@ const CreateCustomerForm = () => {
           <Col className="text-center mb-3" xs={6} md={6}>
             {location.pathname !== "/homepage/clienti/modifica" && (
               <ThemeProvider theme={theme}>
-                <Tooltip title="Aggiungi Richiesta">
+                <Tooltip title="Vai a Form Richiesta">
                   <Button
                     className="btn-send"
                     onClick={() => {

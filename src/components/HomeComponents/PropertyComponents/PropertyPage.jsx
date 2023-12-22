@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProperty } from "../../../redux/actions/PropertyAction";
 import SingleProperty from "./SingleProperty";
 import PropertyCardLoader from "../../Loaders/PropertyCardLoader";
-import { useParams, useLocation } from "react-router";
+import { useParams, useLocation } from "react-router-dom";
 import PropertyDetail from "./PropertyDetail";
 import { Col, Container, Row } from "react-bootstrap";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { AlertTitle, Alert, ThemeProvider, Tooltip, createTheme, Pagination } from "@mui/material";
+import { DETAIL_RESET } from "../../../redux/actions/HomepageAction";
 
 const PropertyPage = () => {
   const propertyState = useSelector((state) => state.property);
@@ -40,6 +41,11 @@ const PropertyPage = () => {
       setFetchDone(true);
     }
   }, [token]);
+  useEffect(() => {
+    if (location.pathname === "/homepage/proprieta") {
+      dispatch({ type: DETAIL_RESET, payload: "" });
+    }
+  }, [location.pathname]);
   return (
     <Container>
       <Row className="mb-4 p-3">

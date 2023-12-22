@@ -17,8 +17,14 @@ import {
 } from "@mui/material";
 import ChipOtherCharacteristics from "../RequestComponents/MuiSupportComponents/ChipOtherCharacteristics";
 import { useDispatch, useSelector } from "react-redux";
-import { ERROR_PROPERTY_RESET, POST_PROPERTY_RESET, postProperty } from "../../../redux/actions/PropertyAction";
-import { useNavigate } from "react-router-dom";
+import {
+  ERROR_PROPERTY_RESET,
+  POST_PROPERTY_RESET,
+  PUT_PROPERTY_RESET,
+  postProperty,
+  putPropertyFetch,
+} from "../../../redux/actions/PropertyAction";
+import { useLocation, useNavigate } from "react-router-dom";
 import SendIcon from "@mui/icons-material/DoubleArrowRounded";
 import ErrorsList from "../../Alerts/ErrorsList";
 const CreatePropertyForm = () => {
@@ -49,13 +55,17 @@ const CreatePropertyForm = () => {
     alimentation: "",
     distribution: "",
   });
+  const [refresh, setRefresch] = useState(false);
   const addressId = useSelector((state) => state.address.addressId);
   const customerIdState = useSelector((state) => state.customer.selected.id);
+  const propertySelected = useSelector((state) => state.property.selected);
   const fetchProperty = useSelector((state) => state.property.postProperty);
+  const putProperty = useSelector((state) => state.property.putProperty);
   const stateErrors = useSelector((state) => state.property.errorMessages);
   const token = useSelector((state) => state.login.respLogin.authorizationToken);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const theme = createTheme({
     palette: {
       ochre: {
@@ -66,6 +76,7 @@ const CreatePropertyForm = () => {
       },
     },
   });
+
   useEffect(() => {
     if (!show) {
       dispatch({ type: ERROR_PROPERTY_RESET, payload: "" });
@@ -95,7 +106,7 @@ const CreatePropertyForm = () => {
     }
   }, [isHeated, heat]);
   useEffect(() => {
-    if (customerIdState !== "" && addressId !== "") {
+    if (customerIdState !== "" && addressId !== "" && location.pathname !== "/homepage/proprieta/modifica") {
       setBody({
         ...body,
         customerId: customerIdState,
@@ -105,19 +116,64 @@ const CreatePropertyForm = () => {
   }, [customerIdState, addressId]);
   useEffect(() => {
     if (fetchProperty) {
-      navigate("/homepage/proprieta");
+      navigate("/homepage/proprieta/" + propertySelected.id);
     }
     return () => {
       dispatch({ type: ERROR_PROPERTY_RESET, payload: "" });
       dispatch({ type: POST_PROPERTY_RESET, payload: false });
     };
   }, [fetchProperty]);
+  useEffect(() => {
+    if (location.pathname === "/homepage/proprieta/modifica") {
+      setBody({
+        surface: propertySelected.surface,
+        numberOfFloors: propertySelected.numberOfFloors,
+        floor: propertySelected.floor,
+        numberOfBathrooms: propertySelected.numberOfBathrooms,
+        parkingSpace: propertySelected.parkingSpace,
+        isToRent: propertySelected.ToRent,
+        habitability: propertySelected.habitability,
+        numberOfRooms: propertySelected.numberOfRooms,
+        energyClass: propertySelected.energyClass,
+        condition: propertySelected.condition,
+        typeOfProperty: propertySelected.typeOfProperty,
+        otherCharacteristics: propertySelected.otherCharacteristics,
+        yearOfConstruction: propertySelected.yearOfConstruction,
+        condominiumFees: propertySelected.condominiumFees,
+        price: propertySelected.price,
+      });
+      setRefresch(true);
+      console.log("ho finito di cambiare le stanze dentro al componente propertyForm");
+      if (propertySelected.heating !== "Non classificabile") {
+        setHeat({
+          type: propertySelected.heating.split(",")[0],
+          alimentation: propertySelected.heating.split(",")[1].trim(),
+          distribution: propertySelected.heating.split(",")[2].trim(),
+        });
+      } else {
+        setIsHeated(false);
+      }
+    }
+  }, [location.pathname]);
+  useEffect(() => {
+    if (putProperty) {
+      navigate("/homepage/proprieta/" + propertySelected.id);
+    }
+    return () => {
+      dispatch({ type: PUT_PROPERTY_RESET, payload: false });
+      dispatch({ type: ERROR_PROPERTY_RESET, payload: "" });
+    };
+  }, [putProperty]);
   return (
     <Card className="shadow mb-3">
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(postProperty(token, body));
+          if (location.pathname === "/homepage/proprieta/modifica") {
+            dispatch(putPropertyFetch(token, body, propertySelected.id));
+          } else {
+            dispatch(postProperty(token, body));
+          }
         }}
       >
         <Row className="p-4 justify-content-center">
@@ -311,10 +367,10 @@ const CreatePropertyForm = () => {
 
           <Row className="border shadow-sm mb-3 text-center p-2 pt-4">
             <Col className="mb-2" xs={12} sm={6}>
-              <ChipRooms body={body} setBody={setBody} />
+              <ChipRooms body={body} setBody={setBody} refresh={refresh} setRefresch={setRefresch} />
             </Col>
             <Col className="mb-2" xs={12} sm={6}>
-              <ChipOtherCharacteristics body={body} setBody={setBody} />
+              <ChipOtherCharacteristics body={body} setBody={setBody} refresh={refresh} setRefresch={setRefresch} />
             </Col>
             <Col className="mb-3" xs={12}>
               <TextField
@@ -334,6 +390,7 @@ const CreatePropertyForm = () => {
               <FormControlLabel
                 control={
                   <Checkbox
+                    checked={body.isToRent}
                     onChange={(e) => {
                       setBody({
                         ...body,
@@ -349,6 +406,7 @@ const CreatePropertyForm = () => {
               <FormControlLabel
                 control={
                   <Checkbox
+                    checked={body.habitability}
                     onChange={(e) => {
                       setBody({
                         ...body,
@@ -371,7 +429,7 @@ const CreatePropertyForm = () => {
                   <FormControlLabel
                     control={
                       <Switch
-                        defaultChecked
+                        checked={isHeated}
                         onChange={(e) => {
                           setIsHeated(e.target.checked);
                         }}
@@ -449,7 +507,9 @@ const CreatePropertyForm = () => {
           <Row className="text-end justify-content-end">
             <Col className="mb-2 align-self-end" xs={6} md={6}>
               <ThemeProvider theme={theme}>
-                <Tooltip title="Aggiungi Proprietà">
+                <Tooltip
+                  title={`${location.pathname === "/homepage/proprieta/modifica" ? "Modifica" : "Aggiungi Proprietà"}`}
+                >
                   <Button
                     className="btn-send"
                     size="small"
@@ -458,7 +518,9 @@ const CreatePropertyForm = () => {
                     type="submit"
                     endIcon={<SendIcon className="icon" />}
                   >
-                    Aggiungi Proprietà
+                    {`${
+                      location.pathname === "/homepage/proprieta/modifica" ? "Modifica Proprietà" : "Aggiungi Proprietà"
+                    }`}
                   </Button>
                 </Tooltip>
               </ThemeProvider>

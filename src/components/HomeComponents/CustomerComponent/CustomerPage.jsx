@@ -43,7 +43,8 @@ const CustomerPage = () => {
     location.pathname !== "/homepage/clienti/aggiungiCliente/richiesta" &&
     location.pathname !== "/homepage/clienti/aggiungiCliente/proprieta" &&
     location.pathname !== "/homepage/clienti/aggiungiCliente/indirizzo" &&
-    location.pathname !== "/homepage/clienti/modifica"
+    location.pathname !== "/homepage/clienti/modifica" &&
+    location.pathname !== "/homepage/proprieta/modifica"
   ) {
     add = true;
     content = customerState.content.map((customer) => {
@@ -52,21 +53,30 @@ const CustomerPage = () => {
   } else if (params.cId !== undefined) {
     add = false;
     content = <CustomerDetail />;
-  } else if (location.pathname === "/homepage/clienti/aggiungiCliente") {
+  } else if (
+    location.pathname === "/homepage/clienti/aggiungiCliente" ||
+    location.pathname === "/homepage/clienti/modifica"
+  ) {
     add = false;
     content = <CreateCustomerForm />;
-  } else if (location.pathname === "/homepage/clienti/aggiungiCliente/richiesta") {
+  } else if (
+    location.pathname === "/homepage/clienti/aggiungiCliente/richiesta" ||
+    location.pathname === "/homepage/richieste/modifica"
+  ) {
     add = false;
     content = <CreateRequestForm />;
-  } else if (location.pathname === "/homepage/clienti/aggiungiCliente/indirizzo") {
+  } else if (
+    location.pathname === "/homepage/clienti/aggiungiCliente/indirizzo" ||
+    location.pathname === "/homepage/clienti/modificaIndirizzo"
+  ) {
     add = false;
     content = <CreateAddressForm />;
-  } else if (location.pathname === "/homepage/clienti/aggiungiCliente/proprieta") {
+  } else if (
+    location.pathname === "/homepage/clienti/aggiungiCliente/proprieta" ||
+    location.pathname === "/homepage/proprieta/modifica"
+  ) {
     add = false;
     content = <CreatePropertyForm />;
-  } else if (location.pathname === "/homepage/clienti/modifica") {
-    add = false;
-    content = <CreateCustomerForm />;
   }
   useEffect(() => {}, [content]);
   useEffect(() => {
