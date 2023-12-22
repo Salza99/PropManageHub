@@ -13,17 +13,22 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/homepage/clienti" element={<HomePage />} />
+        <Route path="/homepage/clienti/modifica" element={<HomePage />} />
         <Route path="/homepage/clienti/aggiungiCliente" element={<HomePage />} />
         <Route path="/homepage/clienti/aggiungiCliente/proprieta" element={<HomePage />} />
         <Route path="/homepage/clienti/aggiungiCliente/richiesta" element={<HomePage />} />
         <Route path="/homepage/clienti/aggiungiCliente/indirizzo" element={<HomePage />} />
+        <Route path="/homepage/clienti/modificaIndirizzo" element={<HomePage />} />
         <Route path="/homepage/proprieta" element={<HomePage />} />
+        <Route path="/homepage/proprieta/modifica" element={<HomePage />} />
         <Route path="/homepage/richieste" element={<HomePage />} />
+        <Route path="/homepage/richieste/modifica" element={<HomePage />} />
         <Route path="/homepage/richieste/:rId" element={<HomePage />} />
         <Route path="/homepage/clienti/:cId" element={<HomePage />} />
         <Route path="/homepage/proprieta/:pId" element={<HomePage />} />
         {userState === "SUPER_ADMIN" ? <Route path="/homepage/collaboratori" element={<HomePage />} /> : ""}
         <Route path="/homepage/collaboratori/:id" element={<HomePage />} />
+        <Route path="/homepage/collaboratori/modifica" element={<HomePage />} />
         {userState === "SUPER_ADMIN" ? <Route path="/homepage/collaboratori/createAdmin" element={<HomePage />} /> : ""}
       </Routes>
     </BrowserRouter>

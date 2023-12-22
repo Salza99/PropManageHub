@@ -27,7 +27,8 @@ const HomePage = () => {
     location.pathname === "/homepage/clienti/aggiungiCliente" ||
     location.pathname === "/homepage/clienti/aggiungiCliente/proprieta" ||
     location.pathname === "/homepage/clienti/aggiungiCliente/richiesta" ||
-    location.pathname === "/homepage/clienti/aggiungiCliente/indirizzo"
+    location.pathname === "/homepage/clienti/aggiungiCliente/indirizzo" ||
+    location.pathname === "/homepage/clienti/modifica"
   ) {
     content = <CustomerPage />;
   } else if (location.pathname === "/homepage/proprieta" || params.pId != null) {

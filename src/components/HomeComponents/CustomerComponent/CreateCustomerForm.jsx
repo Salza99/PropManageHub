@@ -5,9 +5,15 @@ import ErrorsList from "../../Alerts/ErrorsList";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { RESET_CUSTOMER_ERRORS, RESET_CUSTOMER_OK, postCustomer } from "../../../redux/actions/CustomerAction";
+import {
+  RESET_CUSTOMER_ERRORS,
+  RESET_CUSTOMER_OK,
+  RESET_CUSTOMER_PUT,
+  postCustomer,
+  putCustomer,
+} from "../../../redux/actions/CustomerAction";
 import SendIcon from "@mui/icons-material/DoubleArrowRounded";
 const CreateCustomerForm = () => {
   const [body, setBody] = useState({
@@ -25,6 +31,7 @@ const CreateCustomerForm = () => {
   const adminId = useSelector((state) => state.home.myProfile.id);
   const customerState = useSelector((state) => state.customer);
   const navigate = useNavigate();
+  const location = useLocation();
   const handleDateChange = (date) => {
     setBody({
       ...body,
@@ -32,7 +39,6 @@ const CreateCustomerForm = () => {
         date.$D < 10 ? "0" + date.$D : date.$D
       }`,
     });
-    console.log(date);
   };
 
   const theme = createTheme({
@@ -51,10 +57,29 @@ const CreateCustomerForm = () => {
     }
   }, [customerState.errorMessages]);
   useEffect(() => {
+    if (location.pathname === "/homepage/clienti/modifica") {
+      setBody({
+        name: customerState.selected.name,
+        surname: customerState.selected.surname,
+        phone: customerState.selected.phone,
+        email: customerState.selected.email,
+        birthDay: dayjs(customerState.selected.birthDay),
+      });
+    }
+  }, []);
+  useEffect(() => {
     if (!show) {
       dispatch({ type: RESET_CUSTOMER_ERRORS, payload: "" });
     }
   }, [show]);
+  useEffect(() => {
+    if (customerState.putFetch) {
+      navigate("/homepage/clienti/" + customerState.selected.id);
+    }
+    return () => {
+      dispatch({ type: RESET_CUSTOMER_PUT, payload: false });
+    };
+  }, [customerState.putFetch]);
   useEffect(() => {
     if (customerState.errorMessages === "" && customerState.createCustomerOk === true && navigateRequest === true) {
       setBody({
@@ -90,7 +115,12 @@ const CreateCustomerForm = () => {
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(postCustomer(token, body, adminId));
+
+          if (location.pathname === "/homepage/clienti/modifica") {
+            dispatch(putCustomer(token, body, customerState.selected.id));
+          } else {
+            dispatch(postCustomer(token, body, adminId));
+          }
         }}
       >
         <Row className="p-4 justify-content-center">
@@ -102,6 +132,7 @@ const CreateCustomerForm = () => {
               <TextField
                 className="w-100 text"
                 label="Nome"
+                disabled={`${location.pathname !== "/homepage/clienti/modifica" ? false : true}`}
                 variant="standard"
                 value={body.name}
                 onChange={(e) => {
@@ -113,6 +144,7 @@ const CreateCustomerForm = () => {
               <TextField
                 className="w-100"
                 label="cognome"
+                disabled={`${location.pathname !== "/homepage/clienti/modifica" ? false : true}`}
                 variant="standard"
                 value={body.surname}
                 onChange={(e) => {
@@ -150,35 +182,40 @@ const CreateCustomerForm = () => {
                 format="DD/MM/YYYY"
                 label="data di nascità"
                 variant="outlined"
-                disableFuture
+                value={body.birthDay}
                 onChange={handleDateChange}
-                defaultValue={body.birthDay}
               />
             </LocalizationProvider>
           </Col>
 
           <Col className="text-center mb-3" xs={6} md={6}>
-            <ThemeProvider theme={theme}>
-              <Tooltip title="Aggiungi Richiesta">
-                <Button
-                  className="btn-send"
-                  onClick={() => {
-                    setNavigateRequest(true);
-                  }}
-                  size="small"
-                  color="ochre"
-                  variant="contained"
-                  type="submit"
-                  endIcon={<SendIcon className="icon" />}
-                >
-                  Aggiungi Richiesta
-                </Button>
-              </Tooltip>
-            </ThemeProvider>
+            {location.pathname !== "/homepage/clienti/modifica" && (
+              <ThemeProvider theme={theme}>
+                <Tooltip title="Aggiungi Richiesta">
+                  <Button
+                    className="btn-send"
+                    onClick={() => {
+                      setNavigateRequest(true);
+                    }}
+                    size="small"
+                    color="ochre"
+                    variant="contained"
+                    type="submit"
+                    endIcon={<SendIcon className="icon" />}
+                  >
+                    Aggiungi Richiesta
+                  </Button>
+                </Tooltip>
+              </ThemeProvider>
+            )}
           </Col>
           <Col className="text-center mb-3" xs={6} md={6}>
             <ThemeProvider theme={theme}>
-              <Tooltip title="Aggiungi Proprietà">
+              <Tooltip
+                title={`${
+                  location.pathname === "/homepage/clienti/modifica" ? "Conferma Modifiche" : "Vai a Form Indirizzo"
+                }`}
+              >
                 <Button
                   className="btn-send"
                   onClick={() => {
@@ -190,7 +227,7 @@ const CreateCustomerForm = () => {
                   type="submit"
                   endIcon={<SendIcon className="icon" />}
                 >
-                  Aggiungi Proprietà
+                  {`${location.pathname === "/homepage/clienti/modifica" ? "Modifica info" : "Aggiungi Proprietà"}`}
                 </Button>
               </Tooltip>
             </ThemeProvider>

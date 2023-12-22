@@ -3,8 +3,10 @@ import {
   PAGE_CUSTOMER,
   POST_CUSTOMER_DATA,
   POST_CUSTOMER_OK,
+  PUT_CUSTOMER_OK,
   RESET_CUSTOMER_ERRORS,
   RESET_CUSTOMER_OK,
+  RESET_CUSTOMER_PUT,
   SINGLE_CUSTOMER,
 } from "../actions/CustomerAction";
 import { DETAIL_RESET, LOGOUT } from "../actions/HomepageAction";
@@ -40,6 +42,7 @@ const initialState = {
   },
   createCustomerOk: false,
   errorMessages: "",
+  putFetch: false,
 };
 
 const CustomerReducer = (state = initialState, action) => {
@@ -97,6 +100,16 @@ const CustomerReducer = (state = initialState, action) => {
         },
         errorMessages: action.payload,
       };
+    case PUT_CUSTOMER_OK:
+      return {
+        ...state,
+        putFetch: action.payload,
+      };
+    case RESET_CUSTOMER_PUT:
+      return {
+        ...state,
+        putFetch: action.payload,
+      };
     case LOGOUT:
       return {
         content: [
@@ -129,6 +142,7 @@ const CustomerReducer = (state = initialState, action) => {
         },
         createCustomerOk: false,
         errorMessages: "",
+        putFetch: false,
       };
     default:
       return state;

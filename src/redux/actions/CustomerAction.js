@@ -5,6 +5,8 @@ export const POST_CUSTOMER_OK = "POST_CUSTOMER_OK";
 export const RESET_CUSTOMER_OK = "RESET_CUSTOMER_OK";
 export const RESET_CUSTOMER_ERRORS = "RESET_CUSTOMER_ERRORS";
 export const POST_CUSTOMER_DATA = "POST_CUSTOMER_DATA";
+export const RESET_CUSTOMER_PUT = "RESET_CUSTOMER_PUT";
+export const PUT_CUSTOMER_OK = "PUT_CUSTOMER_OK";
 
 export const fetchAllCustomer = (token, page) => {
   return async (dispatch) => {
@@ -66,6 +68,28 @@ export const postCustomer = (token, body, adminId) => {
         const data = await resp.json();
         dispatch({ type: POST_CUSTOMER_DATA, payload: data });
         dispatch({ type: POST_CUSTOMER_OK, payload: true });
+      } else {
+        const errorMessage = await resp.json();
+        dispatch({ type: ERROR_CUSTOMER, payload: errorMessage.errorsList });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+export const putCustomer = (token, body, customerId) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetch("http://localhost:3002/customers/" + customerId, {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-type": "application/json",
+        },
+      });
+      if (resp.ok) {
+        dispatch({ type: PUT_CUSTOMER_OK, payload: true });
       } else {
         const errorMessage = await resp.json();
         dispatch({ type: ERROR_CUSTOMER, payload: errorMessage.errorsList });

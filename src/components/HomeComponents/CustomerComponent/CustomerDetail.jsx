@@ -40,7 +40,15 @@ const CustomerDetail = () => {
                 </Col>
                 <Col className="text-center" xs={6} sm={4}>
                   <Tooltip title="Modifica info cliente">
-                    <Fab className="me-1" size="small" color="ochre" aria-label="edit">
+                    <Fab
+                      className="me-1"
+                      size="small"
+                      color="ochre"
+                      aria-label="edit"
+                      onClick={() => {
+                        navigate("/homepage/clienti/modifica");
+                      }}
+                    >
                       <Pencil />
                     </Fab>
                   </Tooltip>

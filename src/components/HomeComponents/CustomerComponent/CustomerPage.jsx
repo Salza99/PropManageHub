@@ -42,7 +42,8 @@ const CustomerPage = () => {
     location.pathname !== "/homepage/clienti/aggiungiCliente" &&
     location.pathname !== "/homepage/clienti/aggiungiCliente/richiesta" &&
     location.pathname !== "/homepage/clienti/aggiungiCliente/proprieta" &&
-    location.pathname !== "/homepage/clienti/aggiungiCliente/indirizzo"
+    location.pathname !== "/homepage/clienti/aggiungiCliente/indirizzo" &&
+    location.pathname !== "/homepage/clienti/modifica"
   ) {
     add = true;
     content = customerState.content.map((customer) => {
@@ -63,6 +64,9 @@ const CustomerPage = () => {
   } else if (location.pathname === "/homepage/clienti/aggiungiCliente/proprieta") {
     add = false;
     content = <CreatePropertyForm />;
+  } else if (location.pathname === "/homepage/clienti/modifica") {
+    add = false;
+    content = <CreateCustomerForm />;
   }
   useEffect(() => {}, [content]);
   useEffect(() => {
