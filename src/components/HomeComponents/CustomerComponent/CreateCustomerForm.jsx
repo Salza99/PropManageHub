@@ -182,7 +182,7 @@ const CreateCustomerForm = () => {
                 format="DD/MM/YYYY"
                 label="data di nascità"
                 variant="outlined"
-                value={`${location.pathname === "/homepage/clienti/modifica" ? body.birthDay : ""}`}
+                value={body.birthDay}
                 onChange={handleDateChange}
               />
             </LocalizationProvider>
