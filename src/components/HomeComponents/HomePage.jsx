@@ -45,7 +45,7 @@ const HomePage = () => {
   ) {
     content = <AdminPage />;
   } else {
-    content = <div></div>;
+    content = <CardInfoUser homeState={homeState.myProfile} />;
   }
   useEffect(() => {
     if (token) {
@@ -62,9 +62,7 @@ const HomePage = () => {
           <ToolBar />
           <Container>
             <Row className="gy-3">
-              <Col className="text-center" xs={12}>
-                {homeState.myProfile.id && <CardInfoUser homeState={homeState.myProfile} />}
-              </Col>
+              <Col className="text-center mb-3" xs={12}></Col>
 
               <Col className="border-main background-op p-2" xs={12} lg={7}>
                 {content}
